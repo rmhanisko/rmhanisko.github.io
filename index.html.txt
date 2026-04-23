@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RMH Solutions LLC</title>
+
+<meta name="description"
+content="RMH Solutions LLC builds simple, affordable technical solutions for small businesses with hands-on training so clients can maintain and extend their tools over time.">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#f6f8fc;
+color:#172033;
+line-height:1.6;
+}
+
+header{
+background:white;
+border-bottom:1px solid #d7e0ee;
+position:sticky;
+top:0;
+}
+
+.container{
+width:92%;
+max-width:1150px;
+margin:auto;
+}
+
+.nav{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:15px 0;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:14px;
+}
+
+.logo img{
+width:70px;
+height:70px;
+border:2px solid #7aa0d8;
+}
+
+.logo h1{
+margin:0;
+color:#0b2f63;
+}
+
+.tagline{
+color:#2563eb;
+font-weight:600;
+font-size:14px;
+}
+
+nav a{
+margin-left:22px;
+text-decoration:none;
+color:#172033;
+font-weight:600;
+}
+
+.hero{
+display:flex;
+gap:40px;
+padding:60px 0;
+align-items:center;
+}
+
+.hero-text h2{
+font-size:42px;
+color:#0b2f63;
+margin-bottom:15px;
+}
+
+.highlight{
+background:#edf3fd;
+padding:15px;
+border-radius:10px;
+margin-top:20px;
+}
+
+.location{
+margin-top:20px;
+font-weight:bold;
+}
+
+.features{
+display:grid;
+grid-template-columns:repeat(6,1fr);
+background:white;
+border-top:1px solid #d7e0ee;
+border-bottom:1px solid #d7e0ee;
+}
+
+.feature{
+text-align:center;
+padding:25px 15px;
+border-right:1px solid #d7e0ee;
+}
+
+.feature:last-child{
+border-right:none;
+}
+
+section{
+padding:50px 0;
+}
+
+.section-title{
+font-size:30px;
+color:#0b2f63;
+margin-bottom:15px;
+}
+
+.two-column{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:12px;
+border:1px solid #d7e0ee;
+}
+
+ul{
+padding-left:20px;
+columns:2;
+}
+
+.contact{
+background:#edf3fd;
+padding:30px;
+border-radius:15px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+footer{
+background:#0b2f63;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container nav">
+
+<div class="logo">
+<img src="RMHSolutions.jpg">
+<div>
+<h1>RMH Solutions LLC</h1>
+<div class="tagline">Simple Solutions. Real Results.</div>
+</div>
+</div>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#services">What I Do</a>
+<a href="#experience">Experience</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</nav>
+
+</div>
+</header>
+
+<div class="container hero" id="home">
+
+<div class="hero-text">
+
+<h2>Simple, Affordable Technical Solutions That Work for You.</h2>
+
+<p>
+I help small businesses streamline operations, reduce manual work, and leverage automation and AI with solutions that are easy to use, affordable, and built for the way you work.
+</p>
+
+<div class="highlight">
+I don’t just build solutions — I teach you how to use, maintain, and customize them so your business stays in control for the long term.
+</div>
+
+<div class="location">
+Based in Fort Lauderdale, I work with small businesses throughout South Florida, including Wilton Manors and surrounding communities.
+</div>
+
+</div>
+
+</div>
+
+<div class="features" id="services">
+
+<div class="feature">
+<b>Custom Tools</b><br>
+Scheduling, tracking, dashboards, reporting, and more.
+</div>
+
+<div class="feature">
+<b>Process Improvement</b><br>
+Streamline workflows and eliminate duplicate work.
+</div>
+
+<div class="feature">
+<b>Automation & AI</b><br>
+Practical automation and Generative AI solutions.
+</div>
+
+<div class="feature">
+<b>Training & Empowerment</b><br>
+Maintain and extend your solutions independently.
+</div>
+
+<div class="feature">
+<b>Long-Term Partnership</b><br>
+Support as your business evolves.
+</div>
+
+<div class="feature">
+<b>Affordable Solutions</b><br>
+Right-sized systems without enterprise pricing.
+</div>
+
+</div>
+
+<section id="experience">
+
+<div class="container two-column">
+
+<div class="card">
+
+<h2 class="section-title">Selected Organizations & Industry Experience</h2>
+
+<ul>
+
+<li>Horizon Blue Cross Blue Shield of NJ</li>
+<li>Crum & Forster</li>
+<li>UPS</li>
+<li>Institute of Nuclear Power Operations</li>
+<li>State of Michigan / MVAA</li>
+<li>Munich American Reassurance</li>
+<li>First American Financial</li>
+
+<li>Warner Music Group</li>
+<li>The Hartz Mountain Corporation</li>
+<li>PeopleSoft</li>
+<li>Liz Claiborne</li>
+<li>Scholastic Corporation</li>
+<li>Georgia-Pacific</li>
+
+</ul>
+
+</div>
+
+<div class="card" id="about">
+
+<h2 class="section-title">About RMH Solutions LLC</h2>
+
+<p>
+I’m a technology project consultant with more than 40 years of experience helping organizations plan, build, and improve the systems they rely on to run their business.
+</p>
+
+<p>
+I earned my degree in Computer Science from Columbia University and am a certified Project Management Professional (PMP). Over the course of my career, I’ve led major software initiatives, built project management offices, and helped teams successfully deliver complex technology solutions.
+</p>
+
+<p>
+Today, through RMH Solutions LLC, I focus on helping small businesses implement simple, reliable solutions that save time, reduce manual work, and improve day-to-day operations.
+</p>
+
+<p>
+My goal is simple: deliver practical solutions that work today while giving you the knowledge to maintain and improve them tomorrow.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="contact">
+
+<div class="container contact">
+
+<div>
+
+<h2>Let’s Build a Solution That Works for You</h2>
+
+<p>
+Have a challenge you’d like to solve? Let’s talk about how I can help your business work smarter.
+</p>
+
+</div>
+
+<div>
+
+<b>Email:</b> rmhanisko@gmail.com<br>
+<b>Phone:</b> 404-376-1108<br>
+<b>LinkedIn:</b>
+<a href="https://www.linkedin.com/in/rob-hanisko" target="_blank">
+linkedin.com/in/rob-hanisko
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+© 2026 RMH Solutions LLC. All rights reserved.<br>
+Serving Fort Lauderdale, Wilton Manors, and South Florida.
+
+</footer>
+
+</body>
+</html>
