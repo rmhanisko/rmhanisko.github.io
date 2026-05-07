@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RMH Solutions LLC</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #ffffff;
+      color: #111;
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+      border: 2px solid #06327a;
+      background: #ffffff;
+    }
+
+    /* HERO */
+
+    .hero {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      min-height: 430px;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      padding: 40px 56px;
+      z-index: 2;
+    }
+
+    .hero-logo img {
+      height: 155px;
+      width: auto;
+      display: block;
+      margin-bottom: 26px;
+    }
+
+    .hero-copy h1 {
+      font-size: 54px;
+      line-height: 1.05;
+      margin: 0 0 20px;
+      color: #061f4f;
+      letter-spacing: -1.5px;
+    }
+
+    .blue-line {
+      width: 92px;
+      height: 5px;
+      background: #003399;
+      margin-bottom: 24px;
+    }
+
+    .hero-copy p {
+      font-size: 21px;
+      color: #222;
+      margin-bottom: 24px;
+      max-width: 620px;
+    }
+
+    .hero-copy strong {
+      color: #003399;
+    }
+
+    .hero-location {
+      font-size: 18px;
+      color: #444;
+    }
+
+    .hero-location strong {
+      color: #003399;
+    }
+
+    .hero-image {
+      min-height: 430px;
+      margin: 24px 24px 24px 0;
+      border-radius: 18px;
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          to right,
+          rgba(255,255,255,0.82),
+          rgba(255,255,255,0.12),
+          rgba(255,255,255,0)
+        ),
+        url("beach-workspace.png");
+
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* SERVICES */
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      border-top: 1px solid #c9d5eb;
+      border-bottom: 1px solid #c9d5eb;
+      padding: 38px 34px;
+      background: #ffffff;
+    }
+
+    .service {
+      text-align: center;
+      padding: 0 22px;
+      border-right: 1px solid #c9d5eb;
+    }
+
+    .service:last-child {
+      border-right: none;
+    }
+
+    .service-icon {
+      font-size: 42px;
+      color: #003399;
+      margin-bottom: 16px;
+    }
+
+    .service h3 {
+      font-size: 20px;
+      margin: 0 0 16px;
+      color: #111;
+    }
+
+    .service p {
+      font-size: 15px;
+      color: #222;
+      margin: 0;
+    }
+
+    /* DETAILS */
+
+    .details {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 44px;
+      padding: 40px;
+    }
+
+    .details h2 {
+      color: #003399;
+      font-size: 28px;
+      margin-top: 0;
+      margin-bottom: 18px;
+    }
+
+    .experience-box,
+    .about-box {
+      border: 1px solid #c9d5eb;
+      border-radius: 14px;
+      padding: 30px;
+      background: #ffffff;
+    }
+
+    .org-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 26px;
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .org-list li {
+      margin-bottom: 10px;
+      color: #111;
+    }
+
+    .about-box p {
+      color: #111;
+      margin-top: 0;
+      margin-bottom: 18px;
+    }
+
+    /* CTA */
+
+    .cta {
+      margin: 0 40px 40px;
+      background: #eef4ff;
+      border-radius: 16px;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      align-items: center;
+      padding: 30px 40px;
+      gap: 30px;
+    }
+
+    .cta-left h2 {
+      margin: 0 0 12px;
+      color: #061f4f;
+      font-size: 30px;
+    }
+
+    .cta-left p {
+      margin: 0;
+      color: #222;
+      font-size: 18px;
+    }
+
+    .contact-info {
+      border-left: 2px solid #003399;
+      padding-left: 30px;
+    }
+
+    .contact-info div {
+      margin-bottom: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #003399;
+    }
+
+    .contact-info a {
+      color: #003399;
+      text-decoration: none;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #061f4f;
+      color: #ffffff;
+      text-align: center;
+      padding: 14px;
+      font-size: 15px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 1000px) {
+
+      .hero,
+      .details,
+      .cta {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        min-height: 340px;
+        margin: 0 24px 24px;
+      }
+
+      .services {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px 0;
+      }
+
+      .service {
+        border-right: none;
+      }
+
+      .contact-info {
+        border-left: none;
+        padding-left: 0;
+        padding-top: 20px;
+        border-top: 1px solid #bdd0f2;
+      }
+    }
+
+    @media (max-width: 760px) {
+
+      .hero-copy {
+        padding: 34px 28px;
+      }
+
+      .hero-logo img {
+        height: 120px;
+        margin-bottom: 22px;
+      }
+
+      .hero-copy h1 {
+        font-size: 42px;
+      }
+
+      .hero-copy p {
+        font-size: 19px;
+      }
+
+      .services {
+        grid-template-columns: 1fr;
+      }
+
+      .details {
+        padding: 30px;
+      }
+
+      .org-list {
+        grid-template-columns: 1fr;
+      }
+
+      .cta {
+        margin: 0 24px 24px;
+        padding: 26px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <section class="hero">
+
+      <div class="hero-copy">
+
+        <div class="hero-logo">
+          <img src="rmh-logo.png" alt="RMH Solutions Logo">
+        </div>
+
+        <h1>
+          Simple, Affordable Technical Solutions That Work for You.
+        </h1>
+
+        <div class="blue-line"></div>
+
+        <p>
+          RMH Solutions helps independent businesses streamline operations, reduce manual work,
+          and use practical automation and AI to
+          <strong>operate more efficiently, reduce costs, and scale with confidence.</strong>
+        </p>
+
+        <div class="hero-location">
+          Based in <strong>Fort Lauderdale</strong>, serving independent businesses
+          throughout South Florida.
+        </div>
+
+      </div>
+
+      <div class="hero-image"></div>
+
+    </section>
+
+    <section class="services" id="services">
+
+      <div class="service">
+        <div class="service-icon">▦</div>
+        <h3>Custom Tools</h3>
+        <p>
+          Scheduling, accounting, contact management, and other practical tools designed around your workflow.
+        </p>
+      </div>
+
+      <div class="service">
+        <div class="service-icon">⚙</div>
+        <h3>Process Improvement</h3>
+        <p>
+          Streamline workflows, eliminate duplicate work, and improve accuracy.
+        </p>
+      </div>
+
+      <div class="service">
+        <div class="service-icon">☻</div>
+        <h3>Automation & AI</h3>
+        <p>
+          Leverage practical automation and Generative AI to save time and drive results.
+        </p>
+      </div>
+
+      <div class="service">
+        <div class="service-icon">□</div>
+        <h3>Training & Empowerment</h3>
+        <p>
+          Hands-on guidance so your team can maintain and extend your solutions.
+        </p>
+      </div>
+
+      <div class="service">
+        <div class="service-icon">◎</div>
+        <h3>Long-Term Partnership</h3>
+        <p>
+          Ongoing support as your business evolves and your needs grow.
+        </p>
+      </div>
+
+      <div class="service">
+        <div class="service-icon">$</div>
+        <h3>Affordable Solutions</h3>
+        <p>
+          Real business value without enterprise-level cost or complexity.
+        </p>
+      </div>
+
+    </section>
+
+    <section class="details">
+
+      <div class="experience-box">
+
+        <h2>Experience</h2>
+
+        <ul class="org-list">
+          <li>Horizon Blue Cross Blue Shield</li>
+          <li>Warner Music Group</li>
+          <li>UPS</li>
+          <li>Scholastic Corporation</li>
+          <li>Georgia-Pacific</li>
+          <li>Munich American Reassurance</li>
+          <li>Crum & Forster</li>
+          <li>First American Financial</li>
+          <li>The Hartz Mountain Corporation</li>
+          <li>Liz Claiborne</li>
+          <li>State of Michigan / Michigan Veterans Affairs Agency</li>
+          <li>Institute of Nuclear Power Operations</li>
+        </ul>
+
+      </div>
+
+      <div class="about-box">
+
+        <h2>About</h2>
+
+        <p>
+          I’m a technology consultant and certified project manger with more than 30 years
+          of experience helping organizations improve the systems they rely on every day.
+        </p>
+
+        <p>
+          Through RMH Solutions LLC, I focus on practical, real-world solutions
+          that help independent businesses operate more efficiently,
+          reduce costs, and scale with confidence.
+        </p>
+
+        <p>
+          My goal is simple: deliver solutions that work today while giving you
+          the knowledge to maintain and improve them tomorrow.
+        </p>
+
+      </div>
+
+    </section>
+
+    <section class="cta" id="contact">
+
+      <div class="cta-left">
+
+        <h2>Let’s Build a Solution That Works for You</h2>
+
+        <p>
+          Have a challenge you'd like to solve?
+          Let’s talk about how technology and automation can help your business work smarter.
+        </p>
+
+      </div>
+
+      <div class="contact-info">
+
+        <div>
+          ✉
+          <a href="mailto:robert@rmhsolutions.io">
+            robert@rmhsolutions.io
+          </a>
+        </div>
+
+        <div>
+          ☎
+          <a href="tel:4043761108">
+            404-376-1108
+          </a>
+        </div>
+
+        <div>
+          in
+          <a href="https://linkedin.com/in/rob-hanisko">
+            linkedin.com/in/rob-hanisko
+          </a>
+        </div>
+
+      </div>
+
+    </section>
+
+    <footer>
+      © 2026 RMH Solutions LLC. All rights reserved.
+    </footer>
+
+  </div>
+
+</body>
+</html>
