@@ -93,46 +93,18 @@ a {
   text-decoration: none;
 }
 
-form {
-  display: grid;
-  gap: 12px;
-}
-
-label {
-  color: #cbd5f5;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-input,
-textarea {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.08);
-  color: white;
-  font-family: Arial, sans-serif;
-  font-size: 15px;
-}
-
-textarea {
-  resize: vertical;
-}
-
-button {
-  margin-top: 8px;
-  padding: 13px 20px;
-  border: none;
+.email-button {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 13px 22px;
   border-radius: 999px;
   background: #38bdf8;
   color: #020617;
+  text-decoration: none;
   font-weight: bold;
-  cursor: pointer;
-  font-size: 15px;
 }
 
-button:hover {
+.email-button:hover {
   background: #7dd3fc;
 }
 
@@ -205,23 +177,17 @@ footer {
     <div class="box">
       <h2>Send a Message</h2>
 
-      <form action="mailto:robert@rmhsolutions.io" method="post" enctype="text/plain">
+      <p>
+        The simplest way to reach me is by email. Tell me a little about your business,
+        what you are trying to improve, and the best way to contact you.
+      </p>
 
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="business">Business</label>
-        <input type="text" id="business" name="business">
-
-        <label for="message">How can I help?</label>
-        <textarea id="message" name="message" rows="6" required></textarea>
-
-        <button type="submit">Send Message</button>
-
-      </form>
+      <a
+        class="email-button"
+        href="mailto:robert@rmhsolutions.io?subject=RMH%20Solutions%20Inquiry"
+      >
+        Send Email
+      </a>
     </div>
 
   </div>
