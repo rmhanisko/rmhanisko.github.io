@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | RMH Solutions LLC</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom right, #0f172a, #020617);
+  color: white;
+  text-align: center;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 50px 20px;
+}
+
+.logo img {
+  width: 140px;
+  margin-bottom: 20px;
+}
+
+.nav {
+  margin-bottom: 35px;
+}
+
+.nav a {
+  display: inline-block;
+  margin: 6px;
+  padding: 10px 18px;
+  border: 1px solid rgba(56,189,248,0.35);
+  border-radius: 999px;
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: bold;
+  background: rgba(255,255,255,0.04);
+}
+
+.nav a:hover {
+  background: rgba(56,189,248,0.15);
+}
+
+h1 {
+  font-size: 48px;
+  margin: 20px 0;
+}
+
+h1 span {
+  color: #38bdf8;
+}
+
+p {
+  font-size: 18px;
+  color: #cbd5f5;
+  line-height: 1.6;
+}
+
+.highlight {
+  margin-top: 30px;
+  padding: 24px;
+  background: rgba(56,189,248,0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(56,189,248,0.2);
+}
+
+.contact-grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  text-align: left;
+}
+
+.box {
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  padding: 24px;
+  border-radius: 16px;
+}
+
+.box h2 {
+  margin-top: 0;
+  color: white;
+}
+
+a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+form {
+  display: grid;
+  gap: 12px;
+}
+
+label {
+  color: #cbd5f5;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  margin-top: 8px;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 999px;
+  background: #38bdf8;
+  color: #020617;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+button:hover {
+  background: #7dd3fc;
+}
+
+footer {
+  margin-top: 60px;
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+@media (max-width: 760px) {
+  h1 {
+    font-size: 40px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="logo">
+    <img src="rmh-logo.png" alt="RMH Solutions Logo">
+  </div>
+
+  <div class="nav">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <h1>Let’s <span>Talk</span></h1>
+
+  <p>
+    Have a business challenge you’d like to solve?
+    RMH Solutions helps independent businesses simplify work, reduce manual effort,
+    and use practical technology with confidence.
+  </p>
+
+  <div class="highlight">
+    Tell me what you’re trying to improve, automate, organize, or simplify.
+    I’ll follow up personally.
+  </div>
+
+  <div class="contact-grid">
+
+    <div class="box">
+      <h2>Contact Information</h2>
+
+      <p>📍 Fort Lauderdale, Florida</p>
+
+      <p>
+        📧 <a href="mailto:robert@rmhsolutions.io">robert@rmhsolutions.io</a>
+      </p>
+
+      <p>
+        ☎ <a href="tel:4043761108">404-376-1108</a>
+      </p>
+
+      <p>
+        in <a href="https://linkedin.com/in/rob-hanisko">linkedin.com/in/rob-hanisko</a>
+      </p>
+    </div>
+
+    <div class="box">
+      <h2>Send a Message</h2>
+
+      <form action="mailto:robert@rmhsolutions.io" method="post" enctype="text/plain">
+
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="business">Business</label>
+        <input type="text" id="business" name="business">
+
+        <label for="message">How can I help?</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+
+        <button type="submit">Send Message</button>
+
+      </form>
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 RMH Solutions LLC · Serving South Florida including Wilton Manors
+  </footer>
+
+</div>
+
+</body>
+</html>
