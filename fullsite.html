@@ -145,11 +145,13 @@
 
     .services {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      border-top: 1px solid #c9d5eb;
-      border-bottom: 1px solid #c9d5eb;
-      padding: 38px 34px;
-      background: #ffffff;
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 0;
+      border-top: 1px solid #d7e4ff;
+      border-bottom: 1px solid #d7e4ff;
+      padding: 28px 48px;
+      background: linear-gradient(to bottom, #f7faff, #e8f1ff);
     }
 
     .service {
@@ -180,12 +182,73 @@
       margin: 0;
     }
 
+
+    .service.feature-copy {
+      text-align: left;
+      padding: 0;
+      border-right: none;
+      max-width: none;
+      margin: 0;
+    }
+
+
+    .feature-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 12px;
+    }
+
+    .feature-header h3 {
+      margin: 0;
+    }
+
+    .feature-header .feature-action {
+      text-align: right;
+      white-space: nowrap;
+      padding-top: 0;
+    }
+
+    .service.feature-copy h3 {
+      font-size: 28px;
+      color: #061f4f;
+      margin: 0 0 12px;
+    }
+
+    .service.feature-copy p {
+      font-size: 17px;
+      line-height: 1.55;
+      color: #222;
+      margin: 0 0 10px;
+    }
+
+    .feature-action {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .feature-action a {
+      display: inline-block;
+      padding: 13px 24px;
+      background: #003399;
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .feature-action a:hover {
+      background: #061f4f;
+    }
+
     /* CTA */
 
     .cta {
       margin: 40px;
-      background: #eef4ff;
+      background: #ffffff;
       border-radius: 16px;
+      border: 2px solid #d7e4ff;
       display: grid;
       grid-template-columns: 1.3fr 1fr;
       align-items: center;
@@ -206,7 +269,7 @@
     }
 
     .contact-info {
-      border-left: 2px solid #003399;
+      border-left: 2px solid #d7e4ff;
       padding-left: 30px;
     }
 
@@ -264,13 +327,25 @@
       }
 
       .services {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px 0;
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 28px 32px;
       }
 
       .service {
         border-right: none;
       }
+
+      .feature-action {
+        text-align: left;
+      }
+
+      .feature-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+
 
       .contact-info {
         border-left: none;
@@ -321,6 +396,11 @@
 
       .services {
         grid-template-columns: 1fr;
+        padding: 24px 26px;
+      }
+
+      .feature-action {
+        text-align: left;
       }
 
       .cta {
@@ -373,34 +453,38 @@
     </section>
 
     
+
+
 <section class="services" id="services">
 
-  <div class="service" style="grid-column: 1 / -1; border-right:none; max-width:900px; margin:0 auto;">
-    <h3 style="font-size:28px; color:#061f4f; margin-bottom:18px;">
-      Practical Technology for Independent Businesses
-    </h3>
+  <div class="service feature-copy" style="grid-column: 1 / -1;">
 
-    <p style="font-size:18px; line-height:1.7;">
+    <div class="feature-header">
+      <h3>
+        Practical Technology for Independent Businesses
+      </h3>
+
+      <div class="feature-action">
+        <a href="services.html">View Services</a>
+      </div>
+    </div>
+
+    <p>
       RMH Solutions helps simplify operations, reduce manual work, and apply the right
       technology where it creates real business value.
     </p>
 
-    <p style="font-size:18px; line-height:1.7;">
+    <p>
       Whether that means improving a process, automating repetitive tasks,
       integrating systems, leveraging existing platforms, or developing a custom solution,
       our focus is always on delivering results.
     </p>
 
-    <p style="margin-top:24px;">
-      <a href="services.html"
-         style="display:inline-block;padding:12px 22px;background:#003399;color:white;
-         text-decoration:none;border-radius:999px;font-weight:600;">
-         View Services
-      </a>
-    </p>
   </div>
 
 </section>
+
+
 
 
     <section class="cta">
