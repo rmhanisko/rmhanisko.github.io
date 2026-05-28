@@ -20,9 +20,18 @@ body {
   padding: 50px 20px;
 }
 
+.logo a {
+  display: inline-block;
+}
+
 .logo img {
   width: 140px;
   margin-bottom: 20px;
+  transition: transform 0.2s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.03);
 }
 
 .nav {
@@ -39,6 +48,7 @@ body {
   text-decoration: none;
   font-weight: bold;
   background: rgba(255,255,255,0.04);
+  transition: 0.2s ease;
 }
 
 .nav a:hover,
@@ -183,13 +193,47 @@ li {
   background: #7dd3fc;
 }
 
+.footer-contact {
+  margin-top: 50px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 16px;
+  overflow: hidden;
+
+  background: rgba(255,255,255,0.04);
+}
+
+.footer-contact div {
+  padding: 20px;
+  font-size: 16px;
+  color: #cbd5f5;
+  text-align: center;
+}
+
+.footer-contact div:not(:last-child) {
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-contact a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.footer-contact a:hover {
+  text-decoration: underline;
+}
+
 footer {
-  margin-top: 60px;
+  margin-top: 35px;
   font-size: 14px;
   color: #94a3b8;
 }
 
 @media (max-width: 760px) {
+
   h1 {
     font-size: 40px;
   }
@@ -214,6 +258,15 @@ footer {
   .cert-box {
     margin-bottom: 14px;
   }
+
+  .footer-contact {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-contact div:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
 }
 </style>
 </head>
@@ -223,10 +276,10 @@ footer {
 <div class="container">
 
   <div class="logo">
-  <a href="index.html" aria-label="RMH Solutions Home">
-    <img src="rmh-logo.png" alt="RMH Solutions Logo">
-  </a>
-</div>
+    <a href="index.html" aria-label="RMH Solutions Home">
+      <img src="rmh-logo.png" alt="RMH Solutions Logo">
+    </a>
+  </div>
 
   <div class="nav">
     <a href="services.html">Services</a>
@@ -242,14 +295,14 @@ footer {
   </p>
 
   <a class="download-button" href="RMH_Solutions_Resume.pdf" download>
-  Download PDF Resume
+    Download PDF Resume
   </a>
 
   <div class="resume-card">
 
     <div class="resume-header">
       <h2>Robert M. <span>Hanisko</span></h2>
-     </div>
+    </div>
 
     <section class="section">
       <h2>Summary</h2>
@@ -361,36 +414,95 @@ footer {
           <li>Reduced underwriting costs by 20% via resource reduction and elimination of third-party licensing fees.</li>
         </ul>
       </div>
+
     </section>
 
     <section class="section">
       <h2>Education</h2>
+
       <div class="item-header">
         <h3>Columbia University</h3>
         <div class="meta">New York, NY</div>
       </div>
+
       <p class="role">BA, Computer Science</p>
     </section>
 
     <section class="section">
       <h2>Certifications</h2>
+
       <div class="cert-grid">
-        <div class="cert-box"><strong>Project Management:</strong><br>Project Management Professional (PMP)</div>
-        <div class="cert-box"><strong>Agile:</strong><br>Certified Scrum Master (CSM), Certified Scrum Product Owner (CSPO)</div>
-        <div class="cert-box"><strong>Scaled Agile:</strong><br>SAFe 5.0 Practice Consultant (SPC)</div>
+        <div class="cert-box">
+          <strong>Project Management:</strong><br>
+          Project Management Professional (PMP)
+        </div>
+
+        <div class="cert-box">
+          <strong>Agile:</strong><br>
+          Certified Scrum Master (CSM), Certified Scrum Product Owner (CSPO)
+        </div>
+
+        <div class="cert-box">
+          <strong>Scaled Agile:</strong><br>
+          SAFe 5.0 Practice Consultant (SPC)
+        </div>
       </div>
     </section>
 
     <section class="section">
       <h2>Skills</h2>
+
       <div class="skills-grid">
-        <div class="skill-box"><strong>Technical Tools:</strong><br>Jira, Confluence, ChatGPT, Python, SQL, Slack, Teams, Miro</div>
-        <div class="skill-box"><strong>Methodologies:</strong><br>Agile, SAFe, Scrum, Kanban, Waterfall-Hybrid</div>
-        <div class="skill-box"><strong>Industry Experience:</strong><br>Finance, Tech, Media, Insurance, Talent Acquisition, Consulting Services</div>
-        <div class="skill-box"><strong>Leadership &amp; Strategy:</strong><br>Agile Transformation, Executive Coaching, PMO Instantiation</div>
-        <div class="skill-box"><strong>Data &amp; Reporting:</strong><br>Data-Driven Dashboards, Enterprise Metrics, OKR and KPI Reporting</div>
+
+        <div class="skill-box">
+          <strong>Technical Tools:</strong><br>
+          Jira, Confluence, ChatGPT, Python, SQL, Slack, Teams, Miro
+        </div>
+
+        <div class="skill-box">
+          <strong>Methodologies:</strong><br>
+          Agile, SAFe, Scrum, Kanban, Waterfall-Hybrid
+        </div>
+
+        <div class="skill-box">
+          <strong>Industry Experience:</strong><br>
+          Finance, Tech, Media, Insurance, Talent Acquisition, Consulting Services
+        </div>
+
+        <div class="skill-box">
+          <strong>Leadership &amp; Strategy:</strong><br>
+          Agile Transformation, Executive Coaching, PMO Instantiation
+        </div>
+
+        <div class="skill-box">
+          <strong>Data &amp; Reporting:</strong><br>
+          Data-Driven Dashboards, Enterprise Metrics, OKR and KPI Reporting
+        </div>
+
       </div>
     </section>
+
+  </div>
+
+  <div class="footer-contact">
+
+    <div>
+      📍 Fort Lauderdale, Florida
+    </div>
+
+    <div>
+      📧
+      <a href="mailto:robert@rmhsolutions.io">
+        robert@rmhsolutions.io
+      </a>
+    </div>
+
+    <div>
+      ☎
+      <a href="tel:+19543725474">
+        954.372.5474
+      </a>
+    </div>
 
   </div>
 

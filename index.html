@@ -20,9 +20,18 @@ body {
   padding: 50px 20px;
 }
 
+.logo a {
+  display: inline-block;
+}
+
 .logo img {
   width: 140px;
   margin-bottom: 20px;
+  transition: transform 0.2s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.03);
 }
 
 .nav {
@@ -84,19 +93,48 @@ p {
   font-size: 18px;
 }
 
-.contact {
-  margin-top: 40px;
+.footer-contact {
+  margin-top: 50px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 16px;
+  overflow: hidden;
+
+  background: rgba(255,255,255,0.04);
+}
+
+.footer-contact div {
+  padding: 20px;
+  font-size: 16px;
+  color: #cbd5f5;
+  text-align: center;
+}
+
+.footer-contact div:not(:last-child) {
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-contact a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.footer-contact a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  margin-top: 35px;
+  font-size: 14px;
+  color: #94a3b8;
 }
 
 a {
   color: #38bdf8;
   text-decoration: none;
-}
-
-footer {
-  margin-top: 60px;
-  font-size: 14px;
-  color: #94a3b8;
 }
 
 @media (max-width: 760px) {
@@ -111,6 +149,15 @@ footer {
 
   .box {
     width: 100%;
+  }
+
+  .footer-contact {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-contact div:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
   }
 
   h1 {
@@ -129,7 +176,9 @@ footer {
 <div class="container">
 
   <div class="logo">
-    <img src="rmh-logo.png" alt="RMH Solutions Logo">
+    <a href="index.html" aria-label="RMH Solutions Home">
+      <img src="rmh-logo.png" alt="RMH Solutions Logo">
+    </a>
   </div>
 
   <div class="nav">
@@ -175,10 +224,26 @@ footer {
 
   </div>
 
-  <div class="contact">
-    <p>📍 Fort Lauderdale, Florida</p>
-    <p>📧 <a href="mailto:robert@rmhsolutions.io">robert@rmhsolutions.io</a></p>
-    <p>☎ <a href="tel:+19543725474">954.372.5474</a></p>
+  <div class="footer-contact">
+
+    <div>
+      📍 Fort Lauderdale, Florida
+    </div>
+
+    <div>
+      📧
+      <a href="mailto:robert@rmhsolutions.io">
+        robert@rmhsolutions.io
+      </a>
+    </div>
+
+    <div>
+      ☎
+      <a href="tel:+19543725474">
+        954.372.5474
+      </a>
+    </div>
+
   </div>
 
   <footer>

@@ -20,9 +20,18 @@ body {
   padding: 50px 20px;
 }
 
+.logo a {
+  display: inline-block;
+}
+
 .logo img {
   width: 140px;
   margin-bottom: 20px;
+  transition: transform 0.2s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.03);
 }
 
 .nav {
@@ -39,10 +48,17 @@ body {
   text-decoration: none;
   font-weight: bold;
   background: rgba(255,255,255,0.04);
+  transition: 0.2s ease;
 }
 
 .nav a:hover {
   background: rgba(56,189,248,0.15);
+}
+
+.nav a.active {
+  background: rgba(56,189,248,0.22);
+  border-color: rgba(56,189,248,0.55);
+  box-shadow: 0 0 12px rgba(56,189,248,0.12);
 }
 
 h1 {
@@ -107,6 +123,7 @@ footer {
 }
 
 @media (max-width: 760px) {
+
   h1 {
     font-size: 40px;
   }
@@ -122,17 +139,17 @@ footer {
 
 <div class="container">
 
-<div class="logo">
-  <a href="index.html" aria-label="RMH Solutions Home">
-    <img src="rmh-logo.png" alt="RMH Solutions Logo">
-  </a>
-</div>
+  <div class="logo">
+    <a href="index.html" aria-label="RMH Solutions Home">
+      <img src="rmh-logo.png" alt="RMH Solutions Logo">
+    </a>
+  </div>
 
   <div class="nav">
     <a href="services.html">Services</a>
     <a href="about.html">About</a>
     <a href="resume.html">Resume</a>
-    <a href="contact.html">Contact</a>
+    <a class="active" href="contact.html">Contact</a>
   </div>
 
   <h1>Let’s <span>Connect</span></h1>
@@ -146,16 +163,23 @@ footer {
   <div class="contact-grid">
 
     <div class="box">
+
       <h2>Contact Information</h2>
 
       <p>📍 Fort Lauderdale, Florida</p>
 
       <p>
-        📧 <a href="mailto:robert@rmhsolutions.io">robert@rmhsolutions.io</a>
+        📧
+        <a href="mailto:robert@rmhsolutions.io">
+          robert@rmhsolutions.io
+        </a>
       </p>
 
       <p>
-        ☎ <a href="tel:9543725474">954.372.5474</a>
+        ☎
+        <a href="tel:9543725474">
+          954.372.5474
+        </a>
       </p>
 
       <a
@@ -163,17 +187,20 @@ footer {
         href="robert-hanisko.vcf"
         download
       >
-        Add to mobile Contacts
+        Add to Mobile Contacts
       </a>
 
     </div>
 
     <div class="box">
+
       <h2>Send a Message</h2>
 
       <p>
         For engagement inquiries, please reach out by email with a brief overview of your initiative and preferred contact information.
-      </p><br><br>
+      </p>
+
+      <br><br>
 
       <a
         class="email-button"
@@ -181,6 +208,7 @@ footer {
       >
         Send Email
       </a>
+
     </div>
 
   </div>
