@@ -151,6 +151,57 @@ footer {
   color: #94a3b8;
 }
 
+/* FADE-IN ANIMATION */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+.fade-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.fade-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.fade-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.fade-delay-4 {
+  animation-delay: 0.4s;
+}
+
+.fade-delay-5 {
+  animation-delay: 0.5s;
+}
+
+.fade-delay-6 {
+  animation-delay: 0.6s;
+}
+
+.fade-delay-7 {
+  animation-delay: 0.7s;
+}
+
+.fade-delay-8 {
+  animation-delay: 0.8s;
+}
+
+.fade-delay-9 {
+  animation-delay: 0.9s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 760px) {
 
   h1 {
@@ -190,9 +241,11 @@ footer {
     <a href="contact.html">Contact</a>
   </div>
 
-  <h1>Enterprise Delivery <span>Services</span></h1>
+  <h1 class="fade-in fade-delay-1">
+    Enterprise Delivery <span>Services</span>
+  </h1>
 
-  <p>
+  <p class="fade-in fade-delay-2">
     RMH Solutions provides enterprise delivery leadership and hands-on execution
     across Agile transformation, project delivery, Scrum operations,
     PMO leadership, and technology-enabled operational initiatives.
@@ -200,7 +253,8 @@ footer {
 
   <div class="section services-grid">
 
-    <div class="box">
+    <div class="box fade-in fade-delay-3">
+
       <h2>Enterprise Delivery Leadership</h2>
 
       <ul>
@@ -211,9 +265,11 @@ footer {
         <li>Stakeholder coordination and reporting</li>
         <li>Technology-enabled operational initiatives</li>
       </ul>
+
     </div>
 
-    <div class="box">
+    <div class="box fade-in fade-delay-4">
+
       <h2>Agile Transformation &amp; Scrum Leadership</h2>
 
       <ul>
@@ -224,9 +280,11 @@ footer {
         <li>Agile coaching and team alignment</li>
         <li>Scrum of Scrums coordination</li>
       </ul>
+
     </div>
 
-    <div class="box">
+    <div class="box fade-in fade-delay-5">
+
       <h2>PMO Strategy &amp; Delivery Operations</h2>
 
       <ul>
@@ -237,9 +295,11 @@ footer {
         <li>Executive delivery reporting</li>
         <li>Process improvement and operational consistency</li>
       </ul>
+
     </div>
 
-    <div class="box">
+    <div class="box fade-in fade-delay-6">
+
       <h2>Jira &amp; Delivery Platform Optimization</h2>
 
       <ul>
@@ -250,9 +310,11 @@ footer {
         <li>Delivery lifecycle optimization</li>
         <li>Collaboration platform support</li>
       </ul>
+
     </div>
 
-    <div class="box">
+    <div class="box fade-in fade-delay-7">
+
       <h2>AI-Enabled Delivery Operations</h2>
 
       <ul>
@@ -263,9 +325,11 @@ footer {
         <li>Workflow automation initiatives</li>
         <li>Modern operational tooling support</li>
       </ul>
+
     </div>
 
-    <div class="box">
+    <div class="box fade-in fade-delay-8">
+
       <h2>Technical Program Execution</h2>
 
       <ul>
@@ -276,11 +340,12 @@ footer {
         <li>Delivery risk management</li>
         <li>Hands-on execution support</li>
       </ul>
+
     </div>
 
   </div>
 
-  <div class="footer-contact">
+  <div class="footer-contact fade-in fade-delay-9">
 
     <div>
       📍 Fort Lauderdale, Florida

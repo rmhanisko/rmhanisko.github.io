@@ -95,14 +95,11 @@ p {
 
 .footer-contact {
   margin-top: 50px;
-
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-
   border: 1px solid rgba(255,255,255,0.10);
   border-radius: 16px;
   overflow: hidden;
-
   background: rgba(255,255,255,0.04);
 }
 
@@ -135,6 +132,37 @@ footer {
 a {
   color: #38bdf8;
   text-decoration: none;
+}
+
+/* FADE-IN ANIMATION */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+.fade-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.fade-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.fade-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.fade-delay-4 {
+  animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 760px) {
@@ -188,9 +216,11 @@ a {
     <a href="contact.html">Contact</a>
   </div>
 
-  <h1>RMH <span>Solutions LLC</span></h1>
+  <h1 class="fade-in fade-delay-1">
+    RMH <span>Solutions LLC</span>
+  </h1>
 
-  <p>
+  <p class="fade-in fade-delay-2">
     RMH Solutions provides enterprise delivery leadership and hands-on execution
     across project management, Scrum leadership, Agile transformation,
     and technology-enabled operational initiatives.
@@ -198,25 +228,25 @@ a {
 
   <div class="section grid">
 
-    <div class="box">
+    <div class="box fade-in fade-delay-3">
       <strong>Enterprise Project Delivery</strong><br><br>
       Strategic leadership for enterprise initiatives including Agile delivery,
       SDLC governance, cross-functional execution, and transformation programs.
     </div>
 
-    <div class="box">
+    <div class="box fade-in fade-delay-3">
       <strong>Agile & Jira Optimization</strong><br><br>
       Jira configurations, workflow automation, Agile reporting,
       KPI dashboards, and operational visibility for delivery organizations.
     </div>
 
-    <div class="box">
+    <div class="box fade-in fade-delay-3">
       <strong>AI-Enabled Operations</strong><br><br>
       AI-assisted workflows, Python automation, delivery reporting,
       and operational acceleration for modern technology organizations.
     </div>
 
-    <div class="box">
+    <div class="box fade-in fade-delay-3">
       <strong>PMO & Agile Leadership</strong><br><br>
       PMO leadership, Scrum Master services, Agile coaching,
       and enterprise delivery management with a strong technical foundation.
@@ -224,7 +254,7 @@ a {
 
   </div>
 
-  <div class="footer-contact">
+  <div class="footer-contact fade-in fade-delay-4">
 
     <div>
       📍 Fort Lauderdale, Florida

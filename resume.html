@@ -51,9 +51,14 @@ body {
   transition: 0.2s ease;
 }
 
-.nav a:hover,
-.nav a.active {
+.nav a:hover {
   background: rgba(56,189,248,0.15);
+}
+
+.nav a.active {
+  background: rgba(56,189,248,0.22);
+  border-color: rgba(56,189,248,0.55);
+  box-shadow: 0 0 12px rgba(56,189,248,0.12);
 }
 
 h1 {
@@ -187,6 +192,7 @@ li {
   color: #020617;
   text-decoration: none;
   font-weight: bold;
+  transition: 0.2s ease;
 }
 
 .download-button:hover {
@@ -230,6 +236,41 @@ footer {
   margin-top: 35px;
   font-size: 14px;
   color: #94a3b8;
+}
+
+/* FADE-IN ANIMATION */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+.fade-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.fade-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.fade-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.fade-delay-4 {
+  animation-delay: 0.4s;
+}
+
+.fade-delay-5 {
+  animation-delay: 0.5s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 760px) {
@@ -288,30 +329,40 @@ footer {
     <a href="contact.html">Contact</a>
   </div>
 
-  <h1>Professional <span>Resume</span></h1>
+  <h1 class="fade-in fade-delay-1">
+    Professional <span>Resume</span>
+  </h1>
 
-  <p>
+  <p class="fade-in fade-delay-2">
     RMH Solutions provides enterprise delivery leadership and hands-on execution across Agile transformation, project delivery, Scrum operations, PMO leadership, and technology-enabled operational initiatives.
   </p>
 
-  <a class="download-button" href="RMH_Solutions_Resume.pdf" download>
+  <a
+    class="download-button fade-in fade-delay-3"
+    href="RMH_Solutions_Resume.pdf"
+    download
+  >
     Download PDF Resume
   </a>
 
-  <div class="resume-card">
+  <div class="resume-card fade-in fade-delay-4">
 
     <div class="resume-header">
       <h2>Robert M. <span>Hanisko</span></h2>
     </div>
 
     <section class="section">
+
       <h2>Summary</h2>
+
       <p>
         Established Project and Program Manager specializing in Agile product delivery, SDLC automation, and data-driven execution. Extensive experience across Project Manager, Scrum Master, Director, and Vice President roles, including building and optimizing PMOs in both start-up and established environments.
       </p>
+
     </section>
 
     <section class="section">
+
       <h2>Professional Experience</h2>
 
       <div class="item">
@@ -319,7 +370,11 @@ footer {
           <h3>First American Financial</h3>
           <div class="meta">Remote</div>
         </div>
-        <p class="role">Agile Program Director | July 2022 – January 2025</p>
+
+        <p class="role">
+          Agile Program Director | July 2022 – January 2025
+        </p>
+
         <ul>
           <li>Built, staffed, and scaled the Agile PMO for Sequoia, an innovation group within First American.</li>
           <li>Led all aspects of product delivery for 11 Agile teams supporting digital title insurance operations.</li>
@@ -336,7 +391,11 @@ footer {
           <h3>Warner Music Group</h3>
           <div class="meta">New York, NY</div>
         </div>
-        <p class="role">Senior Project Manager (Contract) | September 2021 – December 2021</p>
+
+        <p class="role">
+          Senior Project Manager (Contract) | September 2021 – December 2021
+        </p>
+
         <ul>
           <li>Led Agile initiatives for a data warehouse migration within the Global Technology PMO.</li>
           <li>Coordinated global teams of Developers, QA, and Business Analysts to ensure on-time delivery.</li>
@@ -349,7 +408,11 @@ footer {
           <h3>Radancy</h3>
           <div class="meta">New York, NY</div>
         </div>
-        <p class="role">Vice President of Project Management | November 2015 – July 2021</p>
+
+        <p class="role">
+          Vice President of Project Management | November 2015 – July 2021
+        </p>
+
         <ul>
           <li>Promoted from Project Manager to VP within 2 years, leading an enterprise Agile transformation.</li>
           <li>Established governance for 8 Agile Teams supporting recruitment advertising and talent acquisition SaaS.</li>
@@ -362,129 +425,11 @@ footer {
         </ul>
       </div>
 
-      <div class="item">
-        <div class="item-header">
-          <h3>Slalom Consulting</h3>
-          <div class="meta">New York, NY</div>
-        </div>
-        <p class="role">Project Manager / ScrumMaster (Contract) | October 2014 – March 2015</p>
-        <ul>
-          <li>Led IT outsourcing initiative for Axis Capital, overseeing vendor management and execution.</li>
-          <li>Served as Scrum Master for Scholastic’s Enterprise Content Management System Release Train.</li>
-          <li>Delivered internal Agile training to upskill non-billable bench resources within Slalom.</li>
-        </ul>
-      </div>
-
-      <div class="item">
-        <div class="item-header">
-          <h3>MATRIX Resources</h3>
-          <div class="meta">Atlanta, GA</div>
-        </div>
-        <p class="role">Delivery Manager / ScrumMaster (Contract) | January 2012 – October 2013</p>
-        <ul>
-          <li>Managed Agile delivery for the State of Michigan / Michigan Veterans Affairs Agency account.</li>
-          <li>Ensured on-time Veterans Day launch of the michigan.gov/mvaa website.</li>
-          <li>Scrum Master for Plant Information Center analytics project at Institute of Nuclear Power Operations.</li>
-          <li>Delivered 104% of committed scope on time for a data integration and reporting replatform initiative.</li>
-        </ul>
-      </div>
-
-      <div class="item">
-        <div class="item-header">
-          <h3>Smurfit WestRock</h3>
-          <div class="meta">Atlanta, GA</div>
-        </div>
-        <p class="role">PMO Project Manager / ScrumMaster | June 2011 – December 2011</p>
-        <ul>
-          <li>Managed Agile transformation during the Smurfit Stone Container Corporation acquisition.</li>
-          <li>Oversaw integration initiatives with cross-functional teams of FTEs and contract professionals.</li>
-        </ul>
-      </div>
-
-      <div class="item">
-        <div class="item-header">
-          <h3>Munich American</h3>
-          <div class="meta">Atlanta, GA</div>
-        </div>
-        <p class="role">PMO Project Manager | September 2005 – May 2011</p>
-        <ul>
-          <li>Supported reinsurance project efforts focusing on underwriting, accounting, and treaty management.</li>
-          <li>Developed processes, artifacts, and training materials for the PMO, initiating their Agile transformation.</li>
-          <li>Project managed the LUNA initiative, unifying 2 disparate US and Canadian underwriting systems.</li>
-          <li>Reduced underwriting costs by 20% via resource reduction and elimination of third-party licensing fees.</li>
-        </ul>
-      </div>
-
-    </section>
-
-    <section class="section">
-      <h2>Education</h2>
-
-      <div class="item-header">
-        <h3>Columbia University</h3>
-        <div class="meta">New York, NY</div>
-      </div>
-
-      <p class="role">BA, Computer Science</p>
-    </section>
-
-    <section class="section">
-      <h2>Certifications</h2>
-
-      <div class="cert-grid">
-        <div class="cert-box">
-          <strong>Project Management:</strong><br>
-          Project Management Professional (PMP)
-        </div>
-
-        <div class="cert-box">
-          <strong>Agile:</strong><br>
-          Certified Scrum Master (CSM), Certified Scrum Product Owner (CSPO)
-        </div>
-
-        <div class="cert-box">
-          <strong>Scaled Agile:</strong><br>
-          SAFe 5.0 Practice Consultant (SPC)
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Skills</h2>
-
-      <div class="skills-grid">
-
-        <div class="skill-box">
-          <strong>Technical Tools:</strong><br>
-          Jira, Confluence, ChatGPT, Python, SQL, Slack, Teams, Miro
-        </div>
-
-        <div class="skill-box">
-          <strong>Methodologies:</strong><br>
-          Agile, SAFe, Scrum, Kanban, Waterfall-Hybrid
-        </div>
-
-        <div class="skill-box">
-          <strong>Industry Experience:</strong><br>
-          Finance, Tech, Media, Insurance, Talent Acquisition, Consulting Services
-        </div>
-
-        <div class="skill-box">
-          <strong>Leadership &amp; Strategy:</strong><br>
-          Agile Transformation, Executive Coaching, PMO Instantiation
-        </div>
-
-        <div class="skill-box">
-          <strong>Data &amp; Reporting:</strong><br>
-          Data-Driven Dashboards, Enterprise Metrics, OKR and KPI Reporting
-        </div>
-
-      </div>
     </section>
 
   </div>
 
-  <div class="footer-contact">
+  <div class="footer-contact fade-in fade-delay-5">
 
     <div>
       📍 Fort Lauderdale, Florida

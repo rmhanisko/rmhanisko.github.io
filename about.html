@@ -176,6 +176,41 @@ footer {
   color: #94a3b8;
 }
 
+/* FADE-IN ANIMATION */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+.fade-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.fade-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.fade-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.fade-delay-4 {
+  animation-delay: 0.4s;
+}
+
+.fade-delay-5 {
+  animation-delay: 0.5s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 760px) {
 
   h1 {
@@ -224,9 +259,11 @@ footer {
     <a href="contact.html">Contact</a>
   </div>
 
-  <h1>About <span>RMH Solutions</span></h1>
+  <h1 class="fade-in fade-delay-1">
+    About <span>RMH Solutions</span>
+  </h1>
 
-  <p>
+  <p class="fade-in fade-delay-2">
     RMH Solutions provides enterprise delivery leadership and hands-on execution
     across project management, Scrum leadership, Agile transformation,
     and technology-enabled operational initiatives.
@@ -234,7 +271,7 @@ footer {
 
   <div class="section">
 
-    <div class="box about-robert">
+    <div class="box about-robert fade-in fade-delay-3">
 
       <div class="about-photo">
         <img src="about-pic.png" alt="Robert Hanisko">
@@ -277,7 +314,8 @@ footer {
 
     </div>
 
-    <div class="box">
+    <div class="box fade-in fade-delay-4">
+
       <h2>Enterprise Experience</h2>
 
       <p>
@@ -298,9 +336,11 @@ footer {
         <li>State of Michigan Veterans Affairs Agency</li>
         <li>The Hartz Mountain Corporation</li>
       </ul>
+
     </div>
 
-    <div class="box">
+    <div class="box fade-in fade-delay-5">
+
       <h2>Delivery Approach</h2>
 
       <p>
@@ -319,6 +359,7 @@ footer {
         execution consistency, and organizational effectiveness through practical,
         technology-enabled solutions.
       </p>
+
     </div>
 
   </div>

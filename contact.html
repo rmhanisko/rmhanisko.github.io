@@ -110,6 +110,7 @@ a {
   color: #020617;
   text-decoration: none;
   font-weight: bold;
+  transition: 0.2s ease;
 }
 
 .email-button:hover {
@@ -120,6 +121,37 @@ footer {
   margin-top: 60px;
   font-size: 14px;
   color: #94a3b8;
+}
+
+/* FADE-IN ANIMATION */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+.fade-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.fade-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.fade-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.fade-delay-4 {
+  animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 760px) {
@@ -152,9 +184,11 @@ footer {
     <a class="active" href="contact.html">Contact</a>
   </div>
 
-  <h1>Let’s <span>Connect</span></h1>
+  <h1 class="fade-in fade-delay-1">
+    Let’s <span>Connect</span>
+  </h1>
 
-  <p>
+  <p class="fade-in fade-delay-2">
     RMH Solutions provides enterprise delivery leadership and hands-on execution
     across project management, Scrum leadership, Agile transformation,
     and technology-enabled operational initiatives.
@@ -162,7 +196,7 @@ footer {
 
   <div class="contact-grid">
 
-    <div class="box">
+    <div class="box fade-in fade-delay-3">
 
       <h2>Contact Information</h2>
 
@@ -192,7 +226,7 @@ footer {
 
     </div>
 
-    <div class="box">
+    <div class="box fade-in fade-delay-4">
 
       <h2>Send a Message</h2>
 
