@@ -39,6 +39,7 @@ body {
   text-decoration: none;
   font-weight: bold;
   background: rgba(255,255,255,0.04);
+  transition: 0.2s ease;
 }
 
 .nav a:hover {
@@ -56,19 +57,17 @@ p {
 }
 
 .grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(360px, 1fr));
+  gap: 20px;
 }
 
 .box {
   border: 1px solid rgba(255,255,255,0.1);
   background: rgba(255,255,255,0.05);
-  padding: 20px;
+  padding: 24px;
   border-radius: 16px;
-  margin: 10px;
-  flex: 1 1 240px;
-  max-width: 260px;
+  box-sizing: border-box;
 }
 
 .box strong {
@@ -92,13 +91,21 @@ footer {
 }
 
 @media (max-width: 760px) {
+
+  .container {
+    padding: 40px 16px;
+  }
+
   .grid {
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: 1fr;
   }
 
   .box {
-    max-width: 100%;
+    width: 100%;
+  }
+
+  p {
+    font-size: 17px;
   }
 }
 </style>
@@ -167,4 +174,3 @@ footer {
 
 </body>
 </html>
-
