@@ -310,7 +310,7 @@ a {
 
       <div class="coupon-download">
         <div class="coupon-action">
-          <a id="coupon-link" class="coupon-button" href="rmh-consult30-coupon.png" download="rmh-consult30-coupon.png" target="_blank" rel="noopener">
+          <a id="coupon-link" class="coupon-button" href="rmh-consult30-coupon.png" rel="noopener" target="_blank">
             View &amp; Save Coupon
           </a>
         </div>
@@ -381,7 +381,7 @@ a {
 
   if (couponLink) {
     couponLink.href = couponFile;
-    couponLink.download = couponFile.split('/').pop();
+    couponLink.removeAttribute('download');
   }
 })();
 </script>
