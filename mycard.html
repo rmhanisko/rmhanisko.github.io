@@ -319,14 +319,14 @@ a {
 
       <div class="coupon-download">
         <div class="coupon-action">
-          <a class="coupon-button" href="rmh-business-card.png" download="robert-m-hanisko-rmh-solutions-business-card.png">
-            Download Business Card
+          <a id="card-link" class="coupon-button" href="rmh-business-card.png" rel="noopener" target="_blank">
+            View &amp; Save Business Card
           </a>
         </div>
 
         <div class="coupon-details">
           <div class="coupon-note">
-            Tap the button to download the image to your device.
+            Tap the button to open the business card image, then press and hold the image to save it to your phone.
           </div>
         </div>
       </div>
@@ -364,6 +364,40 @@ a {
 
 
 
+
+
+<script>
+(function () {
+  const defaultCard = 'rmh-business-card.png';
+  const params = new URLSearchParams(window.location.search);
+  const requestedCard = params.get('card') || params.get('file') || defaultCard;
+
+  function sanitizeCardFileName(fileName) {
+    const cleaned = fileName.trim();
+
+    // Keep this local-only so the URL parameter cannot inject scripts or external links.
+    if (!cleaned || cleaned.includes('://') || cleaned.startsWith('/') || cleaned.includes('..')) {
+      return defaultCard;
+    }
+
+    // Allows filenames like rmh-business-card.png or cards/rmh-business-card.png.
+    return /^[a-zA-Z0-9/_\-.]+$/.test(cleaned) ? cleaned : defaultCard;
+  }
+
+  const cardFile = sanitizeCardFileName(requestedCard);
+  const cardLink = document.getElementById('card-link');
+  const cardImage = document.querySelector('.card-preview img');
+
+  if (cardLink) {
+    cardLink.href = cardFile;
+    cardLink.removeAttribute('download');
+  }
+
+  if (cardImage) {
+    cardImage.src = cardFile;
+  }
+})();
+</script>
 
 </body>
 </html>
