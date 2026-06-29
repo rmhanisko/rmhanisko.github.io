@@ -318,15 +318,9 @@ a {
       </div>
 
       <div class="coupon-download">
-        <div class="coupon-action">
-          <a id="card-link" class="coupon-button" href="rmh-business-card.png" rel="noopener" target="_blank">
-            View &amp; Save Business Card
-          </a>
-        </div>
-
         <div class="coupon-details">
           <div class="coupon-note">
-            Tap the button to open the business card image, then press and hold the image to save it to your phone.
+            Press and hold the business card to save it to your phone.
           </div>
         </div>
       </div>
@@ -385,13 +379,7 @@ a {
   }
 
   const cardFile = sanitizeCardFileName(requestedCard);
-  const cardLink = document.getElementById('card-link');
   const cardImage = document.querySelector('.card-preview img');
-
-  if (cardLink) {
-    cardLink.href = cardFile;
-    cardLink.removeAttribute('download');
-  }
 
   if (cardImage) {
     cardImage.src = cardFile;
