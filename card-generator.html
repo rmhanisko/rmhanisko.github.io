@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Card Generator | RMH Solutions LLC</title>
+<style>
+body { margin: 0; font-family: Arial, sans-serif; background: linear-gradient(to bottom right, #0f172a, #020617); color: white; }
+.container { max-width: 900px; margin: auto; padding: 50px 20px; }
+h1 { font-size: 44px; text-align: center; margin: 0 0 12px; }
+h1 span { color: #38bdf8; }
+p { color: #cbd5f5; font-size: 18px; line-height: 1.6; text-align: center; }
+.generator { margin-top: 34px; padding: 28px; border-radius: 18px; background: rgba(255,255,255,0.055); border: 1px solid rgba(255,255,255,0.10); }
+label { display: block; margin: 18px 0 8px; color: #cbd5f5; font-weight: bold; }
+input, textarea, select { width: 100%; box-sizing: border-box; border: 1px solid rgba(56,189,248,0.35); border-radius: 12px; padding: 14px 15px; font-size: 16px; color: white; background: rgba(15,23,42,0.8); outline: none; }
+textarea { min-height: 90px; resize: vertical; }
+.actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+button, .button { border: none; border-radius: 999px; padding: 14px 24px; background: #38bdf8; color: #020617; font-weight: bold; font-size: 16px; cursor: pointer; text-decoration: none; display: inline-block; }
+.button.secondary { background: transparent; color: #38bdf8; border: 1px solid rgba(56,189,248,0.55); }
+.output { margin-top: 26px; padding: 22px; border-radius: 14px; background: rgba(255,255,255,0.035); display: none; text-align: center; }
+.output.show { display: block; }
+.output a { color: #38bdf8; word-break: break-word; }
+.qr-wrap { margin: 22px auto 8px; display: flex; justify-content: center; }
+#qrcode { padding: 14px; background: white; border-radius: 14px; display: inline-block; }
+#qrcode img, #qrcode canvas { display: block; width: 220px; height: 220px; }
+.note { font-size: 14px; color: #94a3b8; margin-top: 12px; }
+.success { color: #7dd3fc; font-weight: bold; margin-top: 12px; min-height: 20px; }
+@media (max-width: 760px) { .container { padding: 40px 16px; } h1 { font-size: 36px; } .generator { padding: 22px; } button, .button { width: 100%; text-align: center; box-sizing: border-box; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>RMH <span>Card Generator</span></h1>
+  <p>Create a personalized RMH Solutions card link and QR code in real time.</p>
+
+  <div class="generator">
+    <label for="client">Client / Business Name</label>
+    <input id="client" type="text" placeholder="ABC Bakery">
+
+    <label for="objective">Business Objective</label>
+    <textarea id="objective" placeholder="Improve scheduling, reduce manual paperwork, automate follow-up..."></textarea>
+
+    <label for="service">Recommended Focus</label>
+    <select id="service">
+      <option>Technology • Automation • Consulting</option>
+      <option>Software • Automation • Consulting</option>
+      <option>Website Development • Automation • Consulting</option>
+      <option>Business Process Automation</option>
+      <option>Custom Software Development</option>
+    </select>
+
+    <label for="message">Personal Message</label>
+    <textarea id="message" placeholder="It was great meeting you. I look forward to discussing how RMH Solutions can help."></textarea>
+
+    <div class="actions">
+      <button id="generate" type="button">Generate QR Code</button>
+      <a id="open-link" class="button secondary" href="#" target="_blank" rel="noopener">Open Card</a>
+      <button id="copy-link" type="button">Copy Link</button>
+    </div>
+
+    <div id="output" class="output">
+      <strong>Personalized URL:</strong><br>
+      <a id="generated-url" href="#" target="_blank" rel="noopener"></a>
+
+      <div class="qr-wrap">
+        <div id="qrcode" aria-label="Personalized card QR code"></div>
+      </div>
+
+      <div class="note">Have the prospect scan this QR code to open their personalized card.</div>
+      <div id="status" class="success"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function () {
+  const generateButton = document.getElementById('generate');
+  const copyButton = document.getElementById('copy-link');
+  const openLink = document.getElementById('open-link');
+  const output = document.getElementById('output');
+  const generatedUrl = document.getElementById('generated-url');
+  const qrcode = document.getElementById('qrcode');
+  const status = document.getElementById('status');
+
+  function fieldValue(id, fallback) {
+    const value = document.getElementById(id).value.trim();
+    return value || fallback;
+  }
+
+  function buildUrl() {
+    const params = new URLSearchParams();
+    params.set('client', fieldValue('client', 'Your Business'));
+    params.set('objective', fieldValue('objective', 'Use technology, automation, and consulting to improve daily operations.'));
+    params.set('service', fieldValue('service', 'Technology • Automation • Consulting'));
+    params.set('message', fieldValue('message', 'Thank you for connecting with RMH Solutions.'));
+
+    const baseUrl = new URL('personal-card.html', window.location.href);
+    baseUrl.search = params.toString();
+    return baseUrl.href;
+  }
+
+  function makeQrCode(url) {
+    qrcode.innerHTML = '';
+
+    if (typeof QRCode === 'undefined') {
+      qrcode.innerHTML = '<div style="color:#020617; max-width:220px; font-weight:bold;">QR library did not load. Check your internet connection or upload the QR library locally.</div>';
+      return;
+    }
+
+    new QRCode(qrcode, {
+      text: url,
+      width: 220,
+      height: 220,
+      colorDark: '#020617',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  }
+
+  function updateOutput() {
+    const url = buildUrl();
+    generatedUrl.href = url;
+    generatedUrl.textContent = url;
+    openLink.href = url;
+    output.classList.add('show');
+    makeQrCode(url);
+    status.textContent = 'QR code ready.';
+    return url;
+  }
+
+  generateButton.addEventListener('click', updateOutput);
+
+  copyButton.addEventListener('click', async function () {
+    const url = updateOutput();
+
+    try {
+      await navigator.clipboard.writeText(url);
+      copyButton.textContent = 'Copied';
+      status.textContent = 'Link copied.';
+    } catch (error) {
+      status.textContent = 'Copy failed. Press and hold the URL to copy it manually.';
+    }
+
+    setTimeout(() => copyButton.textContent = 'Copy Link', 1600);
+  });
+})();
+</script>
+</body>
+</html>
