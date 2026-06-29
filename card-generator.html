@@ -13,7 +13,7 @@ p { color: #cbd5f5; font-size: 18px; line-height: 1.6; text-align: center; }
 .generator { margin-top: 34px; padding: 28px; border-radius: 18px; background: rgba(255,255,255,0.055); border: 1px solid rgba(255,255,255,0.10); }
 label { display: block; margin: 18px 0 8px; color: #cbd5f5; font-weight: bold; }
 input, textarea, select { width: 100%; box-sizing: border-box; border: 1px solid rgba(56,189,248,0.35); border-radius: 12px; padding: 14px 15px; font-size: 16px; color: white; background: rgba(15,23,42,0.8); outline: none; }
-textarea { min-height: 90px; resize: vertical; }
+textarea { min-height: 80px; resize: vertical; }
 .actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
 button, .button { border: none; border-radius: 999px; padding: 14px 24px; background: #38bdf8; color: #020617; font-weight: bold; font-size: 16px; cursor: pointer; text-decoration: none; display: inline-block; }
 .button.secondary { background: transparent; color: #38bdf8; border: 1px solid rgba(56,189,248,0.55); }
@@ -21,10 +21,12 @@ button, .button { border: none; border-radius: 999px; padding: 14px 24px; backgr
 .output.show { display: block; }
 .output a { color: #38bdf8; word-break: break-word; }
 .qr-wrap { margin: 22px auto 8px; display: flex; justify-content: center; }
-#qrcode { padding: 14px; background: white; border-radius: 14px; display: inline-block; }
+#qrcode { padding: 14px; background: white; border-radius: 14px; display: inline-block; min-width: 220px; min-height: 220px; }
 #qrcode img, #qrcode canvas { display: block; width: 220px; height: 220px; }
 .note { font-size: 14px; color: #94a3b8; margin-top: 12px; }
 .success { color: #7dd3fc; font-weight: bold; margin-top: 12px; min-height: 20px; }
+.url-length { color:#94a3b8; font-size:13px; margin-top:8px; }
+.warning { color:#fbbf24; font-size:14px; margin-top:10px; }
 @media (max-width: 760px) { .container { padding: 40px 16px; } h1 { font-size: 36px; } .generator { padding: 22px; } button, .button { width: 100%; text-align: center; box-sizing: border-box; } }
 </style>
 </head>
@@ -35,10 +37,10 @@ button, .button { border: none; border-radius: 999px; padding: 14px 24px; backgr
 
   <div class="generator">
     <label for="client">Client / Business Name</label>
-    <input id="client" type="text" placeholder="ABC Bakery">
+    <input id="client" type="text" placeholder="ABC Bakery" maxlength="80">
 
     <label for="objective">Business Objective</label>
-    <textarea id="objective" placeholder="Improve scheduling, reduce manual paperwork, automate follow-up..."></textarea>
+    <textarea id="objective" placeholder="Improve scheduling, reduce manual paperwork, automate follow-up..." maxlength="180"></textarea>
 
     <label for="service">Recommended Focus</label>
     <select id="service">
@@ -50,7 +52,7 @@ button, .button { border: none; border-radius: 999px; padding: 14px 24px; backgr
     </select>
 
     <label for="message">Personal Message</label>
-    <textarea id="message" placeholder="It was great meeting you. I look forward to discussing how RMH Solutions can help."></textarea>
+    <textarea id="message" placeholder="It was great meeting you. I look forward to discussing how RMH Solutions can help." maxlength="180"></textarea>
 
     <div class="actions">
       <button id="generate" type="button">Generate QR Code</button>
@@ -61,6 +63,7 @@ button, .button { border: none; border-radius: 999px; padding: 14px 24px; backgr
     <div id="output" class="output">
       <strong>Personalized URL:</strong><br>
       <a id="generated-url" href="#" target="_blank" rel="noopener"></a>
+      <div id="url-length" class="url-length"></div>
 
       <div class="qr-wrap">
         <div id="qrcode" aria-label="Personalized card QR code"></div>
@@ -68,6 +71,7 @@ button, .button { border: none; border-radius: 999px; padding: 14px 24px; backgr
 
       <div class="note">Have the prospect scan this QR code to open their personalized card.</div>
       <div id="status" class="success"></div>
+      <div id="warning" class="warning"></div>
     </div>
   </div>
 </div>
@@ -82,18 +86,37 @@ button, .button { border: none; border-radius: 999px; padding: 14px 24px; backgr
   const generatedUrl = document.getElementById('generated-url');
   const qrcode = document.getElementById('qrcode');
   const status = document.getElementById('status');
+  const warning = document.getElementById('warning');
+  const urlLength = document.getElementById('url-length');
 
   function fieldValue(id, fallback) {
     const value = document.getElementById(id).value.trim();
     return value || fallback;
   }
 
+  function limit(value, max) {
+    return value.length > max ? value.substring(0, max) : value;
+  }
+
+  function serviceCode(service) {
+    const map = {
+      'Technology • Automation • Consulting': 'tac',
+      'Software • Automation • Consulting': 'sac',
+      'Website Development • Automation • Consulting': 'web',
+      'Business Process Automation': 'bpa',
+      'Custom Software Development': 'dev'
+    };
+    return map[service] || 'tac';
+  }
+
   function buildUrl() {
     const params = new URLSearchParams();
-    params.set('client', fieldValue('client', 'Your Business'));
-    params.set('objective', fieldValue('objective', 'Use technology, automation, and consulting to improve daily operations.'));
-    params.set('service', fieldValue('service', 'Technology • Automation • Consulting'));
-    params.set('message', fieldValue('message', 'Thank you for connecting with RMH Solutions.'));
+
+    // Short parameter names keep the QR code small and scannable.
+    params.set('c', limit(fieldValue('client', 'Your Business'), 80));
+    params.set('o', limit(fieldValue('objective', 'Improve daily operations.'), 180));
+    params.set('s', serviceCode(fieldValue('service', 'Technology • Automation • Consulting')));
+    params.set('m', limit(fieldValue('message', 'Thank you for connecting with RMH Solutions.'), 180));
 
     const baseUrl = new URL('personal-card.html', window.location.href);
     baseUrl.search = params.toString();
@@ -102,30 +125,38 @@ button, .button { border: none; border-radius: 999px; padding: 14px 24px; backgr
 
   function makeQrCode(url) {
     qrcode.innerHTML = '';
+    warning.textContent = '';
 
     if (typeof QRCode === 'undefined') {
-      qrcode.innerHTML = '<div style="color:#020617; max-width:220px; font-weight:bold;">QR library did not load. Check your internet connection or upload the QR library locally.</div>';
+      qrcode.innerHTML = '<div style="color:#020617; max-width:220px; font-weight:bold;">QR library did not load. Check your internet connection.</div>';
       return;
     }
 
-    new QRCode(qrcode, {
-      text: url,
-      width: 220,
-      height: 220,
-      colorDark: '#020617',
-      colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.H
-    });
+    try {
+      new QRCode(qrcode, {
+        text: url,
+        width: 220,
+        height: 220,
+        colorDark: '#020617',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+      status.textContent = 'QR code ready.';
+    } catch (error) {
+      qrcode.innerHTML = '<div style="color:#020617; max-width:220px; font-weight:bold;">QR code failed because the link is too long. Shorten the message/objective.</div>';
+      status.textContent = '';
+      warning.textContent = error.message || 'QR code generation failed.';
+    }
   }
 
   function updateOutput() {
     const url = buildUrl();
     generatedUrl.href = url;
     generatedUrl.textContent = url;
+    urlLength.textContent = 'URL length: ' + url.length + ' characters';
     openLink.href = url;
     output.classList.add('show');
     makeQrCode(url);
-    status.textContent = 'QR code ready.';
     return url;
   }
 
