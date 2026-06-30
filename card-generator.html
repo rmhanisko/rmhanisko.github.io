@@ -41,17 +41,7 @@ button, .button { border: none; border-radius: 999px; padding: 14px 24px; backgr
 
     <label for="objective">Business Objective</label>
     <textarea id="objective" placeholder="Improve scheduling, reduce manual paperwork, automate follow-up..." maxlength="180"></textarea>
-
-    <label for="service">Recommended Focus</label>
-    <select id="service">
-      <option>Technology • Automation • Consulting</option>
-      <option>Software • Automation • Consulting</option>
-      <option>Website Development • Automation • Consulting</option>
-      <option>Business Process Automation</option>
-      <option>Custom Software Development</option>
-    </select>
-
-    <label for="message">Personal Message</label>
+<label for="message">Personal Message</label>
     <textarea id="message" placeholder="It was great meeting you. I look forward to discussing how RMH Solutions can help." maxlength="180"></textarea>
 
     <div class="actions">
@@ -98,24 +88,12 @@ button, .button { border: none; border-radius: 999px; padding: 14px 24px; backgr
     return value.length > max ? value.substring(0, max) : value;
   }
 
-  function serviceCode(service) {
-    const map = {
-      'Technology • Automation • Consulting': 'tac',
-      'Software • Automation • Consulting': 'sac',
-      'Website Development • Automation • Consulting': 'web',
-      'Business Process Automation': 'bpa',
-      'Custom Software Development': 'dev'
-    };
-    return map[service] || 'tac';
-  }
-
   function buildUrl() {
     const params = new URLSearchParams();
 
     // Short parameter names keep the QR code small and scannable.
     params.set('c', limit(fieldValue('client', 'Your Business'), 80));
     params.set('o', limit(fieldValue('objective', 'Improve daily operations.'), 180));
-    params.set('s', serviceCode(fieldValue('service', 'Technology • Automation • Consulting')));
     params.set('m', limit(fieldValue('message', 'Thank you for connecting with RMH Solutions.'), 180));
 
     const baseUrl = new URL('personal-card.html', window.location.href);

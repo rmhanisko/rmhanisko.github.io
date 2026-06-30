@@ -22,7 +22,6 @@ h2{color:#38bdf8}
 <div class="info">
 <h2 id="client"></h2>
 <p><strong>Business Objective</strong><br><span id="objective"></span></p>
-<p><strong>Recommended Focus</strong><br><span id="service"></span></p>
 <p id="message"></p>
 </div>
 </div>
@@ -31,12 +30,10 @@ const params=new URLSearchParams(window.location.search);
 
 const client=params.get('c')||params.get('client')||'Your Business';
 const objective=params.get('o')||params.get('objective')||'Use technology to improve daily operations.';
-const service=params.get('s')||params.get('service')||'Technology • Automation • Consulting';
 const message=params.get('m')||params.get('message')||'Thank you for connecting with RMH Solutions.';
 
 document.getElementById('client').textContent='Prepared for ' + client;
 document.getElementById('objective').textContent=objective;
-document.getElementById('service').textContent=service;
 document.getElementById('message').textContent=message;
 </script>
 </body>
