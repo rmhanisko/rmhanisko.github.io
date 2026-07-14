@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Independent Businesses | RMH Solutions LLC</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom right, #0f172a, #020617);
+  color: white;
+  text-align: center;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 50px 20px;
+}
+
+.logo a {
+  display: inline-block;
+}
+
+.logo img {
+  width: 140px;
+  margin-bottom: 20px;
+  transition: transform 0.2s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.03);
+}
+
+.nav {
+  margin-bottom: 35px;
+}
+
+.nav a {
+  display: inline-block;
+  margin: 6px;
+  padding: 10px 18px;
+  border: 1px solid rgba(56,189,248,0.35);
+  border-radius: 999px;
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: bold;
+  background: rgba(255,255,255,0.04);
+  transition: 0.2s ease;
+}
+
+.nav a:hover {
+  background: rgba(56,189,248,0.15);
+}
+
+.nav a.active {
+  background: rgba(56,189,248,0.22);
+  border-color: rgba(56,189,248,0.55);
+  box-shadow: 0 0 12px rgba(56,189,248,0.12);
+}
+
+h1 {
+  font-size: 48px;
+  margin: 20px 0;
+}
+
+h1 span {
+  color: #38bdf8;
+}
+
+p {
+  font-size: 18px;
+  color: #cbd5f5;
+  line-height: 1.6;
+}
+
+.section {
+  margin-top: 40px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  text-align: left;
+}
+
+.box {
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  padding: 28px;
+  border-radius: 16px;
+}
+
+.box h2 {
+  margin-top: 0;
+  color: white;
+  font-size: 26px;
+}
+
+.box ul {
+  margin-bottom: 0;
+  padding-left: 22px;
+  color: #cbd5f5;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.box li {
+  margin-bottom: 8px;
+}
+
+.footer-contact {
+  margin-top: 50px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 16px;
+  overflow: hidden;
+
+  background: rgba(255,255,255,0.04);
+}
+
+.footer-contact div {
+  padding: 20px;
+  font-size: 16px;
+  color: #cbd5f5;
+  text-align: center;
+}
+
+.footer-contact div:not(:last-child) {
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-contact a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.footer-contact a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  margin-top: 35px;
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+/* FADE-IN ANIMATION */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+.fade-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.fade-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.fade-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.fade-delay-4 {
+  animation-delay: 0.4s;
+}
+
+.fade-delay-5 {
+  animation-delay: 0.5s;
+}
+
+.fade-delay-6 {
+  animation-delay: 0.6s;
+}
+
+.fade-delay-7 {
+  animation-delay: 0.7s;
+}
+
+.fade-delay-8 {
+  animation-delay: 0.8s;
+}
+
+.fade-delay-9 {
+  animation-delay: 0.9s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 760px) {
+
+  h1 {
+    font-size: 40px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-contact {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-contact div:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+}
+
+.business-intro { max-width: 820px; margin-left: auto; margin-right: auto; }
+.box p { font-size: 16px; margin-bottom: 0; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="logo">
+    <a href="index.html" aria-label="RMH Solutions Home"><img src="rmh-logo.png" alt="RMH Solutions Logo"></a>
+  </div>
+  <div class="nav">
+    <a href="services.html">Corporate Clients</a>
+    <a class="active" href="independent-businesses.html">Independent Businesses</a>
+    <a href="about.html">About</a>
+    <a href="resume.html">Resume</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <h1 class="fade-in fade-delay-1">Independent Business <span>Solutions</span></h1>
+  <p class="business-intro fade-in fade-delay-2">
+    RMH Solutions helps independent businesses simplify operations, improve customer engagement, and grow through practical, affordable technology solutions including websites, business applications, automation, AI, and process improvement.
+  <div class="section services-grid">
+    <div class="box fade-in fade-delay-3"><h2>Run Your Business Anywhere</h2><p>Desktop, web, and mobile solutions that keep you connected wherever business takes you.</p></div>
+    <div class="box fade-in fade-delay-4"><h2>Built for Your Business</h2><p>Custom software designed around your operations—not a one-size-fits-all system that forces you to change how you work.</p></div>
+    <div class="box fade-in fade-delay-5"><h2>Save Time Every Day</h2><p>Digital forms, streamlined workflows, and process automation that reduce repetitive work and keep operations moving.</p></div>
+    <div class="box fade-in fade-delay-6"><h2>Engage Your Customers</h2><p>Websites, QR codes, and digital marketing tools that make it easier for customers to find, understand, and connect with your business.</p></div>
+    <div class="box fade-in fade-delay-7"><h2>Technology That Fits Your Budget</h2><p>Practical, affordable solutions designed for independent businesses and scaled to your actual needs.</p></div>
+    <div class="box fade-in fade-delay-8"><h2>Hands-On Support</h2><p>Clear guidance, implementation support, and practical problem-solving from a Fort Lauderdale-based consultant who works directly with you.</p></div>
+  </div>
+  <div class="footer-contact fade-in fade-delay-9">
+    <div>📍 Fort Lauderdale, Florida</div>
+    <div>📧 <a href="mailto:info@rmhsolutions.io">info@rmhsolutions.io</a></div>
+    <div>☎ <a href="tel:+19543725474">954.372.5474</a></div>
+  </div>
+  <footer>© 2026 RMH Solutions LLC · All rights reserved</footer>
+</div>
+</body>
+</html>

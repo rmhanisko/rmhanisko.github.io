@@ -119,6 +119,36 @@ p {
   text-decoration: none;
 }
 
+.audience-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 270px;
+}
+
+.audience-box strong {
+  font-size: 25px;
+}
+
+.audience-box p {
+  flex: 1;
+  margin: 18px 0 24px;
+}
+
+.audience-button {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: #38bdf8;
+  color: #020617;
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+.audience-button:hover {
+  background: #7dd3fc;
+}
+
 .footer-contact a:hover {
   text-decoration: underline;
 }
@@ -132,6 +162,36 @@ footer {
 a {
   color: #38bdf8;
   text-decoration: none;
+}
+
+.audience-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 270px;
+}
+
+.audience-box strong {
+  font-size: 25px;
+}
+
+.audience-box p {
+  flex: 1;
+  margin: 18px 0 24px;
+}
+
+.audience-button {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: #38bdf8;
+  color: #020617;
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+.audience-button:hover {
+  background: #7dd3fc;
 }
 
 /* FADE-IN ANIMATION */
@@ -208,9 +268,9 @@ a {
       <img src="rmh-logo.png" alt="RMH Solutions Logo">
     </a>
   </div>
-
   <div class="nav">
-    <a href="services.html">Services</a>
+    <a href="services.html">Corporate Clients</a>
+    <a href="independent-businesses.html">Independent Businesses</a>
     <a href="about.html">About</a>
     <a href="resume.html">Resume</a>
     <a href="contact.html">Contact</a>
@@ -221,35 +281,21 @@ a {
   </h1>
 
   <p class="fade-in fade-delay-2">
-    RMH Solutions provides enterprise delivery leadership and hands-on execution
-    across project management, Scrum leadership, Agile transformation,
-    and technology-enabled operational initiatives.
+    RMH Solutions provides practical, technology-enabled services for corporate clients and independent businesses, combining project delivery expertise, process improvement, automation, AI, and custom business solutions.
   </p>
 
-  <div class="section grid">
+  <div class="section grid audience-grid">
 
-    <div class="box fade-in fade-delay-3">
-      <strong>Enterprise Project Delivery</strong><br><br>
-      Strategic leadership for enterprise initiatives including Agile delivery,
-      SDLC governance, cross-functional execution, and transformation programs.
+    <div class="box audience-box fade-in fade-delay-3">
+      <strong>Corporate Clients</strong>
+      <p>Enterprise project and program delivery, Agile and Scrum leadership, PMO strategy, Jira optimization, reporting, and hands-on execution for complex initiatives.</p>
+      <a class="audience-button" href="services.html">Explore Corporate Services</a>
     </div>
 
-    <div class="box fade-in fade-delay-3">
-      <strong>Agile & Jira Optimization</strong><br><br>
-      Jira configurations, workflow automation, Agile reporting,
-      KPI dashboards, and operational visibility for delivery organizations.
-    </div>
-
-    <div class="box fade-in fade-delay-3">
-      <strong>Technology-Enabled Operations</strong><br><br>
-      AI-assisted development, platform integration utilities, delivery reporting,
-      and operational acceleration for modern technology organizations.
-    </div>
-
-    <div class="box fade-in fade-delay-3">
-      <strong>PMO & Agile Leadership</strong><br><br>
-      PMO leadership, Scrum Master services, Agile coaching,
-      and enterprise delivery management with a strong technical foundation.
+    <div class="box audience-box fade-in fade-delay-3">
+      <strong>Independent Businesses</strong>
+      <p>Practical desktop, web, mobile, automation, website, and digital solutions designed around the way your business actually operates.</p>
+      <a class="audience-button" href="independent-businesses.html">Explore Business Solutions</a>
     </div>
 
   </div>
@@ -262,8 +308,8 @@ a {
 
     <div>
       📧
-      <a href="mailto:robert@rmhsolutions.io">
-        robert@rmhsolutions.io
+      <a href="mailto:info@rmhsolutions.io">
+        info@rmhsolutions.io
       </a>
     </div>
 
