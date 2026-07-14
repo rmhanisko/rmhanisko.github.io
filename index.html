@@ -6,192 +6,293 @@
 <title>RMH Solutions</title>
 
 <style>
+
+/* REVISED SITE HEADER */
+.site-header {
+  background: #0b2f55;
+  border-bottom: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.20);
+}
+
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+}
+
+.header-logo {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.header-logo img {
+  display: block;
+  width: 124px;
+  height: auto;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px 26px;
+}
+
+.site-nav a {
+  position: relative;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 10px 0;
+  transition: color 0.2s ease;
+}
+
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 4px;
+  width: 100%;
+  height: 2px;
+  background: #8fc6ec;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  color: #cfe9fb;
+}
+
+.site-nav a:hover::after,
+.site-nav a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@media (max-width: 860px) {
+  .header-inner {
+    flex-direction: column;
+    padding: 16px 18px 18px;
+    gap: 12px;
+  }
+
+  .site-nav {
+    justify-content: center;
+    gap: 4px 18px;
+  }
+}
+
+@media (max-width: 560px) {
+  .header-logo img {
+    width: 96px;
+  }
+
+  .site-nav {
+    gap: 2px 14px;
+  }
+
+  .site-nav a {
+    font-size: 14px;
+  }
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom right, #0f172a, #020617);
-  color: white;
+  background: #ffffff;
+  color: #172033;
   text-align: center;
 }
 
 .container {
-  max-width: 900px;
-  margin: auto;
-  padding: 50px 20px;
-}
-
-.logo a {
-  display: inline-block;
-}
-
-.logo img {
-  width: 140px;
-  margin-bottom: 20px;
-  transition: transform 0.2s ease;
-}
-
-.logo img:hover {
-  transform: scale(1.03);
-}
-
-.nav {
-  margin-bottom: 35px;
-}
-
-.nav a {
-  display: inline-block;
-  margin: 6px;
-  padding: 10px 18px;
-  border: 1px solid rgba(56,189,248,0.35);
-  border-radius: 999px;
-  color: #38bdf8;
-  text-decoration: none;
-  font-weight: bold;
-  background: rgba(255,255,255,0.04);
-  transition: 0.2s ease;
-}
-
-.nav a:hover {
-  background: rgba(56,189,248,0.15);
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 64px 24px 48px;
 }
 
 h1 {
-  font-size: 48px;
-  margin: 20px 0;
+  margin: 0 0 20px;
+  font-size: 50px;
+  line-height: 1.1;
+  color: #0b2f55;
 }
 
 h1 span {
-  color: #38bdf8;
+  color: #1d6fb8;
 }
 
 p {
+  margin: 0;
   font-size: 18px;
-  color: #cbd5f5;
-  line-height: 1.6;
+  line-height: 1.65;
+  color: #465468;
+}
+
+
+.hero-split {
+  display:block;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align:center;
+}
+
+.hero-copy p {
+  margin:0;
+  color:#465468;
+  font-size:28px;
+  line-height:1.7;
+}
+
+@media (max-width: 760px) {
+  .hero-copy p {
+    font-size:22px;
+  }
 }
 
 .section {
-  margin-top: 40px;
+  margin-top: 42px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(360px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
 }
 
 .box {
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.05);
-  padding: 24px;
-  border-radius: 16px;
   box-sizing: border-box;
+  padding: 36px 30px;
+  background: #0b3954;
+  border: none;
+  border-radius: 22px;
+  box-shadow: 0 10px 26px rgba(11, 57, 84, 0.16);
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.box strong {
-  color: #38bdf8;
-  font-size: 18px;
+.box:hover {
+  background: #104966;
+  transform: translateY(-3px);
+}
+
+.audience-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 286px;
+}
+
+.audience-box strong {
+  color: #ffffff;
+  font-size: 25px;
+}
+
+.audience-box p {
+  flex: 1;
+  margin: 18px 0 26px;
+  color: rgba(255, 255, 255, 0.90);
+}
+
+.audience-button {
+  display: inline-block;
+  padding: 13px 24px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #0b3954;
+  text-decoration: none;
+  font-weight: 700;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.audience-button:hover,
+.audience-button:focus-visible {
+  background: #edf4f7;
+  transform: translateY(-1px);
+}
+
+.site-footer {
+  width: 100%;
+  margin-top: 32px;
+  padding: 54px 24px 26px;
+  box-sizing: border-box;
+  background: #0b2f55;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .footer-contact {
-  margin-top: 50px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 16px;
-  overflow: hidden;
-  background: rgba(255,255,255,0.04);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 64px;
+  text-align: left;
 }
 
-.footer-contact div {
-  padding: 20px;
-  font-size: 16px;
-  color: #cbd5f5;
-  text-align: center;
+.footer-column h2 {
+  margin: 0 0 18px;
+  color: #cfe9fb;
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.02em;
 }
 
-.footer-contact div:not(:last-child) {
-  border-right: 1px solid rgba(255,255,255,0.08);
+.footer-column p {
+  margin: 0;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 1.65;
 }
 
-.footer-contact a {
-  color: #38bdf8;
+.footer-column a {
+  color: #ffffff;
   text-decoration: none;
 }
 
-.audience-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 270px;
-}
-
-.audience-box strong {
-  font-size: 25px;
-}
-
-.audience-box p {
-  flex: 1;
-  margin: 18px 0 24px;
-}
-
-.audience-button {
-  display: inline-block;
-  padding: 12px 20px;
-  border-radius: 999px;
-  background: #38bdf8;
-  color: #020617;
-  font-weight: bold;
-  transition: 0.2s ease;
-}
-
-.audience-button:hover {
-  background: #7dd3fc;
-}
-
-.footer-contact a:hover {
+.footer-column a:hover,
+.footer-column a:focus-visible {
+  color: #cfe9fb;
   text-decoration: underline;
 }
 
-footer {
-  margin-top: 35px;
+.footer-copyright {
+  margin-top: 42px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.72);
   font-size: 14px;
-  color: #94a3b8;
+  text-align: center;
 }
 
-a {
-  color: #38bdf8;
-  text-decoration: none;
-}
+@media (max-width: 760px) {
+  .footer-contact {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
 
-.audience-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 270px;
-}
+  .footer-column h2 {
+    margin-bottom: 10px;
+    font-size: 25px;
+  }
 
-.audience-box strong {
-  font-size: 25px;
-}
+  .footer-column p {
+    font-size: 17px;
+  }
 
-.audience-box p {
-  flex: 1;
-  margin: 18px 0 24px;
-}
-
-.audience-button {
-  display: inline-block;
-  padding: 12px 20px;
-  border-radius: 999px;
-  background: #38bdf8;
-  color: #020617;
-  font-weight: bold;
-  transition: 0.2s ease;
-}
-
-.audience-button:hover {
-  background: #7dd3fc;
+  .site-footer {
+    padding: 40px 22px 24px;
+  }
 }
 
 /* FADE-IN ANIMATION */
@@ -245,7 +346,7 @@ a {
 
   .footer-contact div:not(:last-child) {
     border-right: none;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.16);
   }
 
   h1 {
@@ -255,34 +356,41 @@ a {
   p {
     font-size: 17px;
   }
+
+  .site-footer {
+    padding: 36px 16px 24px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-
-  <div class="logo">
-    <a href="index.html" aria-label="RMH Solutions Home">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="header-logo" href="index.html" aria-label="RMH Solutions Home">
       <img src="rmh-logo.png" alt="RMH Solutions Logo">
     </a>
-  </div>
-  <div class="nav">
-    <a href="services.html">Corporate Clients</a>
-    <a href="independent-businesses.html">Independent Businesses</a>
-    <a href="about.html">About</a>
-    <a href="resume.html">Resume</a>
-    <a href="contact.html">Contact</a>
-  </div>
 
-  <h1 class="fade-in fade-delay-1">
-    RMH <span>Solutions LLC</span>
-  </h1>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="services.html">Corporate Clients</a>
+      <a href="independent-businesses.html">Independent Businesses</a>
+      <a href="about.html">About</a>
+      <a href="resume.html">Resume</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
 
-  <p class="fade-in fade-delay-2">
-    RMH Solutions provides practical, technology-enabled services for corporate clients and independent businesses, combining project delivery expertise, process improvement, automation, AI, and custom business solutions.
-  </p>
+<div class="container">
+
+  <section class="hero-split">
+    <div class="hero-copy fade-in fade-delay-1">
+      <p>
+        RMH Solutions provides practical, technology-enabled services for corporate clients and independent businesses, combining project delivery expertise, process improvement, automation, AI, and custom business solutions.
+      </p>
+    </div>
+  </section>
 
   <div class="section grid audience-grid">
 
@@ -300,33 +408,34 @@ a {
 
   </div>
 
-  <div class="footer-contact fade-in fade-delay-4">
-
-    <div>
-      📍 Fort Lauderdale, Florida
-    </div>
-
-    <div>
-      📧
-      <a href="mailto:info@rmhsolutions.io">
-        info@rmhsolutions.io
-      </a>
-    </div>
-
-    <div>
-      ☎
-      <a href="tel:+19543725474">
-        954.372.5474
-      </a>
-    </div>
-
-  </div>
-
-  <footer>
-    © 2026 RMH Solutions LLC · All rights reserved
-  </footer>
-
 </div>
+
+<footer class="site-footer fade-in fade-delay-4">
+  <div class="footer-inner">
+    <div class="footer-contact">
+
+      <section class="footer-column" aria-labelledby="footer-location">
+        <h2 id="footer-location">Location</h2>
+        <p>Fort Lauderdale, Florida</p>
+      </section>
+
+      <section class="footer-column" aria-labelledby="footer-phone">
+        <h2 id="footer-phone">Phone</h2>
+        <p><a href="tel:+19543725474">954.372.5474</a></p>
+      </section>
+
+      <section class="footer-column" aria-labelledby="footer-email">
+        <h2 id="footer-email">Email</h2>
+        <p><a href="mailto:info@rmhsolutions.io">info@rmhsolutions.io</a></p>
+      </section>
+
+    </div>
+
+    <div class="footer-copyright">
+      © 2026 RMH Solutions LLC · All rights reserved
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>

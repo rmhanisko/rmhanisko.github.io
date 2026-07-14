@@ -1,244 +1,225 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Resume | Robert Hanisko</title>
-
 <style>
+.site-header {
+  background: #0b2f55;
+  border-bottom: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.20);
+}
+
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+}
+
+.header-logo {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.header-logo img {
+  display: block;
+  width: 124px;
+  height: auto;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px 26px;
+}
+
+.site-nav a {
+  position: relative;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 10px 0;
+  transition: color 0.2s ease;
+}
+
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 4px;
+  width: 100%;
+  height: 2px;
+  background: #8fc6ec;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible,
+.site-nav a.active {
+  color: #cfe9fb;
+}
+
+.site-nav a:hover::after,
+.site-nav a:focus-visible::after,
+.site-nav a.active::after {
+  transform: scaleX(1);
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom right, #0f172a, #020617);
-  color: white;
+  background: #ffffff;
+  color: #172033;
   text-align: center;
 }
 
 .container {
   max-width: 1000px;
-  margin: auto;
-  padding: 50px 20px;
+  margin: 0 auto;
+  padding: 64px 24px 48px;
 }
 
-.logo a {
-  display: inline-block;
-}
-
-.logo img {
-  width: 140px;
-  margin-bottom: 20px;
-  transition: transform 0.2s ease;
-}
-
-.logo img:hover {
-  transform: scale(1.03);
-}
-
-.nav {
-  margin-bottom: 35px;
-}
-
-.nav a {
-  display: inline-block;
-  margin: 6px;
-  padding: 10px 18px;
-  border: 1px solid rgba(56,189,248,0.35);
-  border-radius: 999px;
-  color: #38bdf8;
-  text-decoration: none;
-  font-weight: bold;
-  background: rgba(255,255,255,0.04);
-  transition: 0.2s ease;
-}
-
-.nav a:hover {
-  background: rgba(56,189,248,0.15);
-}
-
-.nav a.active {
-  background: rgba(56,189,248,0.22);
-  border-color: rgba(56,189,248,0.55);
-  box-shadow: 0 0 12px rgba(56,189,248,0.12);
+.hero {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 h1 {
-  font-size: 48px;
-  margin: 20px 0 10px;
+  margin: 0 0 20px;
+  font-size: 50px;
+  line-height: 1.1;
+  color: #0b2f55;
 }
 
-h1 span,
-h2 span {
-  color: #38bdf8;
+h1 span {
+  color: #1d6fb8;
 }
 
-p {
-  font-size: 18px;
-  color: #cbd5f5;
-  line-height: 1.6;
-}
-
-a {
-  color: #38bdf8;
-  text-decoration: none;
-}
-
-.resume-card {
-  margin-top: 40px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.05);
-  padding: 34px;
-  border-radius: 16px;
-  text-align: left;
-}
-
-.resume-header {
-  text-align: center;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-  padding-bottom: 24px;
-  margin-bottom: 30px;
-}
-
-.resume-header h2 {
-  font-size: 34px;
-  margin: 0 0 12px;
-}
-
-.contact-line {
-  color: #cbd5f5;
-  font-size: 17px;
+.hero p {
+  margin: 0;
+  color: #465468;
+  font-size: 22px;
+  line-height: 1.7;
 }
 
 .section {
-  margin-top: 32px;
+  margin-top: 42px;
 }
 
-.section h2 {
-  font-size: 26px;
-  margin: 0 0 16px;
-  color: white;
-  border-bottom: 1px solid rgba(56,189,248,0.35);
-  padding-bottom: 8px;
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  text-align: left;
 }
 
-.item {
-  margin-bottom: 26px;
+.box {
+  box-sizing: border-box;
+  padding: 34px 30px;
+  background: #0b3954;
+  border: none;
+  border-radius: 22px;
+  box-shadow: 0 10px 26px rgba(11, 57, 84, 0.16);
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.item-header {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  align-items: flex-start;
-  margin-bottom: 6px;
+.box:hover {
+  background: #104966;
+  transform: translateY(-3px);
 }
 
-.item-header h3 {
+.box h2 {
+  margin: 0 0 18px;
+  color: #ffffff;
+  font-size: 25px;
+  line-height: 1.25;
+}
+
+.box ul {
   margin: 0;
-  font-size: 21px;
-  color: white;
+  padding-left: 22px;
+  color: rgba(255, 255, 255, 0.90);
+  font-size: 17px;
+  line-height: 1.65;
 }
 
-.meta {
-  color: #94a3b8;
-  font-size: 15px;
-  white-space: nowrap;
-  text-align: right;
-}
-
-.role {
-  margin: 0 0 10px;
-  color: #cbd5f5;
-  font-weight: bold;
-}
-
-ul {
-  margin: 10px 0 0 22px;
-  padding: 0;
-  color: #cbd5f5;
-  line-height: 1.55;
-  font-size: 16px;
-}
-
-li {
+.box li {
   margin-bottom: 8px;
 }
 
-.skills-grid,
-.cert-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+.box li:last-child {
+  margin-bottom: 0;
 }
 
-.skill-box,
-.cert-box {
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.04);
-  border-radius: 14px;
-  padding: 18px;
+.site-footer {
+  width: 100%;
+  margin-top: 32px;
+  padding: 54px 24px 26px;
+  box-sizing: border-box;
+  background: #0b2f55;
+  border-top: 1px solid rgba(255,255,255,0.12);
 }
 
-.skill-box strong,
-.cert-box strong {
-  color: white;
-}
-
-.download-button {
-  display: inline-block;
-  margin-top: 18px;
-  padding: 13px 22px;
-  border-radius: 999px;
-  background: #38bdf8;
-  color: #020617;
-  text-decoration: none;
-  font-weight: bold;
-  transition: 0.2s ease;
-}
-
-.download-button:hover {
-  background: #7dd3fc;
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .footer-contact {
-  margin-top: 50px;
-
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-
-  border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 16px;
-  overflow: hidden;
-
-  background: rgba(255,255,255,0.04);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 64px;
+  text-align: left;
 }
 
-.footer-contact div {
-  padding: 20px;
-  font-size: 16px;
-  color: #cbd5f5;
-  text-align: center;
+.footer-column h2 {
+  margin: 0 0 18px;
+  color: #cfe9fb;
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.02em;
 }
 
-.footer-contact div:not(:last-child) {
-  border-right: 1px solid rgba(255,255,255,0.08);
+.footer-column p {
+  margin: 0;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 1.65;
 }
 
-.footer-contact a {
-  color: #38bdf8;
+.footer-column a {
+  color: #ffffff;
   text-decoration: none;
 }
 
-.footer-contact a:hover {
+.footer-column a:hover,
+.footer-column a:focus-visible {
+  color: #cfe9fb;
   text-decoration: underline;
 }
 
-footer {
-  margin-top: 35px;
+.footer-copyright {
+  margin-top: 42px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.72);
   font-size: 14px;
-  color: #94a3b8;
+  text-align: center;
 }
-
-/* FADE-IN ANIMATION */
 
 .fade-in {
   opacity: 0;
@@ -246,25 +227,15 @@ footer {
   animation: fadeInUp 0.7s ease forwards;
 }
 
-.fade-delay-1 {
-  animation-delay: 0.1s;
-}
-
-.fade-delay-2 {
-  animation-delay: 0.2s;
-}
-
-.fade-delay-3 {
-  animation-delay: 0.3s;
-}
-
-.fade-delay-4 {
-  animation-delay: 0.4s;
-}
-
-.fade-delay-5 {
-  animation-delay: 0.5s;
-}
+.fade-delay-1 { animation-delay: 0.1s; }
+.fade-delay-2 { animation-delay: 0.2s; }
+.fade-delay-3 { animation-delay: 0.3s; }
+.fade-delay-4 { animation-delay: 0.4s; }
+.fade-delay-5 { animation-delay: 0.5s; }
+.fade-delay-6 { animation-delay: 0.6s; }
+.fade-delay-7 { animation-delay: 0.7s; }
+.fade-delay-8 { animation-delay: 0.8s; }
+.fade-delay-9 { animation-delay: 0.9s; }
 
 @keyframes fadeInUp {
   to {
@@ -273,262 +244,362 @@ footer {
   }
 }
 
+@media (max-width: 860px) {
+  .header-inner {
+    flex-direction: column;
+    padding: 16px 18px 18px;
+    gap: 12px;
+  }
+
+  .site-nav {
+    justify-content: center;
+    gap: 4px 18px;
+  }
+}
+
 @media (max-width: 760px) {
+  .container {
+    padding: 40px 16px;
+  }
 
   h1 {
     font-size: 40px;
   }
 
-  .resume-card {
-    padding: 24px;
+  .hero p {
+    font-size: 20px;
   }
 
-  .item-header,
-  .skills-grid,
-  .cert-grid {
-    display: block;
+  .services-grid {
+    grid-template-columns: 1fr;
   }
 
-  .meta {
-    margin-top: 4px;
-    text-align: left;
-    white-space: normal;
-  }
-
-  .skill-box,
-  .cert-box {
-    margin-bottom: 14px;
+  .box {
+    width: 100%;
   }
 
   .footer-contact {
     grid-template-columns: 1fr;
+    gap: 30px;
   }
 
-  .footer-contact div:not(:last-child) {
-    border-right: none;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+  .footer-column h2 {
+    margin-bottom: 10px;
+    font-size: 25px;
+  }
+
+  .footer-column p {
+    font-size: 17px;
+  }
+
+  .site-footer {
+    padding: 40px 22px 24px;
+  }
+}
+
+@media (max-width: 560px) {
+  .header-logo img {
+    width: 96px;
+  }
+
+  .site-nav {
+    gap: 2px 14px;
+  }
+
+  .site-nav a {
+    font-size: 14px;
+  }
+}
+
+.site-nav a.active{color:#cfe9fb;}
+.site-nav a.active::after{transform:scaleX(1);}
+.resume-card{background:#0b3954;border-radius:22px;padding:36px;box-shadow:0 10px 26px rgba(11,57,84,.16);text-align:left}
+.resume-card,.resume-card p,.resume-card li,.role,.meta{color:rgba(255,255,255,.9)}
+.resume-card h2,.resume-card h3{color:#fff}
+.resume-header{border-bottom:1px solid rgba(255,255,255,.15);margin-bottom:28px;padding-bottom:20px}
+.section h2{border-bottom:1px solid rgba(207,233,251,.25);padding-bottom:8px}
+.download-button{display:inline-block;margin:20px 0 30px;padding:13px 24px;border-radius:999px;background:#0b3954;color:#fff;text-decoration:none;font-weight:700}
+.download-button:hover{background:#104966}
+.skill-box,.cert-box{background:#104966;border-radius:14px;padding:18px}
+.skills-grid,.cert-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.item-header{display:flex;justify-content:space-between;gap:20px}
+@media(max-width:760px){.skills-grid,.cert-grid,.item-header{display:block}}
+
+/* RESUME PAGE CORRECTIONS */
+main.container {
+  padding-bottom: 48px;
+}
+
+main.container > p {
+  max-width: 900px;
+  margin: 0 auto;
+  color: #465468;
+  font-size: 20px;
+  line-height: 1.55;
+}
+
+.resume-card {
+  margin-top: 0;
+  padding: 32px 36px;
+}
+
+.resume-header {
+  text-align: center;
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+}
+
+.resume-header h2 {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.15;
+}
+
+.resume-header h2 span {
+  color: #8fc6ec;
+}
+
+.resume-card .section {
+  margin-top: 24px;
+}
+
+.resume-card .section:first-of-type {
+  margin-top: 0;
+}
+
+.resume-card .section h2 {
+  margin: 0 0 14px;
+  font-size: 25px;
+  line-height: 1.2;
+}
+
+.resume-card p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.resume-card .item {
+  margin-bottom: 18px;
+}
+
+.resume-card .item:last-child {
+  margin-bottom: 0;
+}
+
+.item-header {
+  align-items: baseline;
+  margin-bottom: 3px;
+}
+
+.item-header h3 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.meta {
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.role {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.cert-grid,
+.skills-grid {
+  gap: 12px;
+}
+
+.cert-box,
+.skill-box {
+  line-height: 1.5;
+}
+
+.site-footer {
+  margin-top: 32px;
+}
+
+@media (max-width: 760px) {
+  main.container > p {
+    font-size: 18px;
+  }
+
+  .resume-card {
+    padding: 26px 22px;
+  }
+
+  .item-header {
+    margin-bottom: 5px;
+  }
+
+  .meta {
+    margin-top: 2px;
+  }
+
+  .cert-box,
+  .skill-box {
+    margin-bottom: 12px;
   }
 }
 </style>
 </head>
-
 <body>
-
-<div class="container">
-
-  <div class="logo">
-    <a href="index.html" aria-label="RMH Solutions Home">
-      <img src="rmh-logo.png" alt="RMH Solutions Logo">
-    </a>
-  </div>
-  <div class="nav">
-    <a href="services.html">Corporate Clients</a>
-    <a href="independent-businesses.html">Independent Businesses</a>
-    <a href="about.html">About</a>
-    <a class="active" href="resume.html">Resume</a>
-    <a href="contact.html">Contact</a>
-  </div>
-
-  <h1 class="fade-in fade-delay-1">
+<header class="site-header">
+<div class="header-inner">
+<a aria-label="RMH Solutions Home" class="header-logo" href="index.html">
+<img alt="RMH Solutions Logo" src="rmh-logo.png"/>
+</a>
+<nav aria-label="Primary navigation" class="site-nav">
+<a aria-current="page" href="services.html">Corporate Clients</a>
+<a href="independent-businesses.html">Independent Businesses</a>
+<a href="about.html">About</a>
+<a class="active" href="resume.html">Resume</a>
+<a href="contact.html">Contact</a>
+</nav>
+</div>
+</header>
+<main class="container"><h1 class="fade-in fade-delay-1">
     Professional <span>Resume</span>
-  </h1>
-
-  <p class="fade-in fade-delay-2">
+</h1><p class="fade-in fade-delay-2">
     RMH Solutions provides practical, technology-enabled services for corporate clients and independent businesses, combining project delivery expertise, process improvement, automation, AI, and custom business solutions.
-  </p>
-
-  <a
-    class="download-button fade-in fade-delay-3"
-    href="RMH_Solutions_Resume.pdf"
-    download
-  >
+  </p><a class="download-button fade-in fade-delay-3" download="" href="RMH_Solutions_Resume.pdf">
     Download PDF Resume
-  </a>
-
-  <div class="resume-card fade-in fade-delay-4">
-
-    <div class="resume-header">
-      <h2>Robert M. <span>Hanisko</span></h2>
-    </div>
-
-    <section class="section">
-
-      <h2>Summary</h2>
-
-      <p>
+  </a><div class="resume-card fade-in fade-delay-4">
+<div class="resume-header">
+<h2>Robert M. <span>Hanisko</span></h2>
+</div>
+<section class="section">
+<h2>Summary</h2>
+<p>
         Project and Program Leader with 20+ years of experience leading Agile delivery, PMO transformation, workflow automation, and AI-enabled business solutions. Proven track record delivering complex initiatives, optimizing operational processes, and aligning technology investments with business objectives.
       </p>
-
-    </section>
-
-    <section class="section">
-
-      <h2>Professional Experience</h2>
-
-
+</section>
+<section class="section">
+<h2>Professional Experience</h2>
 <div class="item">
-        <div class="item-header">
-          <h3>RMH Solutions LLC</h3>
-          <div class="meta">Fort Lauderdale, FL</div>
-        </div>
-
-        <p class="role">
-          Founder & Principal Consultant | 2026 – Present
+<div class="item-header">
+<h3>RMH Solutions LLC</h3>
+<div class="meta">Fort Lauderdale, FL</div>
+</div>
+<p class="role">
+          Founder &amp; Principal Consultant | 2026 – Present
         </p>
-
-       </div>
-  
-
-      <div class="item">
-        <div class="item-header">
-          <h3>First American Financial</h3>
-          <div class="meta">Remote</div>
-        </div>
-
-        <p class="role">
+</div>
+<div class="item">
+<div class="item-header">
+<h3>First American Financial</h3>
+<div class="meta">Remote</div>
+</div>
+<p class="role">
           Agile Program Director | 2022 – 2025
         </p>
-
-       </div>
-
-      <div class="item">
-        <div class="item-header">
-          <h3>Warner Music Group</h3>
-          <div class="meta">New York, NY</div>
-        </div>
-
-        <p class="role">
+</div>
+<div class="item">
+<div class="item-header">
+<h3>Warner Music Group</h3>
+<div class="meta">New York, NY</div>
+</div>
+<p class="role">
           Senior Project Manager | 2021
         </p>
-
-        </div>
-
-      <div class="item">
-        <div class="item-header">
-          <h3>Radancy</h3>
-          <div class="meta">New York, NY</div>
-        </div>
-
-        <p class="role">
+</div>
+<div class="item">
+<div class="item-header">
+<h3>Radancy</h3>
+<div class="meta">New York, NY</div>
+</div>
+<p class="role">
           Vice President of Project Management | 2015 – 2021
         </p>
-
-      </div>
-
-      <div class="item">
-        <div class="item-header">
-          <h3>Slalom Consulting</h3>
-          <div class="meta">New York, NY</div>
-        </div>
-
-        <p class="role">
+</div>
+<div class="item">
+<div class="item-header">
+<h3>Slalom Consulting</h3>
+<div class="meta">New York, NY</div>
+</div>
+<p class="role">
           Project Manager / ScrumMaster | 2014 – 2015
         </p>
-
-       </div>
-
-      <div class="item">
-        <div class="item-header">
-          <h3>MATRIX Resources</h3>
-          <div class="meta">Atlanta, GA</div>
-        </div>
-
-        <p class="role">
+</div>
+<div class="item">
+<div class="item-header">
+<h3>MATRIX Resources</h3>
+<div class="meta">Atlanta, GA</div>
+</div>
+<p class="role">
           Delivery Manager / ScrumMaster | 2012 – 2013
         </p>
-
-       </div>
-
-      <div class="item">
-        <div class="item-header">
-          <h3>Smurfit WestRock</h3>
-          <div class="meta">Atlanta, GA</div>
-        </div>
-
-        <p class="role">
+</div>
+<div class="item">
+<div class="item-header">
+<h3>Smurfit WestRock</h3>
+<div class="meta">Atlanta, GA</div>
+</div>
+<p class="role">
           PMO Project Manager / ScrumMaster | 2011
         </p>
-
-      </div>
-
-      <div class="item">
-        <div class="item-header">
-          <h3>Munich Reinsurance America</h3>
-          <div class="meta">Atlanta, GA</div>
-        </div>
-
-        <p class="role">
+</div>
+<div class="item">
+<div class="item-header">
+<h3>Munich Reinsurance America</h3>
+<div class="meta">Atlanta, GA</div>
+</div>
+<p class="role">
           PMO Project Manager | 2005 – 2011
         </p>
-
-      </div>
-
-
-    </section>
-
-    <section class="section">
-      <h2>Education</h2>
-
-      <div class="item">
-        <div class="item-header">
-          <h3>Columbia University</h3>
-          <div class="meta">New York, NY</div>
-        </div>
-        <p class="role">BA, Computer Science</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Certifications</h2>
-
-      <div class="cert-grid">
-        <div class="cert-box"><strong>Project Management:</strong> Project Management Professional (PMP)</div>
-        <div class="cert-box"><strong>Agile:</strong> Certified Scrum Professional - Scrum Master (CSP-SM), Certified Scrum Professional - Product Owner (CSP-PO)</div>
-        <div class="cert-box"><strong>Scaled Agile:</strong> SAFe 5.0 Practice Consultant (SPC)</div>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Skills</h2>
-
-      <div class="skills-grid">
-        <div class="skill-box"><strong>Technical Tools:</strong> Jira, Confluence, ChatGPT, Python, SQL, Slack, Teams, Miro</div>
-        <div class="skill-box"><strong>Methodologies:</strong> Agile, SAFe, Scrum, Kanban, Waterfall-Hybrid</div>
-        <div class="skill-box"><strong>Industry Experience:</strong> Finance, Tech, Media, Insurance, Talent Acquisition, Consulting Services</div>
-        <div class="skill-box"><strong>Leadership & Strategy:</strong> Agile Transformation, Executive Coaching, PMO Instantiation</div>
-        <div class="skill-box"><strong>Data & Reporting:</strong> Data-Driven Dashboards, Enterprise Metrics, OKR and KPI Reporting</div>
-      </div>
-    </section>
-
-  </div>
-
-  <div class="footer-contact fade-in fade-delay-5">
-
-    <div>
-      📍 Fort Lauderdale, Florida
-    </div>
-
-    <div>
-      📧
-      <a href="mailto:info@rmhsolutions.io">
-        info@rmhsolutions.io
-      </a>
-    </div>
-
-    <div>
-      ☎
-      <a href="tel:+19543725474">
-        954.372.5474
-      </a>
-    </div>
-
-  </div>
-
-  <footer>
-    © 2026 RMH Solutions LLC · All rights reserved
-  </footer>
-
 </div>
-
+</section>
+<section class="section">
+<h2>Education</h2>
+<div class="item">
+<div class="item-header">
+<h3>Columbia University</h3>
+<div class="meta">New York, NY</div>
+</div>
+<p class="role">BA, Computer Science</p>
+</div>
+</section>
+<section class="section">
+<h2>Certifications</h2>
+<div class="cert-grid">
+<div class="cert-box"><strong>Project Management:</strong> Project Management Professional (PMP)</div>
+<div class="cert-box"><strong>Agile:</strong> Certified Scrum Professional - Scrum Master (CSP-SM), Certified Scrum Professional - Product Owner (CSP-PO)</div>
+<div class="cert-box"><strong>Scaled Agile:</strong> SAFe 5.0 Practice Consultant (SPC)</div>
+</div>
+</section>
+<section class="section">
+<h2>Skills</h2>
+<div class="skills-grid">
+<div class="skill-box"><strong>Technical Tools:</strong> Jira, Confluence, ChatGPT, Python, SQL, Slack, Teams, Miro</div>
+<div class="skill-box"><strong>Methodologies:</strong> Agile, SAFe, Scrum, Kanban, Waterfall-Hybrid</div>
+<div class="skill-box"><strong>Industry Experience:</strong> Finance, Tech, Media, Insurance, Talent Acquisition, Consulting Services</div>
+<div class="skill-box"><strong>Leadership &amp; Strategy:</strong> Agile Transformation, Executive Coaching, PMO Instantiation</div>
+<div class="skill-box"><strong>Data &amp; Reporting:</strong> Data-Driven Dashboards, Enterprise Metrics, OKR and KPI Reporting</div>
+</div>
+</section>
+</div></main>
+<footer class="site-footer fade-in fade-delay-9">
+<div class="footer-inner">
+<div class="footer-contact">
+<section aria-labelledby="footer-location" class="footer-column">
+<h2 id="footer-location">Location</h2>
+<p>Fort Lauderdale, Florida</p>
+</section>
+<section aria-labelledby="footer-phone" class="footer-column">
+<h2 id="footer-phone">Phone</h2>
+<p><a href="tel:+19543725474">954.372.5474</a></p>
+</section>
+<section aria-labelledby="footer-email" class="footer-column">
+<h2 id="footer-email">Email</h2>
+<p><a href="mailto:info@rmhsolutions.io">info@rmhsolutions.io</a></p>
+</section>
+</div>
+<div class="footer-copyright">
+      © 2026 RMH Solutions LLC · All rights reserved
+    </div>
+</div>
+</footer>
 </body>
 </html>
