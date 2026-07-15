@@ -311,8 +311,35 @@ h1 span {
   }
 }
 
-.mycard-hero{max-width:900px;margin:0 auto}
-.mycard-hero p{font-size:20px;line-height:1.6;color:#465468}
+
+/* Hero dimensions and typography matched exactly to the Contact page */
+.mycard-hero {
+  width: min(1080px, calc(100vw - 48px));
+  max-width: none;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.mycard-hero p {
+  max-width: 1040px;
+  margin: 0 auto;
+  color: #465468;
+  font-size: 25px;
+  line-height: 1.55;
+  text-wrap: balance;
+}
+
+@media (max-width: 760px) {
+  .mycard-hero {
+    width: calc(100vw - 32px);
+  }
+
+  .mycard-hero p {
+    font-size: 20px;
+    line-height: 1.7;
+  }
+}
+
 .card-panel{margin-top:42px;background:#0b3954;border-radius:22px;padding:36px;box-shadow:0 10px 26px rgba(11,57,84,.16);text-align:center}
 .preview{max-width:360px;margin:0 auto 28px}
 .preview-wide{max-width:760px;margin:0 auto}
@@ -335,7 +362,7 @@ h1 span {
 </nav>
 </div>
 </header>
-<main class="container"><section class="mycard-hero"><h1 class="fade-in fade-delay-1">My <span>Business Card</span></h1><p class="fade-in fade-delay-2">Save my digital business card to your phone and keep my contact information handy whenever you need it.</p></section><section class="card-panel fade-in fade-delay-3"><div class="preview"><img alt="RMH Solutions business card" src="rmh-business-card.png"/></div><div class="preview-wide"><img alt="RMH Solutions services overview" src="What I Do.png"/></div><div class="note">Press and hold the business card image to save it to your phone.</div></section></main>
+<main class="container"><section class="mycard-hero"><h1 class="fade-in fade-delay-1">My <span>Business Card</span></h1><p class="fade-in fade-delay-2">RMH Solutions provides practical, technology-enabled services for corporate clients and independent businesses, combining project delivery expertise, process improvement, automation, AI, and custom business solutions.</p></section><section class="card-panel fade-in fade-delay-3"><div class="preview"><img alt="RMH Solutions business card" src="rmh-business-card.png"/></div><div class="preview-wide"><img alt="RMH Solutions services overview" src="What I Do.png"/></div><div class="note">Press and hold the business card image to save it to your phone.</div></section></main>
 <footer class="site-footer fade-in fade-delay-9">
 <div class="footer-inner">
 <div class="footer-contact">
@@ -376,7 +403,7 @@ h1 span {
   }
 
   const cardFile = sanitizeCardFileName(requestedCard);
-  const cardImage = document.querySelector('.card-preview img');
+  const cardImage = document.querySelector('.preview img');
 
   if (cardImage) {
     cardImage.src = cardFile;

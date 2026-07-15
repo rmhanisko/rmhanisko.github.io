@@ -93,8 +93,10 @@ body {
 }
 
 .hero {
-  max-width: 900px;
-  margin: 0 auto;
+  width: min(1080px, calc(100vw - 48px));
+  max-width: none;
+  margin-left: 50%;
+  transform: translateX(-50%);
 }
 
 h1 {
@@ -109,10 +111,12 @@ h1 span {
 }
 
 .hero p {
-  margin: 0;
+  max-width: 1040px;
+  margin: 0 auto;
   color: #465468;
-  font-size: 22px;
-  line-height: 1.7;
+  font-size: 25px;
+  line-height: 1.55;
+  text-wrap: balance;
 }
 
 .section {
@@ -266,8 +270,13 @@ h1 span {
     font-size: 40px;
   }
 
+  .hero {
+    width: calc(100vw - 32px);
+  }
+
   .hero p {
-    font-size: 20px;
+    font-size: 22px;
+    line-height: 1.55;
   }
 
   .services-grid {

@@ -140,16 +140,22 @@ p {
 
 .hero-split {
   display:block;
-  max-width: 900px;
+  max-width: 1080px;
   margin: 0 auto;
   text-align:center;
 }
 
+.hero-copy h1 {
+  margin: 0 0 24px;
+}
+
 .hero-copy p {
-  margin:0;
+  max-width: 1040px;
+  margin:0 auto;
   color:#465468;
-  font-size:28px;
-  line-height:1.7;
+  font-size:25px;
+  line-height:1.55;
+  text-wrap:balance;
 }
 
 @media (max-width: 760px) {
@@ -384,8 +390,11 @@ p {
 
 <div class="container">
 
-  <section class="hero-split">
+  <section class="hero-split" aria-labelledby="home-hero-heading">
     <div class="hero-copy fade-in fade-delay-1">
+      <h1 id="home-hero-heading">
+        Technology Solutions <span>for Every Business</span>
+      </h1>
       <p>
         RMH Solutions provides practical, technology-enabled services for corporate clients and independent businesses, combining project delivery expertise, process improvement, automation, AI, and custom business solutions.
       </p>

@@ -330,11 +330,18 @@ main.container {
   padding-bottom: 48px;
 }
 
-main.container > p {
+/* Match the visible About-page hero text exactly. */
+.resume-hero {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.resume-hero p {
+  width: 100%;
   max-width: 900px;
   margin: 0 auto;
   color: #465468;
-  font-size: 20px;
+  font-size: 25px;
   line-height: 1.55;
 }
 
@@ -422,8 +429,13 @@ main.container > p {
 }
 
 @media (max-width: 760px) {
-  main.container > p {
-    font-size: 18px;
+  .resume-hero p {
+    font-size: 20px;
+    line-height: 1.7;
+  }
+
+  .resume-hero p br {
+    display: none;
   }
 
   .resume-card {
@@ -452,19 +464,15 @@ main.container > p {
 <img alt="RMH Solutions Logo" src="rmh-logo.png"/>
 </a>
 <nav aria-label="Primary navigation" class="site-nav">
-<a aria-current="page" href="services.html">Corporate Clients</a>
+<a href="services.html">Corporate Clients</a>
 <a href="independent-businesses.html">Independent Businesses</a>
 <a href="about.html">About</a>
-<a class="active" href="resume.html">Resume</a>
+<a aria-current="page" class="active" href="resume.html">Resume</a>
 <a href="contact.html">Contact</a>
 </nav>
 </div>
 </header>
-<main class="container"><h1 class="fade-in fade-delay-1">
-    Professional <span>Resume</span>
-</h1><p class="fade-in fade-delay-2">
-    RMH Solutions provides practical, technology-enabled services for corporate clients and independent businesses, combining project delivery expertise, process improvement, automation, AI, and custom business solutions.
-  </p><a class="download-button fade-in fade-delay-3" download="" href="RMH_Solutions_Resume.pdf">
+<main class="container"><section class="hero resume-hero"><h1 class="fade-in fade-delay-1">Professional <span>Resume</span></h1><p class="fade-in fade-delay-2">RMH Solutions provides practical, technology-enabled services for corporate<br/>clients and independent businesses, combining project delivery expertise,<br/>process improvement, automation, AI, and custom business solutions.</p></section><a class="download-button fade-in fade-delay-3" download="" href="RMH_Solutions_Resume.pdf">
     Download PDF Resume
   </a><div class="resume-card fade-in fade-delay-4">
 <div class="resume-header">

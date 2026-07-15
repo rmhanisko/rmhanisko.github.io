@@ -320,15 +320,19 @@ h1 span {
 }
 
 .contact-hero {
-  max-width: 900px;
-  margin: 0 auto;
+  width: min(1080px, calc(100vw - 48px));
+  max-width: none;
+  margin-left: 50%;
+  transform: translateX(-50%);
 }
 
 .contact-hero p {
+  max-width: 1040px;
   margin: 0 auto;
   color: #465468;
-  font-size: 20px;
+  font-size: 25px;
   line-height: 1.55;
+  text-wrap: balance;
 }
 
 .contact-grid {
@@ -399,8 +403,13 @@ h1 span {
 }
 
 @media (max-width: 760px) {
+  .contact-hero {
+    width: calc(100vw - 32px);
+  }
+
   .contact-hero p {
-    font-size: 18px;
+    font-size: 22px;
+    line-height: 1.55;
   }
 
   .contact-grid {
@@ -432,7 +441,7 @@ h1 span {
 </nav>
 </div>
 </header>
-<main class="container"><section class="contact-hero"><h1 class="fade-in fade-delay-1">Let’s <span>Connect</span></h1><p class="fade-in fade-delay-2">RMH Solutions provides practical, technology-enabled services for corporate clients and independent businesses, combining project delivery expertise, process improvement, automation, AI, and custom business solutions.</p></section><section aria-label="Contact options" class="contact-grid"><article class="contact-card fade-in fade-delay-3"><h2>Contact Information</h2><p><a href="mailto:info@rmhsolutions.io">info@rmhsolutions.io</a></p><p><a href="tel:+19543725474">954.372.5474</a></p><a class="contact-button" download="" href="robert-hanisko.vcf">Add to Mobile Contacts</a></article><article class="contact-card fade-in fade-delay-4"><h2>Send a Message</h2><p>For engagement inquiries, please reach out by email with a brief overview of your initiative and preferred contact information.</p><a class="contact-button" href="mailto:info@rmhsolutions.io?subject=RMH%20Solutions%20Inquiry">Send Email</a></article></section></main>
+<main class="container"><section class="contact-hero"><h1 class="fade-in fade-delay-1">Let’s <span>Connect</span></h1><p class="fade-in fade-delay-2">RMH Solutions provides practical, technology-enabled services for corporate clients and independent businesses, combining project delivery expertise, process improvement, automation, AI, and custom business solutions.</p></section><section aria-label="Contact options" class="contact-grid"><article class="contact-card fade-in fade-delay-3"><h2>Contact Information</h2><p>Fort Lauderdale, Florida</p><p><a href="mailto:info@rmhsolutions.io">info@rmhsolutions.io</a></p><p><a href="tel:+19543725474">954.372.5474</a></p><a class="contact-button" download="" href="robert-hanisko.vcf">Add to Mobile Contacts</a></article><article class="contact-card fade-in fade-delay-4"><h2>Send a Message</h2><p>For engagement inquiries, please reach out by email with a brief overview of your initiative and preferred contact information.</p><a class="contact-button" href="mailto:info@rmhsolutions.io?subject=RMH%20Solutions%20Inquiry">Send Email</a></article></section></main>
 <footer class="site-footer fade-in fade-delay-9">
 <div class="footer-inner">
 <div class="footer-contact">
