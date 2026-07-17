@@ -345,6 +345,25 @@ h1 span {
 .preview-wide{max-width:760px;margin:0 auto}
 .preview img,.preview-wide img{display:block;width:100%;height:auto;border-radius:14px}
 .note{margin-top:26px;color:rgba(255,255,255,.9);font-size:17px}
+
+.save-btn{
+  display:inline-block;
+  border:0;
+  cursor:pointer;
+  font-family:inherit;
+  margin-top:24px;
+  padding:14px 28px;
+  background:#1d6fb8;
+  color:#fff;
+  text-decoration:none;
+  font-size:18px;
+  font-weight:600;
+  border-radius:10px;
+  transition:background .2s ease,transform .2s ease;
+}
+.save-btn:hover{background:#2582d4;transform:translateY(-2px);}
+.save-btn:active{transform:none;}
+
 </style>
 </head>
 <body>
@@ -362,7 +381,15 @@ h1 span {
 </nav>
 </div>
 </header>
-<main class="container"><section class="mycard-hero"><h1 class="fade-in fade-delay-1">My <span>Business Card</span></h1><p class="fade-in fade-delay-2">RMH Solutions provides practical, technology-enabled services for corporate clients and independent businesses, combining project delivery expertise, process improvement, automation, AI, and custom business solutions.</p></section><section class="card-panel fade-in fade-delay-3"><div class="preview"><img alt="RMH Solutions business card" src="rmh-business-card.png"/></div><div class="preview-wide"><img alt="RMH Solutions services overview" src="What I Do.png"/></div><div class="note">Press and hold the business card image to save it to your phone.</div></section></main>
+<main class="container"><section class="mycard-hero"><h1 class="fade-in fade-delay-1">My <span>Business Card</span></h1><p class="fade-in fade-delay-2">RMH Solutions provides practical, technology-enabled services for corporate clients and independent businesses, combining project delivery expertise, process improvement, automation, AI, and custom business solutions.</p></section><section class="card-panel fade-in fade-delay-3"><div class="preview">
+<img id="businessCard" alt="RMH Solutions business card" src="rmh-business-card.png"/>
+</div>
+
+<button id="saveCard"
+        class="save-btn"
+        type="button">
+  Save Business Card
+</button></section></main>
 <footer class="site-footer fade-in fade-delay-9">
 <div class="footer-inner">
 <div class="footer-contact">
@@ -407,6 +434,62 @@ h1 span {
 
   if (cardImage) {
     cardImage.src = cardFile;
+  }
+
+  const saveButton = document.getElementById('saveCard');
+
+  async function saveOrShareCard() {
+    const fileName = cardFile.split('/').pop() || 'RMH-Solutions-Business-Card.png';
+
+    try {
+      const response = await fetch(cardFile);
+      if (!response.ok) {
+        throw new Error('Unable to load the business card image.');
+      }
+
+      const blob = await response.blob();
+      const file = new File([blob], fileName, {
+        type: blob.type || 'image/png'
+      });
+
+      if (
+        navigator.share &&
+        navigator.canShare &&
+        navigator.canShare({ files: [file] })
+      ) {
+        await navigator.share({
+          title: 'RMH Solutions Business Card',
+          text: 'Save or share the RMH Solutions business card.',
+          files: [file]
+        });
+        return;
+      }
+
+      const downloadUrl = URL.createObjectURL(blob);
+      const downloadLink = document.createElement('a');
+      downloadLink.href = downloadUrl;
+      downloadLink.download = fileName;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      downloadLink.remove();
+      URL.revokeObjectURL(downloadUrl);
+
+    } catch (error) {
+      if (error && error.name === 'AbortError') {
+        return;
+      }
+
+      const fallbackLink = document.createElement('a');
+      fallbackLink.href = cardFile;
+      fallbackLink.download = fileName;
+      document.body.appendChild(fallbackLink);
+      fallbackLink.click();
+      fallbackLink.remove();
+    }
+  }
+
+  if (saveButton) {
+    saveButton.addEventListener('click', saveOrShareCard);
   }
 })();
 </script></body>
