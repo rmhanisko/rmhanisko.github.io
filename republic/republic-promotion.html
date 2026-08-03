@@ -244,6 +244,8 @@
 
     .promotion-download {
       display: inline-flex;
+      font-family: inherit;
+      cursor: pointer;
       align-items: center;
       justify-content: center;
       gap: 10px;
@@ -457,10 +459,10 @@
       />
 
       <div class="promotion-actions">
-        <a
+        <button
+          id="savePromotion"
           class="promotion-download"
-          href="republic-first-service-promotion.png"
-          download="Republic-Barbershop-10-Off-First-Service.png"
+          type="button"
         >
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 3v12"></path>
@@ -468,7 +470,7 @@
             <path d="M5 21h14"></path>
           </svg>
           Save Promotion
-        </a>
+        </button>
       </div>
 
     </section>
@@ -541,5 +543,103 @@
       </div>
     </div>
   </footer>
+
+  <script>
+  (function () {
+    const defaultPromotion = 'republic-first-service-promotion.png';
+    const params = new URLSearchParams(window.location.search);
+    const requestedPromotion =
+      params.get('promotion') ||
+      params.get('file') ||
+      defaultPromotion;
+
+    function sanitizePromotionFileName(fileName) {
+      const cleaned = fileName.trim();
+
+      // Keep this local-only so the URL parameter cannot inject scripts or external links.
+      if (
+        !cleaned ||
+        cleaned.includes('://') ||
+        cleaned.startsWith('/') ||
+        cleaned.includes('..')
+      ) {
+        return defaultPromotion;
+      }
+
+      // Allows local filenames and subfolders only.
+      return /^[a-zA-Z0-9/_\-.]+$/.test(cleaned)
+        ? cleaned
+        : defaultPromotion;
+    }
+
+    const promotionFile = sanitizePromotionFileName(requestedPromotion);
+    const promotionImage = document.querySelector('.promotion-image');
+    const saveButton = document.getElementById('savePromotion');
+
+    if (promotionImage) {
+      promotionImage.src = promotionFile;
+    }
+
+    async function saveOrSharePromotion() {
+      const fileName =
+        promotionFile.split('/').pop() ||
+        'Republic-Barbershop-10-Off-First-Service.png';
+
+      try {
+        const response = await fetch(promotionFile);
+
+        if (!response.ok) {
+          throw new Error('Unable to load the promotion image.');
+        }
+
+        const blob = await response.blob();
+        const file = new File([blob], fileName, {
+          type: blob.type || 'image/png'
+        });
+
+        // On supported phones, this opens the native share/save sheet.
+        if (
+          navigator.share &&
+          navigator.canShare &&
+          navigator.canShare({ files: [file] })
+        ) {
+          await navigator.share({
+            title: 'Republic Barbershop Promotion',
+            text: 'Save or share this Republic Barbershop promotion.',
+            files: [file]
+          });
+          return;
+        }
+
+        // Desktop and unsupported-browser fallback: download the image file.
+        const downloadUrl = URL.createObjectURL(blob);
+        const downloadLink = document.createElement('a');
+        downloadLink.href = downloadUrl;
+        downloadLink.download = fileName;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        downloadLink.remove();
+        URL.revokeObjectURL(downloadUrl);
+
+      } catch (error) {
+        if (error && error.name === 'AbortError') {
+          return;
+        }
+
+        const fallbackLink = document.createElement('a');
+        fallbackLink.href = promotionFile;
+        fallbackLink.download = fileName;
+        document.body.appendChild(fallbackLink);
+        fallbackLink.click();
+        fallbackLink.remove();
+      }
+    }
+
+    if (saveButton) {
+      saveButton.addEventListener('click', saveOrSharePromotion);
+    }
+  })();
+  </script>
+
 </body>
 </html>
