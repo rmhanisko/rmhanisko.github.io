@@ -225,6 +225,84 @@
       stroke-linejoin:round;
     }
 
+    .result-card {
+      display: none;
+      margin-top: 28px;
+      padding: 30px;
+      text-align: center;
+      background: var(--white);
+      border: 1px solid #d9d9dc;
+      box-shadow: 0 12px 30px rgba(0,0,0,.10);
+    }
+
+    .result-card.is-visible { display: block; }
+
+    .result-card h2 {
+      margin: 0 0 10px;
+      font-size: clamp(25px, 4vw, 36px);
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .result-card p { margin: 0; color: var(--grey-600); }
+
+    #qrcode {
+      width: 280px;
+      min-height: 280px;
+      margin: 24px auto;
+      padding: 14px;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      border: 1px solid #d9d9dc;
+    }
+
+    #qrcode img, #qrcode canvas {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .result-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .result-actions a, .secondary-button {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      border: 2px solid var(--black);
+      border-radius: 3px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .result-actions a { color: var(--white); background: var(--black); }
+    .secondary-button { margin: 0; color: var(--black); background: var(--white); }
+
+    .generated-link {
+      margin-top: 18px;
+      padding: 12px;
+      overflow-wrap: anywhere;
+      color: var(--grey-600);
+      background: var(--grey-100);
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .status-message {
+      min-height: 24px;
+      margin-top: 10px !important;
+      font-weight: 700;
+      color: var(--ink) !important;
+    }
+
     @media (max-width: 700px) {
       .header-inner {
         width: min(100% - 24px, var(--max-width));
@@ -234,7 +312,9 @@
       .brand img { width: 120px; height: 120px; }
       main, .footer-inner { width: min(100% - 28px, var(--max-width)); }
       main { padding: 44px 0 64px; }
-      .referral-card { padding: 24px 20px; }
+      .referral-card, .result-card { padding: 24px 20px; }
+      .result-actions { grid-template-columns: 1fr; }
+      #qrcode { width: 250px; min-height: 250px; }
       .footer-inner { grid-template-columns:1fr; gap:34px; }
       .footer-contact h3, .footer-services h3 { font-size:28px; }
     }
@@ -270,8 +350,20 @@
           required
         />
         <p class="form-help">Your name will appear on the Refer-a-Friend promotion page.</p>
-        <button type="submit">Create Referral Page</button>
+        <button type="submit">Generate Customer QR Code</button>
       </form>
+    </section>
+
+    <section id="resultCard" class="result-card" aria-live="polite">
+      <h2>Customer Coupon Ready</h2>
+      <p id="resultMessage">Have the customer scan this QR code with their phone.</p>
+      <div id="qrcode" aria-label="QR code for the personalized coupon"></div>
+      <div class="result-actions">
+        <a id="openCoupon" href="#" target="_blank" rel="noopener">Open Coupon</a>
+        <button id="copyLink" class="secondary-button" type="button">Copy Coupon Link</button>
+      </div>
+      <div id="generatedLink" class="generated-link"></div>
+      <p id="statusMessage" class="status-message"></p>
     </section>
   </main>
 
@@ -344,24 +436,83 @@
   </footer>
 
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script>
     (function () {
+      /*
+        Change this value only if the hosted coupon page uses a different URL.
+        A phone cannot open a file:// address from the barber's computer.
+      */
+      const REFERRAL_PAGE_URL = 'https://republicbarber.com/republic-refer-a-friend.html';
+
       const form = document.getElementById('referralForm');
       const fullNameInput = document.getElementById('fullName');
+      const resultCard = document.getElementById('resultCard');
+      const resultMessage = document.getElementById('resultMessage');
+      const qrContainer = document.getElementById('qrcode');
+      const openCoupon = document.getElementById('openCoupon');
+      const copyLink = document.getElementById('copyLink');
+      const generatedLink = document.getElementById('generatedLink');
+      const statusMessage = document.getElementById('statusMessage');
+      let currentCouponUrl = '';
+
+      function buildCouponUrl(fullName) {
+        const destination = new URL(REFERRAL_PAGE_URL);
+        destination.searchParams.set('name', fullName);
+        return destination.href;
+      }
 
       form.addEventListener('submit', function (event) {
         event.preventDefault();
+        statusMessage.textContent = '';
 
         const fullName = fullNameInput.value.trim().replace(/\s+/g, ' ');
-
         if (!fullName) {
           fullNameInput.focus();
           return;
         }
 
-        const destination = new URL('republic-refer-a-friend.html', window.location.href);
-        destination.searchParams.set('name', fullName);
-        window.location.href = destination.href;
+        currentCouponUrl = buildCouponUrl(fullName);
+        qrContainer.innerHTML = '';
+
+        if (typeof QRCode === 'undefined') {
+          statusMessage.textContent = 'The QR code library could not load. Check the internet connection and reload this page.';
+          resultCard.classList.add('is-visible');
+          return;
+        }
+
+        new QRCode(qrContainer, {
+          text: currentCouponUrl,
+          width: 250,
+          height: 250,
+          correctLevel: QRCode.CorrectLevel.H
+        });
+
+        resultMessage.textContent = 'Have the customer scan this QR code. Their phone will open the personalized coupon for ' + fullName + '.';
+        openCoupon.href = currentCouponUrl;
+        generatedLink.textContent = currentCouponUrl;
+        resultCard.classList.add('is-visible');
+        resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      copyLink.addEventListener('click', async function () {
+        if (!currentCouponUrl) return;
+
+        try {
+          await navigator.clipboard.writeText(currentCouponUrl);
+          statusMessage.textContent = 'Coupon link copied.';
+        } catch (error) {
+          const textArea = document.createElement('textarea');
+          textArea.value = currentCouponUrl;
+          textArea.setAttribute('readonly', '');
+          textArea.style.position = 'fixed';
+          textArea.style.opacity = '0';
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          textArea.remove();
+          statusMessage.textContent = 'Coupon link copied.';
+        }
       });
     })();
   </script>
