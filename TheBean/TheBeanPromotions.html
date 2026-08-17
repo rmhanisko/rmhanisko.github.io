@@ -39,29 +39,8 @@
       border-bottom: 1px solid rgba(255,255,255,.12);
     }
 
-    .header-inner {
-      width: min(var(--max-width), calc(100% - 40px));
-      min-height: 126px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 16px 0;
-    }
-
-    .brand {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-decoration: none;
-    }
-
-    .brand img {
-      display: block;
-      width: min(830px, 92vw);
-      height: auto;
-      object-fit: contain;
-      background: transparent;
+    .site-header {
+      height: 18px;
     }
 
     main {
@@ -207,16 +186,6 @@
     }
 
     @media (max-width: 720px) {
-      .header-inner {
-        width: min(100% - 24px, var(--max-width));
-        min-height: 104px;
-      }
-
-      .brand img {
-        width: 112px;
-        height: 80px;
-      }
-
       main,
       .footer-inner {
         width: min(100% - 28px, var(--max-width));
@@ -238,13 +207,7 @@
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="header-inner" aria-label="The Bean Espresso Bar">
-      <a class="brand" href="https://www.thebeanespressobar.com/" aria-label="Visit The Bean Espresso Bar website">
-        <img src="The Bean Promo Logo.png" alt="The Bean Espresso Bar" />
-      </a>
-    </div>
-  </header>
+  <header class="site-header" aria-label="The Bean Espresso Bar"></header>
 
   <main id="promotions">
     <div class="section-heading">
@@ -280,7 +243,9 @@
   <footer>
     <div class="footer-inner">
       <div class="footer-logo">
-        <img src="The Bean Logo.jpg" alt="The Bean Espresso Bar" />
+        <a href="https://www.thebeanespressobar.com/" aria-label="Visit The Bean Espresso Bar website">
+          <img src="The Bean Logo.jpg" alt="The Bean Espresso Bar" />
+        </a>
       </div>
 
       <div class="footer-block">
