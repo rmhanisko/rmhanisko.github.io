@@ -325,7 +325,7 @@
       </div>
 
       <div class="actions">
-        <a class="button button-primary" href="TapThatPromotion.png" download="Tap-That-Promotion.png">Save Promotion</a>
+        <button id="savePromotion" class="button button-primary" type="button">Save Promotion</button>
       </div>
       <p class="helper">On iPhone or Android, use <strong>Save Promotion</strong> to keep a copy.</p>
     </section>
@@ -357,6 +357,69 @@
       </div>
     </div>
   </footer>
+
+
+  <script>
+  (function () {
+    const promotionFile = 'TapThatPromotion.png';
+    const saveButton = document.getElementById('savePromotion');
+
+    async function saveOrSharePromotion() {
+      const fileName = 'Tap-That-Promotion.png';
+
+      try {
+        const response = await fetch(promotionFile);
+
+        if (!response.ok) {
+          throw new Error('Unable to load the promotion image.');
+        }
+
+        const blob = await response.blob();
+        const file = new File([blob], fileName, {
+          type: blob.type || 'image/png'
+        });
+
+        if (
+          navigator.share &&
+          navigator.canShare &&
+          navigator.canShare({ files: [file] })
+        ) {
+          await navigator.share({
+            title: 'Tap That Promotion',
+            text: 'Save or share this promotion from Tap That.',
+            files: [file]
+          });
+          return;
+        }
+
+        const downloadUrl = URL.createObjectURL(blob);
+        const downloadLink = document.createElement('a');
+        downloadLink.href = downloadUrl;
+        downloadLink.download = fileName;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        downloadLink.remove();
+        URL.revokeObjectURL(downloadUrl);
+
+      } catch (error) {
+        if (error && error.name === 'AbortError') {
+          return;
+        }
+
+        const fallbackLink = document.createElement('a');
+        fallbackLink.href = promotionFile;
+        fallbackLink.download = fileName;
+        document.body.appendChild(fallbackLink);
+        fallbackLink.click();
+        fallbackLink.remove();
+      }
+    }
+
+    if (saveButton) {
+      saveButton.addEventListener('click', saveOrSharePromotion);
+    }
+  })();
+  </script>
 
 </body>
 </html>
