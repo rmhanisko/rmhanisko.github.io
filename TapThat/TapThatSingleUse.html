@@ -8,7 +8,7 @@
   <title>Single Use Promotion | Tap That</title>
 
   <!-- Browser-side QR generation for the patron's unique promotion -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 
   <style>
     :root {
@@ -451,12 +451,20 @@
       ctx.font = "700 38px Arial, sans-serif";
       ctx.fillText("SINGLE-USE PROMOTION", width / 2, imageHeight + 58);
 
-      const qrDataUrl = await QRCode.toDataURL(redemptionUrl(promotion.promotion_code), {
-        width: 230,
-        margin: 1,
-        errorCorrectionLevel: "M"
+      if (typeof QRious === "undefined") {
+        throw new Error("QR generator did not load.");
+      }
+
+      const qr = new QRious({
+        value: redemptionUrl(promotion.promotion_code),
+        size: 230,
+        level: "M",
+        padding: 8,
+        background: "white",
+        foreground: "black"
       });
 
+      const qrDataUrl = qr.toDataURL("image/png");
       const qrImage = await loadImage(qrDataUrl);
       const qrSize = 230;
       const qrX = Math.round((width - qrSize) / 2);
@@ -528,7 +536,20 @@
         }
 
         localStorage.setItem(STORAGE_KEY, JSON.stringify(result.promotion));
-        await showIssuedPromotion(result.promotion);
+
+        try {
+          await showIssuedPromotion(result.promotion);
+        } catch (renderError) {
+          console.error(renderError);
+          currentPromotion = result.promotion;
+          promotionCodeText.textContent = result.promotion.promotion_code;
+          expirationText.textContent = formatExpiration(result.promotion.expires_at);
+          issuedSummary.hidden = false;
+          setStatus(
+            "Your promotion was created successfully, but the QR image could not be displayed. Reload the page to try again.",
+            "error"
+          );
+        }
 
       } catch (error) {
         console.error(error);
