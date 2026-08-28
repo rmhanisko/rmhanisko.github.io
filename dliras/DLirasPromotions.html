@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Current promotion from D'liras in Wilton Manors." />
+  <title>Promotions | D'liras</title>
+
+  <style>
+    :root {
+      --purple: #6f3586;
+      --purple-dark: #4e235f;
+      --pink: #d24f96;
+      --cyan: #5bbec3;
+      --cream: #fbf7fb;
+      --paper: #ffffff;
+      --ink: #4d3654;
+      --muted: #76687b;
+      --line: #eaddea;
+      --max-width: 1100px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+
+    .site-header {
+      width: 100%;
+    }
+
+    .site-header img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    main {
+      width: min(var(--max-width), calc(100% - 40px));
+      margin: 0 auto;
+      padding: 58px 0 84px;
+    }
+
+    .section-heading {
+      margin-bottom: 30px;
+    }
+
+    .eyebrow {
+      margin: 0 0 9px;
+      color: var(--pink);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .section-heading h1 {
+      margin: 0;
+      color: var(--purple-dark);
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1.02;
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+
+    .featured-promotion {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .promotion-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 40px rgba(79, 35, 95, .16);
+    }
+
+    .promotion-actions {
+      margin-top: 24px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .promotion-download {
+      display: inline-flex;
+      min-height: 52px;
+      padding: 0 28px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 2px solid var(--purple);
+      border-radius: 4px;
+      color: #fff;
+      background: var(--purple);
+      font-family: inherit;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      cursor: pointer;
+      transition: transform .18s ease, background .18s ease, color .18s ease;
+    }
+
+    .promotion-download:hover,
+    .promotion-download:focus-visible {
+      color: var(--purple);
+      background: var(--paper);
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .promotion-download svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    footer {
+      color: var(--ink);
+      background: var(--paper);
+      border-top: 1px solid var(--line);
+      padding: 42px 0 46px;
+    }
+
+    .footer-inner {
+      width: min(var(--max-width), calc(100% - 40px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 150px 1fr 1fr;
+      gap: 44px;
+      align-items: start;
+    }
+
+    .footer-logo img {
+      display: block;
+      width: 128px;
+      height: auto;
+    }
+
+    .footer-block h2 {
+      margin: 0 0 10px;
+      color: var(--purple);
+      font-size: 25px;
+      font-weight: 700;
+    }
+
+    .footer-block p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .footer-block a {
+      text-decoration: none;
+    }
+
+    .footer-block a:hover,
+    .footer-block a:focus-visible {
+      color: var(--pink);
+      outline: none;
+    }
+
+    @media (max-width: 720px) {
+      main,
+      .footer-inner {
+        width: min(100% - 28px, var(--max-width));
+      }
+
+      main { padding: 42px 0 62px; }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .footer-logo img { width: 118px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header" aria-label="D'liras">
+    <img src="TheBest(2).png" alt="The best croissant bakery in Florida — One life, unlimited bites" />
+  </header>
+
+  <main id="promotions">
+    <div class="section-heading">
+      <p class="eyebrow">Current Promotion</p>
+      <h1>$2 Off Your Next Visit</h1>
+    </div>
+
+    <section class="featured-promotion" aria-label="$2 off next visit promotion">
+      <img
+        class="promotion-image"
+        src="DLiras Promotion.png"
+        alt="D'liras promotion offering $2 off your next visit"
+      />
+
+      <div class="promotion-actions">
+        <button id="savePromotion" class="promotion-download" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3v12"></path>
+            <path d="m7 10 5 5 5-5"></path>
+            <path d="M5 21h14"></path>
+          </svg>
+          Save Promotion
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="logo.png" alt="D'liras" />
+      </div>
+
+      <div class="footer-block">
+        <h2>Visit Us</h2>
+        <p>2171 Wilton Dr<br>Wilton Manors, FL 33305</p>
+      </div>
+
+      <div class="footer-block">
+        <h2>Contact</h2>
+        <p>
+          <a href="tel:+19545300422">+1 (954) 530-0422</a><br>
+          <a href="tel:+19545300424">+1 (954) 530-0424</a><br>
+          <a href="mailto:dliras.us@gmail.com">dliras.us@gmail.com</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    const defaultPromotion = 'DLiras Promotion.png';
+    const params = new URLSearchParams(window.location.search);
+    const requestedPromotion =
+      params.get('promotion') ||
+      params.get('file') ||
+      defaultPromotion;
+
+    function sanitizePromotionFileName(fileName) {
+      const cleaned = fileName.trim();
+
+      if (
+        !cleaned ||
+        cleaned.includes('://') ||
+        cleaned.startsWith('/') ||
+        cleaned.includes('..')
+      ) {
+        return defaultPromotion;
+      }
+
+      return /^[a-zA-Z0-9/_\-. ]+$/.test(cleaned)
+        ? cleaned
+        : defaultPromotion;
+    }
+
+    const promotionFile = sanitizePromotionFileName(requestedPromotion);
+    const promotionImage = document.querySelector('.promotion-image');
+    const saveButton = document.getElementById('savePromotion');
+
+    if (promotionImage) {
+      promotionImage.src = promotionFile;
+    }
+
+    async function saveOrSharePromotion() {
+      const fileName =
+        promotionFile.split('/').pop() ||
+        'DLiras-Promotion.png';
+
+      try {
+        const response = await fetch(promotionFile);
+
+        if (!response.ok) {
+          throw new Error('Unable to load the promotion image.');
+        }
+
+        const blob = await response.blob();
+        const file = new File([blob], fileName, {
+          type: blob.type || 'image/png'
+        });
+
+        if (
+          navigator.share &&
+          navigator.canShare &&
+          navigator.canShare({ files: [file] })
+        ) {
+          await navigator.share({
+            title: "D'liras Promotion",
+            files: [file]
+          });
+          return;
+        }
+
+        const downloadUrl = URL.createObjectURL(blob);
+        const downloadLink = document.createElement('a');
+        downloadLink.href = downloadUrl;
+        downloadLink.download = fileName;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        downloadLink.remove();
+        URL.revokeObjectURL(downloadUrl);
+
+      } catch (error) {
+        if (error && error.name === 'AbortError') {
+          return;
+        }
+
+        const fallbackLink = document.createElement('a');
+        fallbackLink.href = promotionFile;
+        fallbackLink.download = fileName;
+        document.body.appendChild(fallbackLink);
+        fallbackLink.click();
+        downloadLink.remove();
+      }
+    }
+
+    if (saveButton) {
+      saveButton.addEventListener('click', saveOrSharePromotion);
+    }
+  })();
+  </script>
+</body>
+</html>
