@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#2a0b21" />
+  <meta name="description" content="Tap That promotion performance metrics." />
+  <title>Promotion Performance | Tap That</title>
+  <style>
+    :root {
+      --plum:#2a0b21; --cream:#fff9fb; --pink:#d81b7c; --pink-bright:#f52892;
+      --muted:#d9c9d2; --line:rgba(255,255,255,.16); --shadow:0 18px 50px rgba(20,3,15,.28);
+      --success:#9ce0b7; --error:#ffb1b1;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0; min-height:100vh; color:var(--cream); background:var(--plum);
+      font-family:"Avenir Next",Avenir,"Helvetica Neue",Arial,sans-serif;
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    }
+    .rainbow-rule {
+      height:3px;
+      background:linear-gradient(90deg,#ef3340 0%,#ff8c1a 18%,#ffd639 34%,#68bf3d 50%,#35a8d8 67%,#5d49a7 83%,#8b4ca8 100%);
+    }
+    header { background:var(--cream); color:var(--plum); }
+    .header-inner {
+      width:min(1180px,calc(100% - 40px)); min-height:82px; margin:0 auto;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .brand-link { display:inline-flex; align-items:center; justify-content:center; text-decoration:none; }
+    .brand-link img { display:block; width:min(180px,44vw); height:auto; }
+    main { width:min(960px,calc(100% - 32px)); margin:0 auto; padding:64px 0 72px; }
+    .hero { text-align:center; margin-bottom:34px; }
+    .eyebrow {
+      margin:0 0 12px; color:var(--pink-bright); font-size:12px; font-weight:800;
+      letter-spacing:.28em; text-transform:uppercase;
+    }
+    h1 {
+      margin:0; font-size:clamp(38px,6vw,64px); line-height:1; letter-spacing:-.035em; font-weight:500;
+    }
+    .intro { max-width:660px; margin:18px auto 0; color:var(--muted); font-size:17px; line-height:1.6; }
+    .metrics-grid {
+      display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; margin-top:34px;
+    }
+    .metric-card {
+      min-height:230px; padding:34px 24px; background:var(--cream); color:var(--plum);
+      box-shadow:var(--shadow); border-top:5px solid var(--pink);
+      display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+    }
+    .metric-value {
+      margin:0; font-size:clamp(64px,10vw,104px); line-height:.95; font-weight:700; letter-spacing:-.04em;
+    }
+    .metric-label {
+      margin:16px 0 0; color:#5b3a50; font-size:13px; font-weight:800;
+      letter-spacing:.16em; text-transform:uppercase;
+    }
+    .status { min-height:24px; margin-top:24px; text-align:center; color:var(--muted); font-size:14px; line-height:1.5; }
+    .status.success { color:var(--success); }
+    .status.error { color:var(--error); }
+    .updated { margin-top:10px; text-align:center; color:#bdaab5; font-size:13px; }
+    footer { border-top:1px solid var(--line); padding:28px 20px 34px; text-align:center; color:#bdaab5; font-size:13px; }
+    @media (max-width:680px) {
+      .header-inner { min-height:74px; width:min(100% - 28px,1180px); }
+      .brand-link img { width:145px; }
+      main { width:min(100% - 24px,960px); padding-top:46px; }
+      .metrics-grid { grid-template-columns:1fr; gap:16px; }
+      .metric-card { min-height:190px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a class="brand-link" href="https://tapthatwiltonmanors.com/" aria-label="Tap That home">
+        <img src="TapThatLogo.png" alt="Tap That" />
+      </a>
+    </div>
+    <div class="rainbow-rule" aria-hidden="true"></div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="metrics-title">
+      <p class="eyebrow">Tap That</p>
+      <h1 id="metrics-title">Promotion Performance</h1>
+      <p class="intro">Current activity for Tap That single-use digital promotions.</p>
+    </section>
+
+    <section class="metrics-grid" aria-label="Promotion metrics">
+      <article class="metric-card">
+        <p id="generatedCount" class="metric-value">—</p>
+        <p class="metric-label">Promotions Generated</p>
+      </article>
+      <article class="metric-card">
+        <p id="redeemedCount" class="metric-value">—</p>
+        <p class="metric-label">Promotions Redeemed</p>
+      </article>
+    </section>
+
+    <p id="statusMessage" class="status" role="status" aria-live="polite">Loading current promotion metrics...</p>
+    <p id="lastUpdated" class="updated"></p>
+  </main>
+
+  <footer>Tap That • Digital Promotion Performance</footer>
+
+  <script>
+    const METRICS_ENDPOINT =
+      "https://cavvmywysmuzezuobbow.supabase.co/functions/v1/promotion-metrics";
+
+    const generatedCount = document.getElementById("generatedCount");
+    const redeemedCount = document.getElementById("redeemedCount");
+    const statusMessage = document.getElementById("statusMessage");
+    const lastUpdated = document.getElementById("lastUpdated");
+
+    function formatUpdated(value) {
+      const date = new Date(value);
+      return new Intl.DateTimeFormat("en-US", {
+        month:"long", day:"numeric", year:"numeric",
+        hour:"numeric", minute:"2-digit", second:"2-digit",
+        timeZone:"America/New_York", timeZoneName:"short"
+      }).format(date);
+    }
+
+    async function loadMetrics() {
+      statusMessage.textContent = "Loading current promotion metrics...";
+      statusMessage.className = "status";
+      lastUpdated.textContent = "";
+
+      try {
+        const response = await fetch(METRICS_ENDPOINT, { method:"GET", cache:"no-store" });
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.error || "Unable to retrieve metrics.");
+        }
+
+        generatedCount.textContent = Number(data.generated ?? 0).toLocaleString("en-US");
+        redeemedCount.textContent = Number(data.redeemed ?? 0).toLocaleString("en-US");
+
+        statusMessage.textContent = "Live metrics loaded successfully.";
+        statusMessage.className = "status success";
+
+        if (data.generated_at) {
+          lastUpdated.textContent = "Last updated: " + formatUpdated(data.generated_at);
+        }
+      } catch (error) {
+        console.error(error);
+        generatedCount.textContent = "—";
+        redeemedCount.textContent = "—";
+        statusMessage.textContent = "Unable to load promotion metrics right now.";
+        statusMessage.className = "status error";
+      }
+    }
+
+    loadMetrics();
+  </script>
+</body>
+</html>
