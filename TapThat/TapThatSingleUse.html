@@ -290,7 +290,7 @@
 <body>
   <header>
     <div class="header-inner">
-      <a class="brand-link" href="https://tapthatbar.com/" aria-label="Tap That home">
+      <a class="brand-link" href="https://tapthatwiltonmanors.com/" aria-label="Tap That home">
         <img src="TapThatLogo.png" alt="Tap That" />
       </a>
     </div>
@@ -350,7 +350,7 @@
   <footer>
     <div class="footer-inner">
       <div class="footer-logo">
-        <a href="https://tapthatbar.com/" target="_blank" rel="noopener" aria-label="Visit Tap That website">
+        <a href="https://tapthatwiltonmanors.com/" target="_blank" rel="noopener" aria-label="Visit Tap That website">
           <img src="TapThatLogo.png" alt="Tap That" />
         </a>
       </div>
@@ -368,7 +368,7 @@
         <p class="footer-title">Tap That</p>
         <div class="footer-copy">
           LGBTQ+ bar and vocal music lounge<br />
-          <a href="https://tapthatbar.com/" target="_blank" rel="noopener">Visit website</a>
+          <a href="https://tapthatwiltonmanors.com/" target="_blank" rel="noopener">Visit website</a>
         </div>
       </div>
     </div>
@@ -499,8 +499,11 @@
       await drawPromotion(promotion);
 
       previewWrap.hidden = true;
-      claimButton.closest(".actions").hidden = true;
+      document.getElementById("claimActions").style.display = "none";
       claimHelper.hidden = true;
+
+      claimButton.disabled = false;
+      claimButton.textContent = "Get My Promotion";
 
       issuedWrap.hidden = false;
       issuedSummary.hidden = false;
