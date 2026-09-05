@@ -40,7 +40,7 @@
     }
     .intro { max-width:660px; margin:18px auto 0; color:var(--muted); font-size:17px; line-height:1.6; }
     .metrics-grid {
-      display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; margin-top:34px;
+      display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:20px; margin-top:34px;
     }
     .metric-card {
       min-height:230px; padding:34px 24px; background:var(--cream); color:var(--plum);
@@ -99,6 +99,11 @@
         <p id="redemptionRate" class="metric-value">—</p>
         <p class="metric-label">Redemption Rate</p>
       </article>
+
+      <article class="metric-card">
+        <p id="averageRedemptionDays" class="metric-value">—</p>
+        <p class="metric-label">Average Days to Redeem</p>
+      </article>
     </section>
 
     <p id="statusMessage" class="status" role="status" aria-live="polite">Loading current promotion metrics...</p>
@@ -114,6 +119,7 @@
     const generatedCount = document.getElementById("generatedCount");
     const redeemedCount = document.getElementById("redeemedCount");
     const redemptionRate = document.getElementById("redemptionRate");
+    const averageRedemptionDays = document.getElementById("averageRedemptionDays");
     const statusMessage = document.getElementById("statusMessage");
     const lastUpdated = document.getElementById("lastUpdated");
 
@@ -147,6 +153,9 @@
         redemptionRate.textContent =
           generated > 0 ? Math.round((redeemed / generated) * 100) + "%" : "0%";
 
+        averageRedemptionDays.textContent =
+          Number(data.average_redemption_days ?? 0).toLocaleString("en-US");
+
         statusMessage.textContent = "Live metrics loaded successfully.";
         statusMessage.className = "status success";
 
@@ -158,6 +167,7 @@
         generatedCount.textContent = "—";
         redeemedCount.textContent = "—";
         redemptionRate.textContent = "—";
+        averageRedemptionDays.textContent = "—";
         statusMessage.textContent = "Unable to load promotion metrics right now.";
         statusMessage.className = "status error";
       }
