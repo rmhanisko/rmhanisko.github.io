@@ -458,6 +458,12 @@ h1 span {
   font-weight: 700;
 }
 
+
+.download-placeholder.artifact-download {
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -493,12 +499,12 @@ h1 span {
 <tr>
 <td>Early Adopter Overview</td>
 <td>09/05/2026</td>
-<td><a class="download-placeholder" href="Early_Adopter_Overview.png" target="_blank" rel="noopener">Download</a></td>
+<td><button class="download-placeholder artifact-download" type="button" data-file="Early_Adopter_Overview.png" data-title="Early Adopter Overview">Download</button></td>
 </tr>
 <tr>
 <td>Digital Promotions Workflow</td>
 <td>09/05/2026</td>
-<td><a class="download-placeholder" href="Digital_Promotions_Workflow.png" target="_blank" rel="noopener">Download</a></td>
+<td><button class="download-placeholder artifact-download" type="button" data-file="Digital_Promotions_Workflow.png" data-title="Digital Promotions Workflow">Download</button></td>
 </tr>
 </tbody>
 </table>
@@ -526,5 +532,67 @@ h1 span {
     </div>
 </div>
 </footer>
+
+<script>
+(function () {
+  async function saveOrShareArtifact(button) {
+    const artifactFile = button.dataset.file;
+    const artifactTitle = button.dataset.title || 'RMH Solutions Artifact';
+    const fileName = artifactFile.split('/').pop() || 'RMH-Solutions-Artifact.png';
+
+    try {
+      const response = await fetch(artifactFile);
+      if (!response.ok) {
+        throw new Error('Unable to load the artifact.');
+      }
+
+      const blob = await response.blob();
+      const file = new File([blob], fileName, {
+        type: blob.type || 'image/png'
+      });
+
+      if (
+        navigator.share &&
+        navigator.canShare &&
+        navigator.canShare({ files: [file] })
+      ) {
+        await navigator.share({
+          title: artifactTitle,
+          text: 'Save or share this RMH Solutions artifact.',
+          files: [file]
+        });
+        return;
+      }
+
+      const downloadUrl = URL.createObjectURL(blob);
+      const downloadLink = document.createElement('a');
+      downloadLink.href = downloadUrl;
+      downloadLink.download = fileName;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      downloadLink.remove();
+      URL.revokeObjectURL(downloadUrl);
+
+    } catch (error) {
+      if (error && error.name === 'AbortError') {
+        return;
+      }
+
+      const fallbackLink = document.createElement('a');
+      fallbackLink.href = artifactFile;
+      fallbackLink.download = fileName;
+      document.body.appendChild(fallbackLink);
+      fallbackLink.click();
+      fallbackLink.remove();
+    }
+  }
+
+  document.querySelectorAll('.artifact-download').forEach(function (button) {
+    button.addEventListener('click', function () {
+      saveOrShareArtifact(button);
+    });
+  });
+})();
+</script>
 </body>
 </html>
