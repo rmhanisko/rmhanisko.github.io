@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17130f">
+  <title>Redeem Promotion</title>
+  <style>
+    :root{--primary:#17130f;--secondary:#d79b2b;--cream:#f7f1e8;--muted:#6f6255;--green:#1f7a45;--red:#a12d2d}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:var(--cream);font-family:"Avenir Next",Avenir,"Helvetica Neue",Arial,sans-serif;color:var(--primary)}
+    .page{width:min(680px,100%);min-height:100vh;margin:auto;background:#fff}
+    header{padding:26px 20px;text-align:center;border-bottom:5px solid var(--secondary)}
+    h1{margin:0;font-size:clamp(30px,7vw,48px)}
+    main{padding:34px 20px 50px}
+    .state{text-align:center;padding:28px 18px;border:1px solid #ddd2c5;background:#fff}
+    .badge{display:inline-block;padding:8px 14px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;background:var(--primary);color:#fff}
+    .badge.valid,.badge.redeemed{background:var(--green)}
+    .badge.invalid,.badge.expired,.badge.already{background:var(--red)}
+    .business{margin:24px 0 5px;font-size:14px;font-weight:900;letter-spacing:.18em;text-transform:uppercase}
+    .campaign{margin:6px auto 18px;font-size:clamp(24px,6vw,38px);line-height:1.1}
+    .code{margin:20px 0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:clamp(23px,7vw,34px);font-weight:900}
+    .meta{color:var(--muted);line-height:1.55}
+    button{width:100%;margin-top:24px;padding:18px;border:0;background:var(--secondary);color:var(--primary);font:inherit;font-size:18px;font-weight:900;cursor:pointer}
+    button:disabled{opacity:.55;cursor:not-allowed}
+    .message{margin-top:18px;text-align:center;color:var(--muted)}
+    footer{padding:25px;text-align:center;color:#8d8174;font-size:12px}
+  </style>
+</head>
+<body>
+<div class="page">
+  <header><h1>Promotion Redemption</h1></header>
+  <main>
+    <section class="state">
+      <div id="badge" class="badge">Checking</div>
+      <p id="business" class="business"></p>
+      <h2 id="campaign" class="campaign"></h2>
+      <p id="code" class="code"></p>
+      <p id="meta" class="meta">Validating promotion...</p>
+      <button id="redeemButton" type="button" style="display:none">Redeem Promotion</button>
+    </section>
+    <p id="message" class="message"></p>
+  </main>
+  <footer>RMH Solutions • Single Use Digital Promotion</footer>
+</div>
+
+<script>
+const ENDPOINT="https://cavvmywysmuzezuobbow.supabase.co/functions/v1/redeem-promotion-v2";
+const params=new URLSearchParams(location.search);
+const promotionCode=String(params.get("code")||"").trim().toUpperCase();
+
+const badge=document.getElementById("badge");
+const business=document.getElementById("business");
+const campaign=document.getElementById("campaign");
+const code=document.getElementById("code");
+const meta=document.getElementById("meta");
+const button=document.getElementById("redeemButton");
+const message=document.getElementById("message");
+
+function formatDate(v){
+  if(!v)return "";
+  return new Intl.DateTimeFormat("en-US",{month:"long",day:"numeric",year:"numeric",timeZone:"America/New_York"}).format(new Date(v));
+}
+
+function details(p){
+  const b=p?.campaign?.business;
+  business.textContent=b?.business_name||"";
+  campaign.textContent=p?.campaign?.campaign_name||"";
+  code.textContent=p?.promotion_code||promotionCode;
+}
+
+function render(data){
+  const result=data.result;
+  const p=data.promotion;
+  if(p)details(p);
+
+  button.style.display="none";
+  button.disabled=false;
+
+  if(result==="valid"){
+    badge.textContent="VALID";
+    badge.className="badge valid";
+    meta.textContent=p?.expires_at ? "Valid through "+formatDate(p.expires_at) : "Promotion is valid.";
+    button.style.display="block";
+    message.textContent="Confirm the promotion before completing redemption.";
+  } else if(result==="redeemed"){
+    badge.textContent="REDEEMED";
+    badge.className="badge redeemed";
+    meta.textContent=p?.redeemed_at ? "Redeemed "+new Date(p.redeemed_at).toLocaleString() : "Promotion redeemed.";
+    message.textContent="Redemption completed successfully.";
+  } else if(result==="already_redeemed"){
+    badge.textContent="ALREADY REDEEMED";
+    badge.className="badge already";
+    meta.textContent=p?.redeemed_at ? "Originally redeemed "+new Date(p.redeemed_at).toLocaleString() : "This promotion has already been redeemed.";
+    message.textContent="This promotion cannot be used again.";
+  } else if(result==="expired"){
+    badge.textContent="EXPIRED";
+    badge.className="badge expired";
+    meta.textContent=p?.expires_at ? "Expired "+formatDate(p.expires_at) : "This promotion has expired.";
+    message.textContent="Do not accept this promotion.";
+  } else {
+    badge.textContent="INVALID";
+    badge.className="badge invalid";
+    meta.textContent=data.message||"Promotion code was not found.";
+    code.textContent=promotionCode;
+    message.textContent="Do not accept this promotion.";
+  }
+}
+
+async function call(action){
+  if(!promotionCode){
+    render({result:"invalid",message:"No promotion code was supplied."});
+    return;
+  }
+  try{
+    const response=await fetch(ENDPOINT,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({action,code:promotionCode})
+    });
+    const data=await response.json();
+    render(data);
+  }catch(err){
+    console.error(err);
+    badge.textContent="ERROR";
+    badge.className="badge invalid";
+    meta.textContent="Unable to contact the promotion service.";
+    message.textContent="Please try again.";
+  }
+}
+
+button.addEventListener("click",async()=>{
+  button.disabled=true;
+  button.textContent="Redeeming...";
+  await call("redeem");
+  button.textContent="Redeem Promotion";
+});
+
+call("validate");
+</script>
+</body>
+</html>
