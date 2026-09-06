@@ -56,25 +56,21 @@
     }
 
     .header-inner {
-      width: min(1180px, calc(100% - 40px));
-      min-height: 82px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 100%;
+      margin: 0;
+      display: block;
       position: relative;
     }
 
     .brand-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
+      width: 100%;
       text-decoration: none;
     }
 
     .brand-link img {
       display: block;
-      width: min(180px, 44vw);
+      width: 100%;
       height: auto;
     }
 
@@ -264,12 +260,6 @@
     .footer-copy a:hover { color: white; text-decoration: underline; }
 
     @media (max-width: 760px) {
-      .header-inner {
-        min-height: 74px;
-        width: min(100% - 28px, 1180px);
-      }
-
-      .brand-link img { width: 145px; }
 
       .hero {
         width: min(100% - 30px, 1050px);
