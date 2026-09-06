@@ -6,162 +6,39 @@
   <meta name="theme-color" content="#17130f">
   <title>Promotion Metrics</title>
   <style>
-    :root{
-      --primary:#17130f;
-      --secondary:#d79b2b;
-      --cream:#f7f1e8;
-      --muted:#6f6255;
-      --green:#1f7a45;
-      --red:#a12d2d;
-      --border:#ddd2c5;
-    }
+    :root{--primary:#17130f;--secondary:#d79b2b;--cream:#f7f1e8;--muted:#6f6255;--green:#1f7a45;--red:#a12d2d;--border:#ddd2c5}
     *{box-sizing:border-box}
-    body{
-      margin:0;
-      min-height:100vh;
-      background:var(--cream);
-      font-family:"Avenir Next",Avenir,"Helvetica Neue",Arial,sans-serif;
-      color:var(--primary);
-    }
-    .page{
-      width:min(900px,100%);
-      min-height:100vh;
-      margin:auto;
-      background:#fff;
-    }
-    header{
-      padding:28px 20px 24px;
-      text-align:center;
-      border-bottom:5px solid var(--secondary);
-    }
-    h1{
-      margin:0;
-      font-size:clamp(30px,6vw,48px);
-    }
-    .subtitle{
-      margin:10px 0 0;
-      color:var(--muted);
-      font-size:15px;
-    }
-    main{
-      padding:28px 18px 48px;
-    }
-    .card{
-      border:1px solid var(--border);
-      padding:22px;
-      margin-bottom:20px;
-      background:#fff;
-    }
-    .business-name{
-      margin:0;
-      font-size:14px;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      font-weight:900;
-    }
-    .campaign-name{
-      margin:8px 0 4px;
-      font-size:clamp(24px,5vw,36px);
-      line-height:1.15;
-    }
-    .campaign-expiry{
-      margin:0;
-      color:var(--muted);
-    }
-    .metrics{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:14px;
-      margin-top:20px;
-    }
-    .metric{
-      border:1px solid var(--border);
-      padding:18px;
-      text-align:center;
-      background:#faf8f5;
-    }
-    .metric-value{
-      display:block;
-      font-size:clamp(30px,7vw,44px);
-      font-weight:900;
-      line-height:1;
-    }
-    .metric-label{
-      display:block;
-      margin-top:8px;
-      font-size:12px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      color:var(--muted);
-      font-weight:800;
-    }
-    .rate{
-      grid-column:1 / -1;
-      background:var(--primary);
-      color:#fff;
-      border-color:var(--primary);
-    }
+    body{margin:0;min-height:100vh;background:var(--cream);font-family:"Avenir Next",Avenir,"Helvetica Neue",Arial,sans-serif;color:var(--primary)}
+    .page{width:min(900px,100%);min-height:100vh;margin:auto;background:#fff}
+    header{padding:28px 20px 24px;text-align:center;border-bottom:5px solid var(--secondary)}
+    h1{margin:0;font-size:clamp(30px,6vw,48px)}
+    .subtitle{margin:10px 0 0;color:var(--muted);font-size:15px}
+    main{padding:28px 18px 48px}
+    .card{border:1px solid var(--border);padding:22px;margin-bottom:20px;background:#fff}
+    .business-name{margin:0;font-size:14px;letter-spacing:.16em;text-transform:uppercase;font-weight:900}
+    .selector-label{display:block;margin:18px 0 7px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:900}
+    select{width:100%;padding:13px 12px;border:1px solid var(--border);background:#fff;color:var(--primary);font:inherit;font-size:16px}
+    .campaign-name{margin:20px 0 4px;font-size:clamp(24px,5vw,36px);line-height:1.15}
+    .campaign-expiry{margin:0;color:var(--muted)}
+    .metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:20px}
+    .metric{border:1px solid var(--border);padding:18px;text-align:center;background:#faf8f5}
+    .metric-value{display:block;font-size:clamp(30px,7vw,44px);font-weight:900;line-height:1}
+    .metric-label{display:block;margin-top:8px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800}
+    .rate{grid-column:1/-1;background:var(--primary);color:#fff;border-color:var(--primary)}
     .rate .metric-label{color:#e8ddd0}
-    h2{
-      margin:0 0 14px;
-      font-size:22px;
-    }
-    .table-wrap{
-      width:100%;
-      overflow-x:auto;
-    }
-    table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:700px;
-    }
-    th,td{
-      padding:12px 10px;
-      border-bottom:1px solid #eee4d9;
-      text-align:left;
-      vertical-align:top;
-      font-size:14px;
-    }
-    th{
-      font-size:12px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:var(--muted);
-    }
-    .status{
-      display:inline-block;
-      padding:5px 8px;
-      font-size:11px;
-      font-weight:900;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
+    h2{margin:0 0 14px;font-size:22px}
+    .table-wrap{width:100%;overflow-x:auto}
+    table{width:100%;border-collapse:collapse;min-width:700px}
+    th,td{padding:12px 10px;border-bottom:1px solid #eee4d9;text-align:left;vertical-align:top;font-size:14px}
+    th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+    .status{display:inline-block;padding:5px 8px;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
     .available{background:#e8f4ec;color:var(--green)}
     .redeemed{background:#edf0f4;color:#24364b}
     .expired{background:#f7e9e9;color:var(--red)}
-    .message{
-      text-align:center;
-      color:var(--muted);
-      padding:18px 0;
-    }
-    .error{
-      color:var(--red);
-      font-weight:700;
-    }
-    footer{
-      padding:22px;
-      text-align:center;
-      color:#8d8174;
-      font-size:12px;
-    }
-    @media (min-width:700px){
-      .metrics{
-        grid-template-columns:repeat(4,minmax(0,1fr));
-      }
-      .rate{
-        grid-column:auto;
-      }
-    }
+    .message{text-align:center;color:var(--muted);padding:18px 0}
+    .error{color:var(--red);font-weight:700}
+    footer{padding:22px;text-align:center;color:#8d8174;font-size:12px}
+    @media(min-width:700px){.metrics{grid-template-columns:repeat(5,minmax(0,1fr))}.rate{grid-column:auto}}
   </style>
 </head>
 <body>
@@ -176,30 +53,19 @@
 
     <section id="summaryCard" class="card" style="display:none">
       <p id="businessName" class="business-name"></p>
+
+      <label class="selector-label" for="campaignSelect">Campaign</label>
+      <select id="campaignSelect"></select>
+
       <h2 id="campaignName" class="campaign-name"></h2>
       <p id="campaignExpiry" class="campaign-expiry"></p>
 
       <div class="metrics">
-        <div class="metric">
-          <span id="issued" class="metric-value">0</span>
-          <span class="metric-label">Issued</span>
-        </div>
-        <div class="metric">
-          <span id="available" class="metric-value">0</span>
-          <span class="metric-label">Available</span>
-        </div>
-        <div class="metric">
-          <span id="redeemed" class="metric-value">0</span>
-          <span class="metric-label">Redeemed</span>
-        </div>
-        <div class="metric">
-          <span id="expired" class="metric-value">0</span>
-          <span class="metric-label">Expired</span>
-        </div>
-        <div class="metric rate">
-          <span id="rate" class="metric-value">0%</span>
-          <span class="metric-label">Redemption Rate</span>
-        </div>
+        <div class="metric"><span id="issued" class="metric-value">0</span><span class="metric-label">Issued</span></div>
+        <div class="metric"><span id="available" class="metric-value">0</span><span class="metric-label">Available</span></div>
+        <div class="metric"><span id="redeemed" class="metric-value">0</span><span class="metric-label">Redeemed</span></div>
+        <div class="metric"><span id="expired" class="metric-value">0</span><span class="metric-label">Expired</span></div>
+        <div class="metric rate"><span id="rate" class="metric-value">0%</span><span class="metric-label">Redemption Rate</span></div>
       </div>
     </section>
 
@@ -207,15 +73,7 @@
       <h2>Issued Promotions</h2>
       <div class="table-wrap">
         <table>
-          <thead>
-            <tr>
-              <th>Promotion Code</th>
-              <th>Status</th>
-              <th>Issued</th>
-              <th>Redeemed</th>
-              <th>Expires</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Promotion Code</th><th>Status</th><th>Issued</th><th>Redeemed</th><th>Expires</th></tr></thead>
           <tbody id="promotionRows"></tbody>
         </table>
       </div>
@@ -226,150 +84,113 @@
 </div>
 
 <script>
-const ENDPOINT =
-  "https://cavvmywysmuzezuobbow.supabase.co/functions/v1/promotion-metrics-v2";
+const ENDPOINT="https://cavvmywysmuzezuobbow.supabase.co/functions/v1/promotion-metrics-v2";
+const params=new URLSearchParams(location.search);
+const businessSlug=String(params.get("business")||"").trim().toLowerCase();
 
-const params = new URLSearchParams(location.search);
-const businessSlug = String(params.get("business") || "")
-  .trim()
-  .toLowerCase();
+const message=document.getElementById("message");
+const summaryCard=document.getElementById("summaryCard");
+const detailCard=document.getElementById("detailCard");
+const businessName=document.getElementById("businessName");
+const campaignSelect=document.getElementById("campaignSelect");
+const campaignName=document.getElementById("campaignName");
+const campaignExpiry=document.getElementById("campaignExpiry");
+const issued=document.getElementById("issued");
+const available=document.getElementById("available");
+const redeemed=document.getElementById("redeemed");
+const expired=document.getElementById("expired");
+const rate=document.getElementById("rate");
+const promotionRows=document.getElementById("promotionRows");
 
-const message = document.getElementById("message");
-const summaryCard = document.getElementById("summaryCard");
-const detailCard = document.getElementById("detailCard");
-
-const businessName = document.getElementById("businessName");
-const campaignName = document.getElementById("campaignName");
-const campaignExpiry = document.getElementById("campaignExpiry");
-
-const issued = document.getElementById("issued");
-const available = document.getElementById("available");
-const redeemed = document.getElementById("redeemed");
-const expired = document.getElementById("expired");
-const rate = document.getElementById("rate");
-
-const promotionRows = document.getElementById("promotionRows");
-
-function formatDate(value) {
-  if (!value) return "—";
-  return new Intl.DateTimeFormat("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-    timeZone: "America/New_York"
-  }).format(new Date(value));
+function formatDate(value){
+  if(!value)return "—";
+  return new Intl.DateTimeFormat("en-US",{month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit",timeZone:"America/New_York"}).format(new Date(value));
 }
-
-function formatDateOnly(value) {
-  if (!value) return "";
-  return new Intl.DateTimeFormat("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-    timeZone: "America/New_York"
-  }).format(new Date(value));
+function formatDateOnly(value){
+  if(!value)return "";
+  return new Intl.DateTimeFormat("en-US",{month:"long",day:"numeric",year:"numeric",timeZone:"America/New_York"}).format(new Date(value));
 }
-
-function deriveDisplayStatus(promotion) {
-  if (promotion.status === "redeemed") return "redeemed";
-
-  if (
-    promotion.expires_at &&
-    new Date(promotion.expires_at) <= new Date()
-  ) {
-    return "expired";
-  }
-
+function deriveDisplayStatus(p){
+  if(p.status==="redeemed")return "redeemed";
+  if(p.expires_at&&new Date(p.expires_at)<=new Date())return "expired";
   return "available";
 }
+function fillCampaignDropdown(campaigns,selectedId){
+  campaignSelect.innerHTML="";
+  for(const c of campaigns){
+    const option=document.createElement("option");
+    option.value=c.id;
+    option.textContent=c.campaign_name+(c.active?"":" (Inactive)");
+    option.selected=c.id===selectedId;
+    campaignSelect.appendChild(option);
+  }
+}
+function render(data,refreshDropdown){
+  const b=data.business;
+  const c=data.selected_campaign;
+  const m=data.metrics;
+  const promotions=data.promotions||[];
 
-function render(data) {
-  const business = data.business;
-  const campaign = data.campaign;
-  const metrics = data.metrics;
-  const promotions = data.promotions || [];
+  businessName.textContent=b.business_name;
+  if(refreshDropdown)fillCampaignDropdown(data.campaigns||[],c.id);
 
-  businessName.textContent = business.business_name;
-  campaignName.textContent = campaign.campaign_name;
+  campaignName.textContent=c.campaign_name;
+  campaignExpiry.textContent=c.expires_at?"Campaign valid through "+formatDateOnly(c.expires_at):"";
 
-  campaignExpiry.textContent = campaign.expires_at
-    ? "Campaign valid through " + formatDateOnly(campaign.expires_at)
-    : "";
+  issued.textContent=m.issued;
+  available.textContent=m.available;
+  redeemed.textContent=m.redeemed;
+  expired.textContent=m.expired;
+  rate.textContent=m.redemption_rate+"%";
 
-  issued.textContent = metrics.issued;
-  available.textContent = metrics.available;
-  redeemed.textContent = metrics.redeemed;
-  expired.textContent = metrics.expired;
-  rate.textContent = metrics.redemption_rate + "%";
-
-  promotionRows.innerHTML = "";
-
-  for (const promotion of promotions) {
-    const displayStatus = deriveDisplayStatus(promotion);
-
-    const row = document.createElement("tr");
-
-    row.innerHTML = `
-      <td><strong>${promotion.promotion_code}</strong></td>
-      <td>
-        <span class="status ${displayStatus}">
-          ${displayStatus}
-        </span>
-      </td>
-      <td>${formatDate(promotion.issued_at)}</td>
-      <td>${formatDate(promotion.redeemed_at)}</td>
-      <td>${formatDate(promotion.expires_at)}</td>
-    `;
-
+  promotionRows.innerHTML="";
+  for(const p of promotions){
+    const status=deriveDisplayStatus(p);
+    const row=document.createElement("tr");
+    row.innerHTML=`<td><strong>${p.promotion_code}</strong></td>
+      <td><span class="status ${status}">${status}</span></td>
+      <td>${formatDate(p.issued_at)}</td>
+      <td>${formatDate(p.redeemed_at)}</td>
+      <td>${formatDate(p.expires_at)}</td>`;
     promotionRows.appendChild(row);
   }
 
-  message.style.display = "none";
-  summaryCard.style.display = "block";
-  detailCard.style.display = "block";
+  message.style.display="none";
+  summaryCard.style.display="block";
+  detailCard.style.display="block";
 }
 
-async function loadMetrics() {
-  if (!businessSlug) {
-    message.textContent =
-      "No business was specified in the URL.";
+async function loadMetrics(campaignId="",refreshDropdown=false){
+  if(!businessSlug){
+    message.textContent="No business was specified in the URL.";
     message.classList.add("error");
     return;
   }
+  try{
+    const body={business_slug:businessSlug};
+    if(campaignId)body.campaign_id=campaignId;
 
-  try {
-    const response = await fetch(ENDPOINT, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        business_slug: businessSlug
-      })
+    const response=await fetch(ENDPOINT,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(body)
     });
-
-    const data = await response.json();
-
-    if (!response.ok || !data.success) {
-      throw new Error(
-        data.error || "Unable to retrieve metrics."
-      );
-    }
-
-    render(data);
-  } catch (error) {
+    const data=await response.json();
+    if(!response.ok||!data.success)throw new Error(data.error||"Unable to retrieve metrics.");
+    render(data,refreshDropdown);
+  }catch(error){
     console.error(error);
-    message.textContent =
-      error instanceof Error
-        ? error.message
-        : "Unable to retrieve metrics.";
+    message.style.display="block";
+    message.textContent=error instanceof Error?error.message:"Unable to retrieve metrics.";
     message.classList.add("error");
   }
 }
 
-loadMetrics();
+campaignSelect.addEventListener("change",()=>{
+  loadMetrics(campaignSelect.value,false);
+});
+
+loadMetrics("",true);
 </script>
 </body>
 </html>
