@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#17130f" />
+  <meta name="description" content="Single-use digital promotion." />
+  <title>Digital Promotion</title>
+  <style>
+    :root{--primary:#17130f;--secondary:#d79b2b;--cream:#f7f1e8;--text:#17130f;--muted:#6f6255;--line:#ddd2c5;--success:#1f7a45;--error:#a12d2d;--shadow:0 18px 48px rgba(0,0,0,.20)}
+    *{box-sizing:border-box} body{margin:0;min-height:100vh;background:var(--cream);color:var(--text);font-family:"Avenir Next",Avenir,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}.page{width:min(760px,100%);margin:0 auto;background:#fff;min-height:100vh;box-shadow:0 0 40px rgba(0,0,0,.08)}header{background:#fff}.header-image{display:none;width:100%;height:auto;object-fit:cover}.logo-wrap{display:flex;justify-content:center;align-items:center;padding:18px 20px;background:#fff;border-bottom:4px solid var(--secondary)}.logo-wrap img{display:none;max-width:min(240px,62vw);max-height:110px;width:auto;height:auto;object-fit:contain}main{padding:28px 20px 42px;background:linear-gradient(180deg,#fff 0%,var(--cream) 100%)}.loading,.fatal{text-align:center;padding:60px 20px;color:var(--muted);line-height:1.6}.fatal{color:var(--error)}.content{display:none}.business-name{margin:0;text-align:center;color:var(--primary);font-size:14px;font-weight:800;letter-spacing:.20em;text-transform:uppercase}h1{margin:10px auto 18px;max-width:680px;text-align:center;color:var(--primary);font-size:clamp(30px,6vw,48px);line-height:1.08;letter-spacing:-.03em}.promo-art{display:none;width:100%;height:auto;margin:22px 0 24px;box-shadow:var(--shadow)}.details{margin:0 0 24px;padding:20px;border:1px solid var(--line);background:#fff}.details p{margin:7px 0;color:var(--muted);font-size:15px;line-height:1.5}.details strong{color:var(--primary)}.claim-btn,.save-btn,.website-btn{width:100%;border:0;border-radius:0;padding:17px 18px;font:inherit;font-weight:800;font-size:17px;cursor:pointer;text-decoration:none;text-align:center;display:block}.claim-btn{background:var(--secondary);color:var(--primary)}.claim-btn:disabled{opacity:.55;cursor:not-allowed}.save-btn{margin-top:12px;background:var(--primary);color:#fff}.website-btn{margin-top:12px;border:1px solid var(--primary);background:#fff;color:var(--primary)}.issued{display:none;margin-top:26px;padding:24px 20px;background:#fff;border-top:5px solid var(--secondary);box-shadow:var(--shadow);text-align:center}.issued-label{margin:0 0 8px;color:var(--muted);font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}.code{margin:0;color:var(--primary);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:clamp(24px,7vw,38px);font-weight:800;letter-spacing:.04em;word-break:break-word}.qr-wrap{display:flex;justify-content:center;align-items:center;margin:22px auto 14px;min-height:240px}.qr-wrap img{display:block;width:min(260px,75vw);height:auto}.valid-through{margin:10px 0 0;color:var(--primary);font-size:14px;font-weight:800;text-transform:uppercase}.instructions{margin:12px auto 0;max-width:520px;color:var(--muted);font-size:14px;line-height:1.55}.status{min-height:22px;margin:16px 0 0;text-align:center;color:var(--muted);font-size:14px}.status.success{color:var(--success)}.status.error{color:var(--error)}footer{padding:24px 20px 34px;text-align:center;color:#8d8174;background:var(--cream);font-size:12px}@media (max-width:560px){main{padding-left:14px;padding-right:14px}.details{padding:17px}.issued{padding-left:14px;padding-right:14px}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <img id="headerImage" class="header-image" alt="" />
+      <div class="logo-wrap"><img id="businessLogo" alt="" /></div>
+    </header>
+    <main>
+      <div id="loading" class="loading">Loading promotion...</div>
+      <div id="fatal" class="fatal" style="display:none;"></div>
+      <section id="content" class="content">
+        <p id="businessName" class="business-name"></p>
+        <h1 id="campaignName"></h1>
+        <img id="promotionImage" class="promo-art" alt="Promotion artwork" />
+        <div class="details">
+          <p><strong>Offer:</strong> <span id="offerText"></span></p>
+          <p><strong>Terms:</strong> <span id="termsText"></span></p>
+          <p><strong>Valid through:</strong> <span id="expiresText"></span></p>
+        </div>
+        <button id="claimButton" class="claim-btn" type="button">Get My Promotion</button>
+        <section id="issuedSection" class="issued" aria-live="polite">
+          <p class="issued-label">Your Single-Use Promotion</p>
+          <p id="promotionCode" class="code"></p>
+          <div class="qr-wrap"><img id="qrImage" alt="Promotion redemption QR code" /></div>
+          <p id="issuedExpiresText" class="valid-through"></p>
+          <p class="instructions">Present this QR code when you are ready to redeem your promotion.</p>
+          <button id="saveButton" class="save-btn" type="button">Save Promotion</button>
+        </section>
+        <a id="websiteButton" class="website-btn" href="#" target="_blank" rel="noopener" style="display:none;">Visit Website</a>
+        <p id="statusMessage" class="status" role="status"></p>
+      </section>
+    </main>
+    <footer>RMH Solutions • Single Use Digital Promotion</footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+  <script>
+    const SUPABASE_BASE="https://cavvmywysmuzezuobbow.supabase.co";
+    const STORAGE_PUBLIC_BASE=SUPABASE_BASE+"/storage/v1/object/public/promotion-assets/";
+    const CONFIG_ENDPOINT=SUPABASE_BASE+"/functions/v1/promotion-config-v2";
+    const ISSUE_ENDPOINT=SUPABASE_BASE+"/functions/v1/issue-promotion-v2";
+    const params=new URLSearchParams(window.location.search);
+    const businessSlug=String(params.get("business")||"").trim().toLowerCase();
+    const loading=document.getElementById("loading"),fatal=document.getElementById("fatal"),content=document.getElementById("content"),headerImage=document.getElementById("headerImage"),businessLogo=document.getElementById("businessLogo"),promotionImage=document.getElementById("promotionImage"),businessName=document.getElementById("businessName"),campaignName=document.getElementById("campaignName"),offerText=document.getElementById("offerText"),termsText=document.getElementById("termsText"),expiresText=document.getElementById("expiresText"),claimButton=document.getElementById("claimButton"),issuedSection=document.getElementById("issuedSection"),promotionCode=document.getElementById("promotionCode"),qrImage=document.getElementById("qrImage"),issuedExpiresText=document.getElementById("issuedExpiresText"),saveButton=document.getElementById("saveButton"),websiteButton=document.getElementById("websiteButton"),statusMessage=document.getElementById("statusMessage");
+    let config=null,issuedPromotion=null,qrDataUrl="";
+    function assetUrl(path){if(!path)return"";return STORAGE_PUBLIC_BASE+path.split("/").map(encodeURIComponent).join("/")}
+    function formatExpiration(value){if(!value)return"No expiration date";return new Intl.DateTimeFormat("en-US",{month:"long",day:"numeric",year:"numeric",timeZone:"America/New_York"}).format(new Date(value))}
+    function localStorageKey(){return"rmh_single_use_v2_"+businessSlug+"_"+config.campaign.id}
+    function showFatal(message){loading.style.display="none";content.style.display="none";fatal.style.display="block";fatal.textContent=message}
+    function applyBranding(){const primary=config.business.primary_color||"#17130f",secondary=config.business.secondary_color||"#d79b2b";document.documentElement.style.setProperty("--primary",primary);document.documentElement.style.setProperty("--secondary",secondary);document.querySelector('meta[name="theme-color"]').setAttribute("content",primary);document.title=config.campaign.campaign_name+" | "+config.business.business_name}
+    function renderConfig(){applyBranding();businessName.textContent=config.business.business_name;campaignName.textContent=config.campaign.campaign_name;offerText.textContent=config.campaign.campaign_name;termsText.textContent=config.campaign.terms_text||"See business for details.";expiresText.textContent=formatExpiration(config.campaign.expires_at);if(config.business.logo_filename){businessLogo.src=assetUrl(config.business.logo_filename);businessLogo.alt=config.business.business_name+" logo";businessLogo.style.display="block"}if(config.business.header_image_filename){headerImage.src=assetUrl(config.business.header_image_filename);headerImage.alt=config.business.business_name;headerImage.style.display="block"}if(config.campaign.promotion_image_filename){promotionImage.src=assetUrl(config.campaign.promotion_image_filename);promotionImage.style.display="block"}if(config.business.website_url){websiteButton.href=config.business.website_url;websiteButton.style.display="block"}loading.style.display="none";fatal.style.display="none";content.style.display="block"}
+    async function loadConfig(){if(!businessSlug){showFatal("No business was specified in the promotion link.");return}try{const response=await fetch(CONFIG_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({business_slug:businessSlug}),cache:"no-store"});const data=await response.json();if(!response.ok||!data.success)throw new Error(data.error||"Unable to load promotion.");config=data;renderConfig();restorePromotion()}catch(error){console.error(error);showFatal(error instanceof Error?error.message:"Unable to load promotion.")}}
+    async function buildQr(code){const redeemUrl=new URL("Redeem.html",window.location.href);redeemUrl.search="";redeemUrl.searchParams.set("code",code);qrDataUrl=await QRCode.toDataURL(redeemUrl.toString(),{width:700,margin:2,errorCorrectionLevel:"M"});qrImage.src=qrDataUrl}
+    async function renderIssued(promotion){issuedPromotion=promotion;promotionCode.textContent=promotion.promotion_code;issuedExpiresText.textContent="Valid through "+formatExpiration(promotion.expires_at);await buildQr(promotion.promotion_code);claimButton.style.display="none";issuedSection.style.display="block";statusMessage.textContent="Your promotion is ready.";statusMessage.className="status success"}
+    function restorePromotion(){try{const raw=localStorage.getItem(localStorageKey());if(!raw)return;const saved=JSON.parse(raw);if(saved&&saved.promotion_code&&saved.campaign_id===config.campaign.id)renderIssued(saved)}catch(error){console.warn("Unable to restore saved promotion.",error)}}
+    async function issuePromotion(){claimButton.disabled=true;statusMessage.textContent="Creating your promotion...";statusMessage.className="status";try{const response=await fetch(ISSUE_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({business_slug:businessSlug})});const data=await response.json();if(!response.ok||!data.success)throw new Error(data.error||"Unable to create promotion.");const promotion=data.promotion;localStorage.setItem(localStorageKey(),JSON.stringify(promotion));await renderIssued(promotion)}catch(error){console.error(error);statusMessage.textContent=error instanceof Error?error.message:"Unable to create promotion.";statusMessage.className="status error";claimButton.disabled=false}}
+    async function loadImageForCanvas(url){const response=await fetch(url,{mode:"cors",cache:"no-store"});if(!response.ok)throw new Error("Unable to load promotion artwork.");const blob=await response.blob();return new Promise((resolve,reject)=>{const objectUrl=URL.createObjectURL(blob),image=new Image();image.onload=()=>{URL.revokeObjectURL(objectUrl);resolve(image)};image.onerror=()=>{URL.revokeObjectURL(objectUrl);reject(new Error("Unable to prepare promotion artwork."))};image.src=objectUrl})}
+    function loadDataUrlImage(dataUrl){return new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>resolve(image);image.onerror=reject;image.src=dataUrl})}
+    function wrapText(ctx,text,x,y,maxWidth,lineHeight){const words=String(text||"").split(/\s+/);let line="",currentY=y;for(let i=0;i<words.length;i++){const testLine=line+words[i]+" ";if(ctx.measureText(testLine).width>maxWidth&&i>0){ctx.fillText(line.trim(),x,currentY);line=words[i]+" ";currentY+=lineHeight}else line=testLine}if(line.trim())ctx.fillText(line.trim(),x,currentY);return currentY}
+    async function savePromotionImage(){if(!issuedPromotion||!qrDataUrl)return;saveButton.disabled=true;saveButton.textContent="Preparing Promotion...";try{const canvas=document.createElement("canvas"),width=1200,padding=70;let promoArt=null;if(config.campaign.promotion_image_filename)promoArt=await loadImageForCanvas(assetUrl(config.campaign.promotion_image_filename));const qr=await loadDataUrlImage(qrDataUrl);let artHeight=0;if(promoArt)artHeight=Math.round(width*(promoArt.height/promoArt.width));const infoHeight=700;canvas.width=width;canvas.height=artHeight+infoHeight;const ctx=canvas.getContext("2d");ctx.fillStyle="#ffffff";ctx.fillRect(0,0,canvas.width,canvas.height);if(promoArt)ctx.drawImage(promoArt,0,0,width,artHeight);const top=artHeight+padding;ctx.fillStyle=config.business.primary_color||"#17130f";ctx.textAlign="center";ctx.font="700 34px Arial";ctx.fillText(config.business.business_name,width/2,top);ctx.font="700 48px Arial";wrapText(ctx,config.campaign.campaign_name,width/2,top+70,1000,56);const qrSize=300,qrY=top+150;ctx.drawImage(qr,(width-qrSize)/2,qrY,qrSize,qrSize);ctx.font="700 38px monospace";ctx.fillText(issuedPromotion.promotion_code,width/2,qrY+qrSize+62);ctx.font="700 24px Arial";ctx.fillText("VALID THROUGH "+formatExpiration(issuedPromotion.expires_at).toUpperCase(),width/2,qrY+qrSize+110);ctx.fillStyle="#5f554b";ctx.font="22px Arial";wrapText(ctx,config.campaign.terms_text||"",width/2,qrY+qrSize+160,1000,32);ctx.font="20px Arial";ctx.fillText("Present this QR code when redeeming.",width/2,canvas.height-55);const link=document.createElement("a");link.download=config.business.slug+"-"+issuedPromotion.promotion_code+".png";link.href=canvas.toDataURL("image/png");document.body.appendChild(link);link.click();link.remove();statusMessage.textContent="Promotion image saved.";statusMessage.className="status success"}catch(error){console.error(error);statusMessage.textContent=error instanceof Error?error.message:"Unable to save promotion image.";statusMessage.className="status error"}finally{saveButton.disabled=false;saveButton.textContent="Save Promotion"}}
+    claimButton.addEventListener("click",issuePromotion);saveButton.addEventListener("click",savePromotionImage);loadConfig();
+  </script>
+</body>
+</html>
