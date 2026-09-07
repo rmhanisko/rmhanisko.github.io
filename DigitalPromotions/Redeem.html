@@ -10,8 +10,8 @@
     *{box-sizing:border-box}
     body{margin:0;min-height:100vh;background:var(--cream);font-family:"Avenir Next",Avenir,"Helvetica Neue",Arial,sans-serif;color:var(--primary)}
     .page{width:min(680px,100%);min-height:100vh;margin:auto;background:#fff}
-    header{padding:26px 20px;text-align:center;border-bottom:5px solid var(--secondary)}
-    h1{margin:0;font-size:clamp(30px,7vw,48px)}
+    header{padding:20px 20px 26px;text-align:center;border-bottom:5px solid var(--secondary)}
+    .redeem-logo{display:none;max-width:min(240px,62vw);max-height:110px;width:auto;height:auto;object-fit:contain;margin:0 auto 18px}h1{margin:0;font-size:clamp(30px,7vw,48px)}
     main{padding:34px 20px 50px}
     .state{text-align:center;padding:28px 18px;border:1px solid #ddd2c5;background:#fff}
     .badge{display:inline-block;padding:8px 14px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;background:var(--primary);color:#fff}
@@ -29,7 +29,7 @@
 </head>
 <body>
 <div class="page">
-  <header><h1>Promotion Redemption</h1></header>
+  <header><img id="businessLogo" class="redeem-logo" alt=""><h1>Promotion Redemption</h1></header>
   <main>
     <section class="state">
       <div id="badge" class="badge">Checking</div>
@@ -41,11 +41,13 @@
     </section>
     <p id="message" class="message"></p>
   </main>
-  <footer>RMH Solutions • Single Use Digital Promotion</footer>
+  <footer>RMH Solutions • Digital Promotions Platform</footer>
 </div>
 
 <script>
-const ENDPOINT="https://cavvmywysmuzezuobbow.supabase.co/functions/v1/redeem-promotion-v2";
+const SUPABASE_BASE="https://cavvmywysmuzezuobbow.supabase.co";
+const STORAGE_PUBLIC_BASE=SUPABASE_BASE+"/storage/v1/object/public/promotion-assets/";
+const ENDPOINT=SUPABASE_BASE+"/functions/v1/redeem-promotion-v2";
 const params=new URLSearchParams(location.search);
 const promotionCode=String(params.get("code")||"").trim().toUpperCase();
 
@@ -56,6 +58,7 @@ const code=document.getElementById("code");
 const meta=document.getElementById("meta");
 const button=document.getElementById("redeemButton");
 const message=document.getElementById("message");
+const businessLogo=document.getElementById("businessLogo");
 
 function formatDate(v){
   if(!v)return "";
@@ -67,6 +70,12 @@ function details(p){
   business.textContent=b?.business_name||"";
   campaign.textContent=p?.campaign?.campaign_name||"";
   code.textContent=p?.promotion_code||promotionCode;
+
+  if(b?.slug){
+    businessLogo.src=STORAGE_PUBLIC_BASE+encodeURIComponent(b.slug)+"/logo.png";
+    businessLogo.alt=(b.business_name||"Business")+" logo";
+    businessLogo.style.display="block";
+  }
 }
 
 function render(data){
