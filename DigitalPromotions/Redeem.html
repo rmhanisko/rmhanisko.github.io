@@ -72,9 +72,10 @@ function details(p){
   code.textContent=p?.promotion_code||promotionCode;
 
   if(b?.slug){
+    businessLogo.onload=()=>{businessLogo.style.display="block"};
+    businessLogo.onerror=()=>{businessLogo.style.display="none"};
     businessLogo.src=STORAGE_PUBLIC_BASE+encodeURIComponent(b.slug)+"/logo.png?v="+Date.now();
     businessLogo.alt=(b.business_name||"Business")+" logo";
-    businessLogo.style.display="block";
   }
 }
 
