@@ -21,7 +21,10 @@
     .campaign{margin:6px auto 18px;font-size:clamp(24px,6vw,38px);line-height:1.1}
     .code{margin:20px 0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:clamp(23px,7vw,34px);font-weight:900}
     .meta{color:var(--muted);line-height:1.55}
-    button{width:100%;margin-top:24px;padding:18px;border:0;background:var(--secondary);color:var(--primary);font:inherit;font-size:18px;font-weight:900;cursor:pointer}
+    .staff-code-wrap{display:none;margin-top:24px;text-align:left}
+    .staff-code-wrap label{display:block;margin-bottom:8px;font-size:14px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+    .staff-code-wrap input{width:100%;padding:16px;border:1px solid #b9aea2;background:#fff;color:var(--primary);font:inherit;font-size:20px;font-weight:700;text-transform:uppercase}
+    button{width:100%;margin-top:16px;padding:18px;border:0;background:var(--secondary);color:var(--primary);font:inherit;font-size:18px;font-weight:900;cursor:pointer}
     button:disabled{opacity:.55;cursor:not-allowed}
     .message{margin-top:18px;text-align:center;color:var(--muted)}
     footer{padding:25px;text-align:center;color:#8d8174;font-size:12px}
@@ -37,6 +40,10 @@
       <h2 id="campaign" class="campaign"></h2>
       <p id="code" class="code"></p>
       <p id="meta" class="meta">Validating promotion...</p>
+      <div id="staffCodeWrap" class="staff-code-wrap">
+        <label for="staffCode">Staff Code</label>
+        <input id="staffCode" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" minlength="5" maxlength="12" pattern="[A-Za-z0-9]{5,12}">
+      </div>
       <button id="redeemButton" type="button" style="display:none">Redeem Promotion</button>
     </section>
     <p id="message" class="message"></p>
@@ -57,6 +64,8 @@ const campaign=document.getElementById("campaign");
 const code=document.getElementById("code");
 const meta=document.getElementById("meta");
 const button=document.getElementById("redeemButton");
+const staffCodeWrap=document.getElementById("staffCodeWrap");
+const staffCode=document.getElementById("staffCode");
 const message=document.getElementById("message");
 const businessLogo=document.getElementById("businessLogo");
 
@@ -85,14 +94,16 @@ function render(data){
   if(p)details(p);
 
   button.style.display="none";
+  staffCodeWrap.style.display="none";
   button.disabled=false;
 
   if(result==="valid"){
     badge.textContent="VALID";
     badge.className="badge valid";
     meta.textContent=p?.expires_at ? "Valid through "+formatDate(p.expires_at) : "Promotion is valid.";
+    staffCodeWrap.style.display="block";
     button.style.display="block";
-    message.textContent="Confirm the promotion before completing redemption.";
+    message.textContent="Enter the Staff Code to complete redemption.";
   } else if(result==="redeemed"){
     badge.textContent="REDEEMED";
     badge.className="badge redeemed";
@@ -103,6 +114,13 @@ function render(data){
     badge.className="badge already";
     meta.textContent=p?.redeemed_at ? "Originally redeemed "+new Date(p.redeemed_at).toLocaleString() : "This promotion has already been redeemed.";
     message.textContent="This promotion cannot be used again.";
+  } else if(result==="unauthorized"){
+    badge.textContent="VALID";
+    badge.className="badge valid";
+    meta.textContent=p?.expires_at ? "Valid through "+formatDate(p.expires_at) : "Promotion is valid.";
+    staffCodeWrap.style.display="block";
+    button.style.display="block";
+    message.textContent=data.message||"Incorrect Staff Code.";
   } else if(result==="expired"){
     badge.textContent="EXPIRED";
     badge.className="badge expired";
@@ -117,7 +135,7 @@ function render(data){
   }
 }
 
-async function call(action){
+async function call(action,enteredStaffCode=""){
   if(!promotionCode){
     render({result:"invalid",message:"No promotion code was supplied."});
     return;
@@ -126,7 +144,9 @@ async function call(action){
     const response=await fetch(ENDPOINT,{
       method:"POST",
       headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({action,code:promotionCode})
+      body:JSON.stringify(action==="redeem"
+        ? {action,code:promotionCode,staff_code:enteredStaffCode}
+        : {action,code:promotionCode})
     });
     const data=await response.json();
     render(data);
@@ -140,9 +160,15 @@ async function call(action){
 }
 
 button.addEventListener("click",async()=>{
+  const enteredStaffCode=staffCode.value.trim();
+  if(!/^[A-Za-z0-9]{5,12}$/.test(enteredStaffCode)){
+    message.textContent="Staff Code must be 5 to 12 letters and numbers.";
+    staffCode.focus();
+    return;
+  }
   button.disabled=true;
   button.textContent="Redeeming...";
-  await call("redeem");
+  await call("redeem",enteredStaffCode);
   button.textContent="Redeem Promotion";
 });
 
