@@ -183,7 +183,14 @@ function render(data,refreshDropdown){
 
 async function loadMetrics(campaignId="",refreshDropdown=false){
   if(!businessId){
-    accessMessage.textContent="No business was specified in the URL.";
+    accessMessage.textContent="No Business ID was provided. Please use a valid Metrics link or QR code.";
+    accessMessage.classList.add("error");
+    accessButton.disabled=true;
+    return;
+  }
+
+  if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(businessId)){
+    accessMessage.textContent="Invalid Business ID. Please verify the Metrics link or QR code.";
     accessMessage.classList.add("error");
     accessButton.disabled=true;
     return;
@@ -266,7 +273,11 @@ campaignSelect.addEventListener("change",()=>{
 });
 
 if(!businessId){
-  accessMessage.textContent="No business was specified in the URL.";
+  accessMessage.textContent="No Business ID was provided. Please use a valid Metrics link or QR code.";
+  accessMessage.classList.add("error");
+  accessButton.disabled=true;
+} else if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(businessId)){
+  accessMessage.textContent="Invalid Business ID. Please verify the Metrics link or QR code.";
   accessMessage.classList.add("error");
   accessButton.disabled=true;
 }
