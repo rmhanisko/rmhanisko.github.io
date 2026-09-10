@@ -18,6 +18,13 @@
     .business-name{margin:0;font-size:14px;letter-spacing:.16em;text-transform:uppercase;font-weight:900}
     .selector-label{display:block;margin:18px 0 7px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:900}
     select{width:100%;padding:13px 12px;border:1px solid var(--border);background:#fff;color:var(--primary);font:inherit;font-size:16px}
+    .access-card{max-width:460px;margin:0 auto;border:1px solid var(--border);padding:24px;background:#fff}
+    .access-card h2{margin:0 0 8px;text-align:center}
+    .access-card p{margin:0 0 18px;text-align:center;color:var(--muted);line-height:1.5}
+    .access-card label{display:block;margin:0 0 7px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:900}
+    .access-card input{width:100%;padding:14px 12px;border:1px solid var(--border);background:#fff;color:var(--primary);font:inherit;font-size:18px;text-transform:uppercase}
+    .access-card button{width:100%;margin-top:14px;padding:15px;border:0;background:var(--secondary);color:var(--primary);font:inherit;font-size:17px;font-weight:900;cursor:pointer}
+    .access-card button:disabled{opacity:.55;cursor:not-allowed}
     .campaign-name{margin:20px 0 4px;font-size:clamp(24px,5vw,36px);line-height:1.15}
     .campaign-expiry{margin:0;color:var(--muted)}
     .metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:20px}
@@ -45,11 +52,20 @@
 <div class="page">
   <header>
     <h1>Promotion Metrics</h1>
-    <p class="subtitle">RMH Solutions • Single Use Digital Promotion</p>
+    <p class="subtitle">RMH Solutions • Digital Promotions Platform</p>
   </header>
 
   <main>
-    <div id="message" class="message">Loading metrics...</div>
+    <section id="accessCard" class="access-card">
+      <h2>Staff Access</h2>
+      <p>Enter the Staff Code to view promotion metrics.</p>
+      <label for="staffCode">Staff Code</label>
+      <input id="staffCode" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" minlength="5" maxlength="12" pattern="[A-Za-z0-9]{5,12}">
+      <button id="accessButton" type="button">View Metrics</button>
+      <div id="accessMessage" class="message" style="padding-bottom:0"></div>
+    </section>
+
+    <div id="message" class="message" style="display:none"></div>
 
     <section id="summaryCard" class="card" style="display:none">
       <p id="businessName" class="business-name"></p>
@@ -86,8 +102,12 @@
 <script>
 const ENDPOINT="https://cavvmywysmuzezuobbow.supabase.co/functions/v1/promotion-metrics-v2";
 const params=new URLSearchParams(location.search);
-const businessSlug=String(params.get("business")||"").trim().toLowerCase();
+const businessId=String(params.get("business")||"").trim();
 
+const accessCard=document.getElementById("accessCard");
+const staffCode=document.getElementById("staffCode");
+const accessButton=document.getElementById("accessButton");
+const accessMessage=document.getElementById("accessMessage");
 const message=document.getElementById("message");
 const summaryCard=document.getElementById("summaryCard");
 const detailCard=document.getElementById("detailCard");
@@ -101,6 +121,7 @@ const redeemed=document.getElementById("redeemed");
 const expired=document.getElementById("expired");
 const rate=document.getElementById("rate");
 const promotionRows=document.getElementById("promotionRows");
+let authorizedStaffCode="";
 
 function formatDate(value){
   if(!value)return "—";
@@ -161,13 +182,22 @@ function render(data,refreshDropdown){
 }
 
 async function loadMetrics(campaignId="",refreshDropdown=false){
-  if(!businessSlug){
-    message.textContent="No business was specified in the URL.";
-    message.classList.add("error");
+  if(!businessId){
+    accessMessage.textContent="No business was specified in the URL.";
+    accessMessage.classList.add("error");
+    accessButton.disabled=true;
     return;
   }
+
+  if(!authorizedStaffCode){
+    return;
+  }
+
   try{
-    const body={business_slug:businessSlug};
+    const body={
+      business_id:businessId,
+      staff_code:authorizedStaffCode
+    };
     if(campaignId)body.campaign_id=campaignId;
 
     const response=await fetch(ENDPOINT,{
@@ -176,7 +206,24 @@ async function loadMetrics(campaignId="",refreshDropdown=false){
       body:JSON.stringify(body)
     });
     const data=await response.json();
-    if(!response.ok||!data.success)throw new Error(data.error||"Unable to retrieve metrics.");
+
+    if(!response.ok||!data.success){
+      if(data.unauthorized){
+        authorizedStaffCode="";
+        summaryCard.style.display="none";
+        detailCard.style.display="none";
+        accessCard.style.display="block";
+        accessMessage.textContent=data.error||"Incorrect Staff Code.";
+        accessMessage.classList.add("error");
+        staffCode.focus();
+        return;
+      }
+      throw new Error(data.error||"Unable to retrieve metrics.");
+    }
+
+    accessCard.style.display="none";
+    accessMessage.textContent="";
+    accessMessage.classList.remove("error");
     render(data,refreshDropdown);
   }catch(error){
     console.error(error);
@@ -186,11 +233,43 @@ async function loadMetrics(campaignId="",refreshDropdown=false){
   }
 }
 
+accessButton.addEventListener("click",async()=>{
+  const enteredStaffCode=staffCode.value.trim();
+
+  if(!/^[A-Za-z0-9]{5,12}$/.test(enteredStaffCode)){
+    accessMessage.textContent="Staff Code must be 5 to 12 letters and numbers.";
+    accessMessage.classList.add("error");
+    staffCode.focus();
+    return;
+  }
+
+  accessButton.disabled=true;
+  accessButton.textContent="Checking...";
+  accessMessage.textContent="";
+  accessMessage.classList.remove("error");
+
+  authorizedStaffCode=enteredStaffCode;
+  await loadMetrics("",true);
+
+  accessButton.disabled=false;
+  accessButton.textContent="View Metrics";
+});
+
+staffCode.addEventListener("keydown",(event)=>{
+  if(event.key==="Enter"){
+    accessButton.click();
+  }
+});
+
 campaignSelect.addEventListener("change",()=>{
   loadMetrics(campaignSelect.value,false);
 });
 
-loadMetrics("",true);
+if(!businessId){
+  accessMessage.textContent="No business was specified in the URL.";
+  accessMessage.classList.add("error");
+  accessButton.disabled=true;
+}
 </script>
 </body>
 </html>
