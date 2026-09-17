@@ -34,8 +34,6 @@
           <p class="issued-label">Your Single-Use Promotion</p>
           <p id="promotionCode" class="code"></p>
           <div class="qr-wrap"><img id="qrImage" alt="Promotion redemption QR code" /></div>
-          <p id="issuedExpiresText" class="valid-through"></p>
-          <p class="instructions">Present this QR code when you are ready to redeem your promotion.</p>
           <button id="saveButton" class="save-btn" type="button">Save Promotion</button>
         </section>
         <a id="websiteButton" class="website-btn" href="#" target="_blank" rel="noopener" style="display:none;">Visit Website</a>
@@ -53,7 +51,7 @@
     const ISSUE_ENDPOINT=SUPABASE_BASE+"/functions/v1/issue-promotion-v2";
     const params=new URLSearchParams(window.location.search);
     const businessId=String(params.get("business")||"").trim();
-    const loading=document.getElementById("loading"),fatal=document.getElementById("fatal"),content=document.getElementById("content"),headerImage=document.getElementById("headerImage"),businessLogo=document.getElementById("businessLogo"),promotionImage=document.getElementById("promotionImage"),businessName=document.getElementById("businessName"),campaignName=document.getElementById("campaignName"),offerText=document.getElementById("offerText"),termsText=document.getElementById("termsText"),expiresText=document.getElementById("expiresText"),claimButton=document.getElementById("claimButton"),issuedSection=document.getElementById("issuedSection"),promotionCode=document.getElementById("promotionCode"),qrImage=document.getElementById("qrImage"),issuedExpiresText=document.getElementById("issuedExpiresText"),saveButton=document.getElementById("saveButton"),websiteButton=document.getElementById("websiteButton"),statusMessage=document.getElementById("statusMessage");
+    const loading=document.getElementById("loading"),fatal=document.getElementById("fatal"),content=document.getElementById("content"),headerImage=document.getElementById("headerImage"),businessLogo=document.getElementById("businessLogo"),promotionImage=document.getElementById("promotionImage"),businessName=document.getElementById("businessName"),campaignName=document.getElementById("campaignName"),offerText=document.getElementById("offerText"),termsText=document.getElementById("termsText"),expiresText=document.getElementById("expiresText"),claimButton=document.getElementById("claimButton"),issuedSection=document.getElementById("issuedSection"),promotionCode=document.getElementById("promotionCode"),qrImage=document.getElementById("qrImage"),saveButton=document.getElementById("saveButton"),websiteButton=document.getElementById("websiteButton"),statusMessage=document.getElementById("statusMessage");
     let config=null,issuedPromotion=null,qrDataUrl="";
     function assetUrl(path){if(!path)return"";return STORAGE_PUBLIC_BASE+path.split("/").map(encodeURIComponent).join("/")+"?v="+Date.now()}
     function formatExpiration(value){if(!value)return"No expiration date";return new Intl.DateTimeFormat("en-US",{month:"long",day:"numeric",year:"numeric",timeZone:"America/New_York"}).format(new Date(value))}
@@ -63,7 +61,7 @@
     function renderConfig(){applyBranding();businessName.textContent=config.business.business_name;campaignName.textContent=config.campaign.campaign_name;offerText.textContent=config.campaign.campaign_name;termsText.textContent=config.campaign.terms_text||"See business for details.";expiresText.textContent=formatExpiration(config.campaign.expires_at);const logoPath=config.business.slug+"/logo.png",headerPath=config.business.slug+"/header.png";businessLogo.onload=()=>{businessLogo.style.display="block"};businessLogo.onerror=()=>{businessLogo.style.display="none"};businessLogo.src=assetUrl(logoPath);businessLogo.alt=config.business.business_name+" logo";headerImage.onload=()=>{headerImage.style.display="block"};headerImage.onerror=()=>{headerImage.style.display="none"};headerImage.src=assetUrl(headerPath);headerImage.alt=config.business.business_name;if(config.campaign.promotion_image_filename){promotionImage.src=assetUrl(config.campaign.promotion_image_filename);promotionImage.style.display="block"}if(config.business.website_url){websiteButton.href=config.business.website_url;websiteButton.style.display="block"}loading.style.display="none";fatal.style.display="none";content.style.display="block"}
     async function loadConfig(){if(!businessId){showFatal("No Business ID was provided. Please use a valid promotion link or QR code.");return}if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(businessId)){showFatal("Invalid Business ID. Please verify the promotion link or QR code.");return}try{const response=await fetch(CONFIG_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({business_id:businessId}),cache:"no-store"});const data=await response.json();if(!response.ok||!data.success)throw new Error(data.error||"Unable to load promotion.");config=data;renderConfig();restorePromotion()}catch(error){console.error(error);showFatal(error instanceof Error?error.message:"Unable to load promotion.")}}
     async function buildQr(code){const redeemUrl=new URL("Redeem.html",window.location.href);redeemUrl.search="";redeemUrl.searchParams.set("code",code);if(typeof qrcode!=="function")throw new Error("QR code library did not load.");const qr=qrcode(0,"M");qr.addData(redeemUrl.toString());qr.make();qrDataUrl=qr.createDataURL(8,16);qrImage.src=qrDataUrl}
-    async function renderIssued(promotion){issuedPromotion=promotion;promotionCode.textContent=promotion.promotion_code;issuedExpiresText.textContent="Valid through "+formatExpiration(promotion.expires_at);await buildQr(promotion.promotion_code);claimButton.style.display="none";issuedSection.style.display="block";statusMessage.textContent="Your promotion is ready.";statusMessage.className="status success"}
+    async function renderIssued(promotion){issuedPromotion=promotion;promotionCode.textContent=promotion.promotion_code;await buildQr(promotion.promotion_code);claimButton.style.display="none";issuedSection.style.display="block";statusMessage.textContent="Your promotion is ready.";statusMessage.className="status success"}
     function restorePromotion(){try{const raw=localStorage.getItem(localStorageKey());if(!raw)return;const saved=JSON.parse(raw);if(saved&&saved.promotion_code&&saved.campaign_id===config.campaign.id)renderIssued(saved)}catch(error){console.warn("Unable to restore saved promotion.",error)}}
     async function issuePromotion(){claimButton.disabled=true;statusMessage.textContent="Creating your promotion...";statusMessage.className="status";try{const response=await fetch(ISSUE_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({business_id:businessId})});const data=await response.json();if(!response.ok||!data.success)throw new Error(data.error||"Unable to create promotion.");const promotion=data.promotion;localStorage.setItem(localStorageKey(),JSON.stringify(promotion));await renderIssued(promotion)}catch(error){console.error(error);statusMessage.textContent=error instanceof Error?error.message:"Unable to create promotion.";statusMessage.className="status error";claimButton.disabled=false}}
     async function loadImageForCanvas(url){const response=await fetch(url,{mode:"cors",cache:"no-store"});if(!response.ok)throw new Error("Unable to load promotion artwork.");const blob=await response.blob();return new Promise((resolve,reject)=>{const objectUrl=URL.createObjectURL(blob),image=new Image();image.onload=()=>{URL.revokeObjectURL(objectUrl);resolve(image)};image.onerror=()=>{URL.revokeObjectURL(objectUrl);reject(new Error("Unable to prepare promotion artwork."))};image.src=objectUrl})}
@@ -92,7 +90,7 @@
           artHeight=Math.round(width*(promoArt.height/promoArt.width));
         }
 
-        const infoHeight=700;
+        const infoHeight=600;
         canvas.width=width;
         canvas.height=artHeight+infoHeight;
 
@@ -138,32 +136,6 @@
           issuedPromotion.promotion_code,
           width/2,
           qrY+qrSize+62
-        );
-
-        ctx.font="700 24px Arial";
-        ctx.fillText(
-          "VALID THROUGH "+
-            formatExpiration(issuedPromotion.expires_at).toUpperCase(),
-          width/2,
-          qrY+qrSize+110
-        );
-
-        ctx.fillStyle="#5f554b";
-        ctx.font="22px Arial";
-        wrapText(
-          ctx,
-          config.campaign.terms_text||"",
-          width/2,
-          qrY+qrSize+160,
-          1000,
-          32
-        );
-
-        ctx.font="20px Arial";
-        ctx.fillText(
-          "Present this QR code when redeeming.",
-          width/2,
-          canvas.height-55
         );
 
         const blob=await new Promise((resolve)=>
