@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Independent Businesses | RMH Solutions LLC</title>
+<style>
+.site-header {
+  background: #0b2f55;
+  border-bottom: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.20);
+}
+
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+}
+
+.header-logo {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.header-logo img {
+  display: block;
+  width: 124px;
+  height: auto;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px 26px;
+}
+
+.site-nav a {
+  position: relative;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 10px 0;
+  transition: color 0.2s ease;
+}
+
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 4px;
+  width: 100%;
+  height: 2px;
+  background: #8fc6ec;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible,
+.site-nav a.active {
+  color: #cfe9fb;
+}
+
+.site-nav a:hover::after,
+.site-nav a:focus-visible::after,
+.site-nav a.active::after {
+  transform: scaleX(1);
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+  color: #172033;
+  text-align: center;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 64px 24px 48px;
+}
+
+.hero {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+h1 {
+  margin: 0 0 20px;
+  font-size: 50px;
+  line-height: 1.1;
+  color: #0b2f55;
+}
+
+h1 span {
+  color: #1d6fb8;
+}
+
+.hero p {
+  margin: 0;
+  color: #465468;
+  font-size: 22px;
+  line-height: 1.7;
+}
+
+.section {
+  margin-top: 42px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  text-align: left;
+}
+
+.box {
+  box-sizing: border-box;
+  padding: 34px 30px;
+  background: #0b3954;
+  border: none;
+  border-radius: 22px;
+  box-shadow: 0 10px 26px rgba(11, 57, 84, 0.16);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.box:hover {
+  background: #104966;
+  transform: translateY(-3px);
+}
+
+.box h2 {
+  margin: 0 0 18px;
+  color: #ffffff;
+  font-size: 25px;
+  line-height: 1.25;
+}
+
+.box ul {
+  margin: 0;
+  padding-left: 22px;
+  color: rgba(255, 255, 255, 0.90);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.box li {
+  margin-bottom: 8px;
+}
+
+.box li:last-child {
+  margin-bottom: 0;
+}
+
+.site-footer {
+  width: 100%;
+  margin-top: 32px;
+  padding: 54px 24px 26px;
+  box-sizing: border-box;
+  background: #0b2f55;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.footer-contact {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 64px;
+  text-align: left;
+}
+
+.footer-column h2 {
+  margin: 0 0 18px;
+  color: #cfe9fb;
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.footer-column p {
+  margin: 0;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.footer-column a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.footer-column a:hover,
+.footer-column a:focus-visible {
+  color: #cfe9fb;
+  text-decoration: underline;
+}
+
+.footer-copyright {
+  margin-top: 42px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.72);
+  font-size: 14px;
+  text-align: center;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+.fade-delay-1 { animation-delay: 0.1s; }
+.fade-delay-2 { animation-delay: 0.2s; }
+.fade-delay-3 { animation-delay: 0.3s; }
+.fade-delay-4 { animation-delay: 0.4s; }
+.fade-delay-5 { animation-delay: 0.5s; }
+.fade-delay-6 { animation-delay: 0.6s; }
+.fade-delay-7 { animation-delay: 0.7s; }
+.fade-delay-8 { animation-delay: 0.8s; }
+.fade-delay-9 { animation-delay: 0.9s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 860px) {
+  .header-inner {
+    flex-direction: column;
+    padding: 16px 18px 18px;
+    gap: 12px;
+  }
+
+  .site-nav {
+    justify-content: center;
+    gap: 4px 18px;
+  }
+}
+
+@media (max-width: 760px) {
+  .container {
+    padding: 40px 16px;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  .hero p {
+    font-size: 20px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .box {
+    width: 100%;
+  }
+
+  .footer-contact {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .footer-column h2 {
+    margin-bottom: 10px;
+    font-size: 25px;
+  }
+
+  .footer-column p {
+    font-size: 17px;
+  }
+
+  .site-footer {
+    padding: 40px 22px 24px;
+  }
+}
+
+@media (max-width: 560px) {
+  .header-logo img {
+    width: 96px;
+  }
+
+  .site-nav {
+    gap: 2px 14px;
+  }
+
+  .site-nav a {
+    font-size: 14px;
+  }
+}
+
+.business-intro {
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.services-grid .box p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.90);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.site-nav a.active {
+  color: #cfe9fb;
+}
+
+.site-nav a.active::after {
+  transform: scaleX(1);
+}
+
+  .footer-legal {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.footer-legal a {
+  color: #cfe9fb;
+  text-decoration: none;
+}
+
+.footer-legal a:hover,
+.footer-legal a:focus-visible {
+  text-decoration: underline;
+}
+
+.footer-legal span {
+  margin: 0 8px;
+  color: rgba(255,255,255,0.45);
+}
+/* Shared RMH gradient brand and compact footer */
+
+.container { max-width: 1160px; padding: 38px 24px 36px; }
+.hero { max-width: none; box-sizing: border-box; padding: 52px 40px; border-radius: 24px; background: linear-gradient(112deg,#0c0939 0%,#123e55 56%,#167d8b 100%); box-shadow: 0 12px 30px #0c09391a; }
+.hero h1 { color: #fff; font-size: clamp(32px,4.2vw,50px); letter-spacing: -1.4px; }
+.hero h1 span { color: #83eafa; }
+.hero p { color: #f0f8fc; font-size: 23px; max-width: 980px; }
+.section { margin-top: 26px; }
+.services-grid .box { background: linear-gradient(135deg,#0c0939,#164b65); padding: 30px;  }
+.services-grid .box:nth-child(even) { background: linear-gradient(135deg,#123e55,#167783); }
+.services-grid .box:hover { background: linear-gradient(135deg,#10164a,#1b6176); box-shadow: 0 14px 32px #123e5530; }
+.services-grid .box:nth-child(even):hover { background: linear-gradient(135deg,#16465e,#187e8b); }
+.service-icon { width: 64px; height: 64px; display: grid; place-items: center; margin-bottom: 18px; border-radius: 50%; border: 1px solid #ffffff80; background: linear-gradient(145deg,#ffffff40,#ffffff05); box-shadow: inset 0 1px 3px #ffffff55,0 5px 15px #0002; color: #83eafa; }
+.service-icon svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+@media(max-width:760px) { .container { padding: 24px 16px; } .hero { padding: 36px 20px; } .hero p { font-size: 19px; } .services-grid .box {  padding: 28px 22px; } }
+@media(prefers-reduced-motion:reduce) { .fade-in { animation: none; opacity: 1; transform: none; } .box { transition: none; } }
+
+/* Compact contact footer */
+.site-footer { padding: 24px 20px 18px; margin-top: 24px; }
+.footer-contact { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px 0; text-align: center; }
+.footer-contact .contact-item { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0 24px; color: #fff; font-size: 16px; line-height: 1.5; border: 0; }
+.footer-contact .contact-item + .contact-item { border-left: 1px solid rgba(255,255,255,.24); }
+.contact-item svg { width: 21px; height: 21px; flex: none; fill: none; stroke: #20d4f5; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.contact-item a { color: inherit; text-decoration: none; }
+.contact-item a:hover, .contact-item a:focus-visible { text-decoration: underline; color: #67e8f9; }
+.footer-copyright { margin-top: 18px; padding-top: 14px; }
+.footer-legal { margin-top: 7px; }
+@media(max-width:760px) {
+ .site-footer { padding: 22px 16px 18px; }
+ .footer-contact { flex-direction: column; gap: 10px; }
+ .footer-contact .contact-item, .footer-contact .contact-item + .contact-item { border: 0; padding: 0; }
+}
+
+
+.services-grid .box h2 { display:flex; align-items:center; gap:16px; min-height:64px; }
+.services-grid .service-icon { flex:0 0 64px; margin:0; }
+.services-grid li::marker { color:#83eafa; }
+@media(max-width:760px){ .services-grid .box h2 { font-size:22px; } .services-grid .service-icon { width:48px;height:48px;flex-basis:48px; } }
+</style>
+</head>
+<body>
+<header class="site-header">
+<div class="header-inner">
+<a aria-label="RMH Solutions Home" class="header-logo" href="index.html">
+<img alt="RMH Solutions Logo" src="rmh-logo.png"/>
+</a>
+<nav aria-label="Primary navigation" class="site-nav">
+<a href="services.html">Corporate Clients</a>
+<a class="active" aria-current="page" href="independent-businesses.html">Independent Businesses</a>
+<a href="about.html">About</a>
+<a href="resume.html">Resume</a>
+<a href="contact.html">Contact</a>
+</nav>
+</div>
+</header>
+<main class="container">
+<section class="hero">
+<h1 class="fade-in fade-delay-1">Independent Business <span>Solutions</span></h1>
+<p class="business-intro fade-in fade-delay-2">RMH Solutions helps independent businesses simplify operations, improve customer engagement, and grow through practical, affordable technology solutions including websites, business applications, automation, and process improvement.</p>
+</section>
+<section aria-label="Independent business solutions" class="section services-grid"><article class="box fade-in fade-delay-3"><h2><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="15" height="12" rx="2"/><path d="M5 19h9m-5-4v4"/><rect x="18" y="10" width="4" height="11" rx="1"/></svg></span>Run Your Business Anywhere</h2><p>Desktop, web, and mobile solutions that keep you connected wherever business takes you.</p></article><article class="box fade-in fade-delay-4"><h2><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m9 8-4 4 4 4m6-8 4 4-4 4"/></svg></span>Built for Your Business</h2><p>Custom software designed around your operations—not a one-size-fits-all system that forces you to change how you work.</p></article><article class="box fade-in fade-delay-5"><h2><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg></span>Save Time Every Day</h2><p>Digital forms, streamlined workflows, and process automation that reduce repetitive work and keep operations moving.</p></article><article class="box fade-in fade-delay-6"><h2><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 11a8 8 0 0 1-8 8H4l2-4a8 8 0 1 1 15-4Z"/><path d="M9 11h8m-8 4h5"/></svg></span>Engage Your Customers</h2><p>Websites, QR codes, and digital marketing tools that make it easier for customers to find, understand, and connect with your business.</p></article><article class="box fade-in fade-delay-7"><h2><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 8h-4a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4H9m3-10v12"/></svg></span>Technology That Fits Your Budget</h2><p>Practical, affordable solutions designed for independent businesses and scaled to your actual needs.</p></article><article class="box fade-in fade-delay-8"><h2><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 13v-2a8 8 0 0 1 16 0v2M4 12h3v6H4zM17 12h3v6h-3zM20 18v2h-7"/></svg></span>Hands-On Support</h2><p>Clear guidance, implementation support, and practical problem-solving from a Fort Lauderdale-based consultant who works directly with you.</p></article></section>
+</main>
+<footer class="site-footer fade-in fade-delay-9">
+  <div class="footer-inner">
+    <div class="footer-contact" aria-label="Contact information">
+      <div class="contact-item"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Fort Lauderdale, Florida</span></div>
+      <div class="contact-item"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 3H4a1 1 0 0 0-1 1c0 9.4 7.6 17 17 17a1 1 0 0 0 1-1v-3l-5-2-2 2a14 14 0 0 1-7-7l2-2Z"/></svg><span><a href="tel:+19543725474">954.372.5474</a></span></div>
+      <div class="contact-item"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span><a href="mailto:info@rmhsolutions.io">info@rmhsolutions.io</a></span></div>
+    </div>
+
+    <div class="footer-copyright">
+      © 2026 RMH Solutions LLC · All rights reserved
+      <div class="footer-legal"><a href="Terms.html">Terms of Use</a><span aria-hidden="true"> | </span><a href="Privacy.html">Privacy Policy</a></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
